@@ -1,5 +1,11 @@
 <?php
-
+/*-------------------------------------------------------------
+ *  Audrey Social Network Platform
+ *  http://asnp.co
+ *
+ *  Author: William gallios
+ *
+ */
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT

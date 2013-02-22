@@ -2,11 +2,21 @@
 
 class Welcome extends CI_Controller
 {
-    /*
     function Welcome()
     {
+        parent::__construct();
+
+        $this->load->model('welcome_model', 'welcome', true);
+
+        $this->load->library('functions');
+
+        if ($this->functions->checkNeedSetup() == true)
+        {
+            header("Location: /setup");
+            exit;
+        }
     }
-    */
+
     public function index()
     {
 
