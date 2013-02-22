@@ -16,5 +16,8 @@ class Setup extends CI_Controller
     public function index()
     {
 
+        $this->load->view('templates/header_setup');
+        $this->load->view('setup/index');
+        $this->load->view('templates/footer');
     }
 }

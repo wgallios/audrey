@@ -7,7 +7,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <!-- Le styles -->
+    <!-- ONLY FOR DEV - REMOVE FOR LIVE //-->
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
     <link href="/public/bootstrap2.3/css/bootstrap.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="/min/?f=public/css/main.css<?=$this->config->item('min_debug')?>&amp;<?=$this->config->item('min_version')?>" />
