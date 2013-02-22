@@ -31,8 +31,9 @@
 
         <div class="span6">
 
-        <div class='row-fluid'>
-            <button type='button' class='btn'>Add Friend</button>
+        <div class='row-fluid action-bar'>
+            <button type='button' class='btn btn-success'>Add Friend</button>
+            <button type='button' class='btn btn-info'>Follow</button>
         </div>
 
 
