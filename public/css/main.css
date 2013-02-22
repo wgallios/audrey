@@ -1,0 +1,27 @@
+
+table.form-table, table.info-table
+{
+    width:100%
+}
+
+table.form-table td, table.info-table td
+{
+    padding:7px;
+}
+
+table.form-table input, table.form-table select, table.info-table input, table.info-table select
+{
+    margin-bottom:0;
+}
+
+table.form-table td:nth-child(odd)
+{
+    font-weight:bold;
+    text-align:right;
+}
+
+table.info-table td:nth-child(odd)
+{
+    font-weight:bold;
+}
+
