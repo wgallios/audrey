@@ -25,3 +25,7 @@ table.info-table td:nth-child(odd)
     font-weight:bold;
 }
 
+.action-bar
+{
+    margin-bottom:20px;
+}

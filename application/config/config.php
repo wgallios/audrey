@@ -1,5 +1,9 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+if (file_exists($_SERVER['DOCUMENT_ROOT'] . 'application' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.local.php'))
+{
+    include_once 'config.local.php';
+}
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -357,6 +361,9 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+
+if (!isset($config['min_version'])) $config['min_version'] = 1;
+if (!isset($config['min_debug'])) $config['min_debug'] = null;
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
