@@ -6,8 +6,6 @@ class Welcome extends CI_Controller
     {
         parent::__construct();
 
-        $this->load->model('welcome_model', 'welcome', true);
-
         $this->load->library('functions');
 
         if ($this->functions->checkNeedSetup() == true)
@@ -15,6 +13,9 @@ class Welcome extends CI_Controller
             header("Location: /setup");
             exit;
         }
+
+        $this->load->model('welcome_model', 'welcome', true);
+
     }
 
     public function index()
