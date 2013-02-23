@@ -81,7 +81,7 @@ class Home extends CI_Controller
         }
 
         $this->load->view('templates/header_login', $header);
-        $this->load->view('welcome/login');
+        $this->load->view('home/login');
         $this->load->view('templates/footer_login');
     }
 
