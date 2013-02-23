@@ -29,7 +29,7 @@ class Functions
 
         if ($login == 0)
         {
-            if(!isset($_COOKIE['UserID']))
+            if(!isset($_COOKIE['userid']))
             {
                 header("Location: /home/login?site-error=" . urlencode("You are not logged in") . "&ref=" . uri_string());
                 exit;

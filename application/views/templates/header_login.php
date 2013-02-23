@@ -9,9 +9,7 @@
     width:350px;
 }
 </style>
-
-        <?=$headScript?>
-
+        <?=$headscript?>
 </head>
     <body onload="<?=$onload?>">
 
