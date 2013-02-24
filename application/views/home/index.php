@@ -7,6 +7,7 @@
     </div> <!-- .span3 //-->
 
     <div class='span6'>
+        <h1>Feed</h1>
 
     </div> <!-- .span6 //-->
 
