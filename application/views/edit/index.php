@@ -9,6 +9,18 @@
     <div class='span6'>
         <h1>Edit Information</h1>
 
+<div class='tabbable'>
+    <ul class='nav nav-tabs'>
+        <li class='active'><a href='#tabInfo' data-toggle="tab">Basic Information</a></li>
+    </ul>
+
+
+<div class="tab-content">
+    <div id="tabInfo" class='tab-pane active'>
+    </div>
+</div> <!-- .tab-content //-->
+
+</div> <!-- .tabbable //-->
 
     </div> <!-- .span6 //-->
 
