@@ -8,3 +8,6 @@
     <?php include_once 'navbar.php' ?>
 
     <div class="container-fluid">
+
+    <?php include_once 'alert.php' ?>
+

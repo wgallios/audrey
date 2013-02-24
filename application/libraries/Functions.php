@@ -36,4 +36,40 @@ class Functions
             }
         }
     }
+
+    /**
+     * Gets a code group
+     *
+     * @param int $group 
+     * @param String $orderBy
+     *
+     * @return array->object
+     */
+    public function getCodes($group, $orderBy = null)
+    {
+        $ci =& get_instance();
+
+        $group = intval($group);
+
+        if (empty($group)) throw new Exception("Group is empty!");
+
+        if (!empty($orderBy))
+        {
+            $orderBy = $ci->db->escape_str($orderBy);
+
+            $sqlOrderBy = "ORDER BY " . $orderBy;
+        }
+        else
+        {
+            $sqlOrderBy = "ORDER BY display ASC";
+        }
+
+        $sql = "SELECT * FROM codes WHERE `group` = {$group} AND `code` <> 0 " . $sqlOrderBy;
+
+        $query = $ci->db->query($sql);
+
+        $results = $query->result();
+
+    return $results;
+    }
 }

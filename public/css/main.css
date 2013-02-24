@@ -34,3 +34,13 @@ table.info-table td:nth-child(odd)
 {
     margin-top:80px;
 }
+
+table tr td.regularCursor
+{
+    cursor:default;
+}
+
+ul.home-nav li a i
+{
+    margin-top:5px;
+}

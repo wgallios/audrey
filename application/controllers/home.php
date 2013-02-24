@@ -22,9 +22,9 @@ class Home extends CI_Controller
      */
     public function index()
     {
-
-        $this->load->view('templates/header');
-        $this->load->view('home/index');
+        $header['nav'] = 'home';
+        $this->load->view('templates/header', $header);
+        $this->load->view('home/index', $body);
         $this->load->view('templates/footer');
     }
 

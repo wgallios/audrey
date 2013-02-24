@@ -10,7 +10,8 @@
     <!-- ONLY FOR DEV - REMOVE FOR LIVE //-->
     <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
-    <link href="/public/bootstrap2.3/css/bootstrap.css" rel="stylesheet">
+    <!-- <link href="/public/bootstrap2.3/css/bootstrap.css" rel="stylesheet"> -->
+    <link href="/public/bootstrap2.3/css/bootstrap.spacelab.min.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="/min/?f=public/css/main.css<?=$this->config->item('min_debug')?>&amp;<?=$this->config->item('min_version')?>" />
 
@@ -35,7 +36,11 @@
     <link href="/public/bootstrap2.3/css/bootstrap-responsive.css" rel="stylesheet">
 
     <script type='text/javascript' src='/public/js/jquery-1.9.1.min.js'></script>
+    <script type='text/javascript' src='/public/bootstrap2.3/js/bootstrap.min.js'></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="/public/bootstrap2.3/js/html5shiv.js"></script>
     <![endif]-->
+
+    <script type='text/javascript' src="/min/?f=public/js/global.js<?=$this->config->item('min_debug')?>&amp;<?=$this->config->item('min_version')?>"></script>
+
