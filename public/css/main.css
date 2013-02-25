@@ -14,6 +14,12 @@ table.form-table input, table.form-table select, table.info-table input, table.i
     margin-bottom:0;
 }
 
+table.form-table td:nth-child(even)
+{
+    text-align:left;
+}
+
+
 table.form-table td:nth-child(odd)
 {
     font-weight:bold;

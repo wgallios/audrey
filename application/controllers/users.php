@@ -23,7 +23,9 @@ class Users extends CI_Controller
     {
 
         $header['headscript'] = "<script type='text/javascript' src='/min/?f=public/js/users.js{$this->config->item('min_debug')}&amp;{$this->config->item('min_version')}'></script>\n";
+
         $header['onload'] = "users.indexInit();";
+
         $header['nav'] = 'users';
 
         try

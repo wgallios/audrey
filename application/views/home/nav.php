@@ -19,6 +19,7 @@ $active[$nav] = 'active';
     <li class='<?=$active['editinfo']?>'><a href='/edit'><i class='icon-pencil'></i> Edit Information</a></li>
     <li class='<?=$active['careers']?>'><a href='#'><i class='icon-briefcase'></i> Career</a></li>
     <li class='<?=$active['education']?>'><a href='#'><i class='icon-book'></i> Education</a></li>
+    <li class='<?=$active['privacy']?>'><a href='#'><i class='icon-lock'></i> Privacy</a></li>
 
     <li class='nav-header'>Settings</li>
     <li class='<?=$active['users']?>'><a href='/users'><i class='icon-user'></i> Users</a></li>
