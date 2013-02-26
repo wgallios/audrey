@@ -51,4 +51,40 @@ class Edit extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    /**
+     * TODO: short description.
+     *
+     * @return TODO
+     */
+    public function saveinfo()
+    {
+        $return = array();
+
+        if ($_POST)
+        {
+            try
+            {
+                $this->edit->saveSettings($_POST);
+            }
+            catch(Exception $e)
+            {
+                $return['status'] = 'ERROR';
+                $return['msg'] = $e->getMessage();
+                $return['errorNumber'] = 1;
+                echo json_encode($return);
+                exit;
+            }
+
+            $return['status'] = 'SUCCESS';
+            echo json_encode($return);
+            exit;
+        }
+
+            $return['status'] = 'ERROR';
+            $return['msg'] = 'Get is not supported';
+            $return['errorNumber'] = 2;
+            echo json_encode($return);
+            exit;
+
+    }
 }

@@ -19,6 +19,7 @@ $active[$nav] = 'active';
     <li class='<?=$active['editinfo']?>'><a href='/edit'><i class='icon-pencil'></i> Edit Information</a></li>
     <li class='<?=$active['careers']?>'><a href='#'><i class='icon-briefcase'></i> Career</a></li>
     <li class='<?=$active['education']?>'><a href='#'><i class='icon-book'></i> Education</a></li>
+    <li class='<?=$active['pages']?>'><a href='#'><i class='icon-globe'></i> Pages</a></li>
     <li class='<?=$active['privacy']?>'><a href='#'><i class='icon-lock'></i> Privacy</a></li>
 
     <li class='nav-header'>Settings</li>
@@ -26,5 +27,5 @@ $active[$nav] = 'active';
     <li class='<?=$active['plugins']?>'><a href='#'><i class='icon-wrench'></i> Plugins</a></li>
     <li><a href='#'><i class='icon-cog'></i> Site Settings</a></li>
 </ul>
-</div>
-</div>
+</div> <!-- .span12 .well //-->
+</div> <!-- .row-fluid //-->

@@ -6,8 +6,10 @@
         <?php include_once $_SERVER['DOCUMENT_ROOT'] . 'application' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'home' . DIRECTORY_SEPARATOR . 'nav.php' ?>
     </div> <!-- .span3 //-->
 
-    <div class='span6'>
+    <div class='span9'>
         <h1>Edit Information</h1>
+
+<form name='editForm' id='editForm'>
 
 <div class='tabbable'>
     <ul class='nav nav-tabs'>
@@ -23,14 +25,14 @@
             <tbody>
                 <tr>
                     <td>First Name</td>
-                    <td><input type='text' class='input-medium' name='firstName' id='lastName' value="<?=$info->firstName?>"></td>
+                    <td><input type='text' class='input-large' name='firstName' id='firstName' value="<?=$info->firstName?>"></td>
                     <td>Last Name</td>
-                    <td><input type='text' class='input-medium' name='lastName' id='lastName' value="<?=$info->lastName?>"></td>
+                    <td><input type='text' class='input-large' name='lastName' id='lastName' value="<?=$info->lastName?>"></td>
                 </tr>
 
                 <tr>
                     <td>D.O.B.</td>
-                    <td><input type='text' class='input-medium' name='' id='' value=""></td>
+                    <td><input type='text' class='input-medium' name='dob' id='dob' value="<?=$info->dob?>"></td>
                     <td>Gender</td>
                     <td>
                         <select name='gender' id='gender' class='input-medium'>
@@ -40,7 +42,9 @@
                             {
                                 foreach ($genders as $r)
                                 {
-                                    echo "<option value='{$r->code}'>{$r->display}</option>\n";
+                                    $sel = ($info->gender == $r->code) ? 'selected' : null;
+
+                                    echo "<option value='{$r->code}' {$sel}>{$r->display}</option>\n";
                                 }
                             }
                             ?>
@@ -51,14 +55,16 @@
                 <tr>
                     <td>Relationship Status</td>
                     <td>
-                        <select name='relationshipStatus' id='relationshipStatus' class='input-medium'>
+                        <select name='relationshipStatus' id='relationshipStatus' class='input-large'>
                             <option value=''></option>
                             <?php
                             if (!empty($rss))
                             {
                                 foreach ($rss as $r)
                                 {
-                                    echo "<option value='{$r->code}'>{$r->display}</option>\n";
+                                    $sel = ($info->relationshipStatus == $r->code) ? 'selected' : null;
+
+                                    echo "<option value='{$r->code}' {$sel}>{$r->display}</option>\n";
                                 }
                             }
                             ?>
@@ -69,7 +75,7 @@
                 </tr>
                 <tr>
                     <td>Height</td>
-                    <td><input type='text' name='' id='' class='input-mini' value=""> <small>Feet</small> <input type='text' name='' id='' class='input-mini' value=""> <small>Inches</small></td>
+                    <td><input type='text' name='heightFeet' id='heightFeet' class='input-mini' value="<?=$info->heightFeet?>"> <small>Feet</small> <input type='text' name='heightInches' id='heightInches' class='input-mini' value="<?=$info->heightInches?>"> <small>Inches</small></td>
                     <td>Weight</td>
                     <td>
                         <input type='text' name='weight' id='weight' class='input-mini' value="<?=$info->weight?>">
@@ -80,7 +86,9 @@
                             {
                                 foreach ($weights as $r)
                                 {
-                                    echo "<option value='{$r->code}'>{$r->display}</option>\n";
+                                    $sel = ($info->weightType == $r->code) ? 'selected' : null;
+
+                                    echo "<option value='{$r->code}' {$sel}>{$r->display}</option>\n";
                                 }
                             }
                             ?>
@@ -103,15 +111,19 @@
 
 </div> <!-- .tabbable //-->
 
+</form>
+
 <div class='form-actions'>
     <button class='btn btn-primary' id='saveBtn'>Save</button>
-    <button class='btn' id='cancelBtn'>Cancel</button>
+    <!-- <button class='btn' id='cancelBtn'>Cancel</button> -->
 </div>
 
 
 
-    </div> <!-- .span6 //-->
+    </div> <!-- .span9 //-->
 
+    <?php
+    /*
     <div class='span3'>
 
         <div class='row-fluid'>
@@ -120,5 +132,6 @@
         </div>
 
     </div> <!-- .span3 //-->
-
+    */
+    ?>
 </div> <!-- .row-fluid //-->

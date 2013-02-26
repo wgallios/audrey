@@ -3,6 +3,8 @@ SHOW TABLES;
 
 EXPLAIN users;
 
+EXPLAIN settings;
+
 
 UPDATE users SET passwd = SHA1('') WHERE id =
 
