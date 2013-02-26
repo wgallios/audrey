@@ -123,4 +123,31 @@ ORDER BY label";
 
     return $this->db->insert_id();
     }
+
+    /**
+     * Checks if a users password is correct
+     *
+     * @param String $userid  
+     * @param String $passord 
+     *
+     * @return boolean - True if correct password, false if not
+     */
+    public function checkPassword($userid, $password)
+    {
+        $userid = intval($userid);
+        $password = $this->db->escape_str($password);
+
+        if (empty($userid)) throw new Exception("userid is empty!");
+        if (empty($password)) throw new Exception("password is empty!");
+
+        $sql = "SELECT COUNT(*) cnt FROM users WHERE username = '{$userid}' AND passwd = SHA1('{$password}')";
+
+        $query = $this->db->query($sql);
+
+        $results = $query->result();
+
+        if ((int) $results[0]->cnt > 0) return true;
+
+    return false;
+    }
 }

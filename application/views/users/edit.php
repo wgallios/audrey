@@ -12,6 +12,8 @@
 <form name='editUserForm' id='editUserForm'>
 <input type='hidden' name='id' id='id' value='<?=$id?>'>
 
+<input type='hidden' name='currentUsername' id='currentUsername' value="<?=$info->username?>">
+
 <div class='tabbable'>
     <ul class='nav nav-tabs'>
         <li class='active'><a href='#tabSettings' data-toggle="tab">Settings</a></li>
@@ -58,7 +60,7 @@
 
                 <tr>
                     <td>New password<td>
-                    <td><input type='password' name='nePassword' id='newPassword' placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'></td>
+                    <td><input type='password' name='newPassword' id='newPassword' placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'></td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                 </tr>
@@ -122,6 +124,11 @@ EOS;
         <div class='form-actions'>
             <button class='btn btn-primary' id='saveBtn'>Save</button>
             <button class='btn' id='cancelBtn'>Cancel</button>
+            
+            <div class='pull-right'>
+                <button type='button' class='btn btn-warning' id='deleteBtn'><i class='icon-trash'></i></button>
+            </div>
+            
         </div>
 
 

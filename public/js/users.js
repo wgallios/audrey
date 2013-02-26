@@ -122,3 +122,53 @@ users.createUser = function()
                 window.location = '/users/edit/' + data.userid;
             }, 'json');
 }
+
+users.checkEditForm = function()
+{
+
+    if ($('#username').val() == '')
+    {
+        global.renderAlert("Please enter a username!");
+        $('#username').focus();
+        return;
+    }
+
+
+    if ($('#email').val() == '')
+    {
+        global.renderAlert("Please enter an email address!");
+        $('#email').focus();
+        return;
+    }
+
+    if ($('#firstName').val() == '')
+    {
+        global.renderAlert("Please enter a first name!");
+        $('#firstName').focus();
+        return;
+    }
+
+    if ($('#lastName').val() == '')
+    {
+        global.renderAlert("Please enter a last name!");
+        $('#lastName').focus();
+        return;
+    }
+
+    if ($('#currentPassword').va() != '')
+    {
+        if ($('#newPassword').val() != $('#confirmPassword').val())
+        {
+            global.renderAlert("New password does not match");
+            $('#newPassword').focus();
+            return;
+        }
+    }
+
+    $.post("/users/save", $('#editUserForm').serialize(), function(data){
+
+            }, 'json');
+
+}
+
+

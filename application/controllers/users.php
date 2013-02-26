@@ -169,4 +169,41 @@ class Users extends CI_Controller
         echo json_encode($return);
         exit;
     }
+
+    /**
+     * TODO: short description.
+     *
+     * @return TODO
+     */
+    public function save()
+    {
+        if ($_POST)
+        {
+            try
+            {
+                $check = $this->users->checkPassword($_COOKIE['userid'], $_POST['currentPassword']);
+
+                $return['status'] = 'SUCCESS';
+
+                $return['msg'] = ($check == true) ? 'VALID' : 'INVALID';
+
+                echo json_encode($return);
+                exit;
+            }
+            catch(Exception)
+            {
+                $return['status'] = 'ERROR';
+                $return['msg'] = $e->getMessage();
+                $return['errorNumber'] = 1;
+                echo json_encode($return);
+                exit;
+            }
+        }
+
+        $return['status'] = 'ERROR';
+        $return['msg'] = 'Get is not supported';
+        $return['errorNumber'] = 2;
+        echo json_encode($return);
+        exit;
+    }
 }
