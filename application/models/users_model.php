@@ -74,4 +74,53 @@ ORDER BY label";
 
     return $results;
     }
+
+    /**
+     * Checks if a username is in use
+     *
+     * @param String $username
+     *
+     * @return boolean - True if username is in use, false otherwise
+     */
+    public function checkUsernameInUse($username)
+    {
+        $username = $this->db->escape_str($username);
+
+        $sql = "SELECT COUNT(*) cnt FROM users WHERE username = '{$username}'";
+
+        $query = $this->db->query($sql);
+
+        $results = $query->result();
+
+        if ((int) $results[0]->cnt > 0) return true;
+
+    return false;
+    }
+
+    /**
+     * Inserts a new user
+     *
+     * @param arrayd $p
+     *
+     * @return INT - userid
+     */
+    public function createNew($p)
+    {
+        $p = $this->functions->recursiveClean($p);
+
+        // sets them as a default user
+        $sql = "INSERT INTO users SET
+            datestamp = NOW(),
+            username = '{$p['username']}',
+            passwd = SHA1('{$p['password']}'),
+            firstName = '{$p['firstName']}',
+            lastName = '{$p['lastName']}',
+            email = '{$p['email']}',
+            status = '1',
+            permissions = '2'";
+
+        $this->db->query($sql);
+
+    return $this->db->insert_id();
+    }
 }

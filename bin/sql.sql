@@ -20,3 +20,5 @@ FROM permissions
 WHERE active = 1
 ORDER BY label
 
+
+SELECT COUNT(*) cnt FROM users WHERE username = 'wgallios'

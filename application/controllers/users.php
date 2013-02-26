@@ -90,4 +90,83 @@ class Users extends CI_Controller
         $this->load->view('users/edit', $body);
         $this->load->view('templates/footer');
     }
+
+    /**
+     * TODO: short description.
+     *
+     * @return TODO
+     */
+    public function checkusername()
+    {
+        if ($_POST)
+        {
+            try
+            {
+                $check = $this->users->checkUsernameInUse($_POST['username']);
+
+                if ($check == true)
+                {
+                    $return['status'] = 'SUCCESS';
+                    $return['msg'] = 'INUSE';
+                    echo json_encode($return);
+                    exit;
+                }
+            }
+            catch(Exception $e)
+            {
+                $return['status'] = 'ERROR';
+                $return['msg'] = $e->getMessage();
+                $return['errorNumber'] = 1;
+                echo json_encode($return);
+                exit;
+            }
+
+
+            $return['status'] = 'SUCCESS';
+            $return['msg'] = 'AVAILABLE';
+            echo json_encode($return);
+            exit;
+        }
+
+        $return['status'] = 'ERROR';
+        $return['msg'] = 'Get is not supported';
+        $return['errorNumber'] = 2;
+        echo json_encode($return);
+        exit;
+    }
+
+    /**
+     * TODO: short description.
+     *
+     * @return TODO
+     */
+    public function createnew()
+    {
+        if ($_POST)
+        {
+            try
+            {
+                $userid = $this->users->createNew($_POST);
+
+                $return['status'] = 'SUCCESS';
+                $return['userid'] = $userid;
+                echo json_encode($return);
+                exit;
+            }
+            catch(Exception $e)
+            {
+                $return['status'] = 'ERROR';
+                $return['msg'] = $e->getMessage();
+                $return['errorNumber'] = 1;
+                echo json_encode($return);
+                exit;
+            }
+        }
+
+        $return['status'] = 'ERROR';
+        $return['msg'] = 'Get is not supported';
+        $return['errorNumber'] = 2;
+        echo json_encode($return);
+        exit;
+    }
 }
