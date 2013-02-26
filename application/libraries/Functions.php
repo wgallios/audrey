@@ -130,11 +130,14 @@ class Functions
     /**
      * Saves stack trace error in error log
      */
-    public function sendStackTrace($e)
+    public function sendStackTrace($e, $errorNum = 0)
     {
         $body = "Stack Trace Error:\n\n";
         $body .= "URL: {$_SERVER["SERVER_NAME"]}{$_SERVER["REQUEST_URI"]}\n";
         $body .= "Referer: {$_SERVER['HTTP_REFERER']}\n";
+
+        if (empty($errorNum))$body .= "Error Number: {$errorNum}\n\n";
+
         $body .= "User ID: {$_COOKIE['userid']}\n\n";
         $body .= "Message: " . $e->getMessage() . "\n\n";
         $body .= $e;

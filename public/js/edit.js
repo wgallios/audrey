@@ -41,7 +41,7 @@ edit.saveInformation = function()
                 }
                 else
                 {
-                    global.renderAlert(data.msg, 'alert-error');
+                    global.renderAlert(data.msg + " (Error #" + data.errorNumber + ")", 'alert-error');
                 }
 
                 $('#saveBtn').removeAttr('disabled');
