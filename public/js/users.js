@@ -36,6 +36,14 @@ users.editInit = function()
             }
 
             });
+
+    $('#deleteBtn').click(function(e){
+            if (confirm("Are you sure you wish to delete this user?"))
+            {
+                users.deleteUser();
+            }
+
+            });
 }
 
 users.checkCreateForm = function()
@@ -171,4 +179,7 @@ users.checkEditForm = function()
 
 }
 
+users.deleteUser = function()
+{
 
+}

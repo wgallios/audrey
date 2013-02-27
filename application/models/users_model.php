@@ -33,12 +33,13 @@ class users_model extends CI_Model
 
             if (empty($id)) throw new Exception("ID is empty!");
 
-            $sqlWhere = " WHERE id = '{$id}' ";
+            $sqlWhere = " AND id = '{$id}' ";
         }
 
         $sql = "SELECT *
             , codeDisplay(1, status) statusDisplay
             FROM users
+            WHERE `status` <> 3
             {$sqlWhere}
             ORDER BY firstName, lastName";
 
@@ -127,7 +128,7 @@ ORDER BY label";
     /**
      * Checks if a users password is correct
      *
-     * @param String $userid  
+     * @param Int $userid  
      * @param String $passord 
      *
      * @return boolean - True if correct password, false if not
@@ -140,7 +141,7 @@ ORDER BY label";
         if (empty($userid)) throw new Exception("userid is empty!");
         if (empty($password)) throw new Exception("password is empty!");
 
-        $sql = "SELECT COUNT(*) cnt FROM users WHERE username = '{$userid}' AND passwd = SHA1('{$password}')";
+        $sql = "SELECT COUNT(*) cnt FROM users WHERE userid = '{$userid}' AND passwd = SHA1('{$password}')";
 
         $query = $this->db->query($sql);
 
@@ -149,5 +150,65 @@ ORDER BY label";
         if ((int) $results[0]->cnt > 0) return true;
 
     return false;
+    }
+
+    /**
+     * TODO: short description.
+     *
+     * @param mixed $userid   
+     * @param mixed $password 
+     *
+     * @return TODO
+     */
+    public function updatePassword($userid, $password)
+    {
+        $userid = intval($userid);
+        $password = $this->db->escape_str($password);
+
+        if (empty($userid)) throw new Exception("userid is empty!");
+        if (empty($password)) throw new Exception("password is empty!");
+
+        $sql = "UPDATE users SET passwd = SHA1('{$password}') WHERE userid = '{$userid}'";
+
+    return true;
+    }
+
+    /**
+     * TODO: short description.
+     *
+     * @param array $p - $_POST array
+     *
+     * @return TODO
+     */
+    public function saveSettings($p)
+    {
+        $p = $this->functions->recursiveClean($p);
+
+        $p['id'] = intval($p['id']);
+
+        if (empty($p['id'])) throw new Exception("user id is empty!");
+
+        $perms = 0;
+
+        if (!empty($_POST['permission']))
+        {
+            foreach ($p['permission'] as $bit)
+            {
+                $perms += $bit;
+            }
+        }
+
+        $sql = "UPDATE users SET
+            username = '{$p['username']}',
+            fistName = '{$p['firstName']}',
+            lastName = '{$p['lastName']}',
+            status = '{$p['status']}',
+            email = '{$p['email']}'
+            permissions = '{$perms}'
+            WHERE id = '{$p['id']}'";
+
+        $this->db->query($sql);
+
+    return true;
     }
 }

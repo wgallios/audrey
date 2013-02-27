@@ -27,17 +27,40 @@
         <table class='form-table'>
             <tbody>
                 <tr>
-                    <td>Username<td>
+                    <td>Username</td>
                     <td><input type='text' name='username' id='username' value="<?=$info->username?>" placeholder='UserNameYouveHadSince13'></td>
-                    <td>E-mail<td>
+                    <td>E-mail</td>
                     <td><input type='text' name='email' id='email' value="<?=$info->email?>" placeholder="email@domain.com"></td>
                 </tr>
 
                 <tr>
-                    <td>First Name<td>
+                    <td>First Name</td>
                     <td><input type='text' name='firstName' id='firstName' value="<?=$info->firstName?>" placeholder="Audrey"></td>
-                    <td>Last Name<td>
+                    <td>Last Name</td>
                     <td><input type='text' name='lastName' id='lastName' value="<?=$info->lastName?>" placeholder="Smith"></td>
+                </tr>
+
+                <tr>
+                    <td>Status</td>
+                    <td>
+                    <select name='status' id='status'>
+                    <?php
+                    if (!empty($statuses))
+                    {
+                        foreach ($statuses as $r)
+                        {
+                            if ($r->code == 3) continue; // skips deleted status (use delete user button for that)
+
+                            $sel = ($info->status == $r->code) ? "selected='selected'" : null;
+
+                            echo "<option value='{$r->code}' {$sel}>{$r->display}</option>\n";
+                        }
+                    }
+                    ?>
+                    </select>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
                 </tr>
             </tbody>
         </table>
@@ -52,21 +75,21 @@
         <table class='form-table'>
             <tbody>
                 <tr>
-                    <td>Current Password<td>
+                    <td>Current Password</td>
                     <td><input type='password' name='currentPassword' id='currentPassword' placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'></td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                 </tr>
 
                 <tr>
-                    <td>New password<td>
+                    <td>New password</td>
                     <td><input type='password' name='newPassword' id='newPassword' placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'></td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                 </tr>
 
                 <tr>
-                    <td>Confirm New password<td>
+                    <td>Confirm New password</td>
                     <td><input type='password' name='confirmPassword' id='confirmPassword' placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'></td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
@@ -126,7 +149,7 @@ EOS;
             <button class='btn' id='cancelBtn'>Cancel</button>
             
             <div class='pull-right'>
-                <button type='button' class='btn btn-warning' id='deleteBtn'><i class='icon-trash'></i></button>
+                <button type='button' class='btn btn-danger' id='deleteBtn'><i class='icon-trash icon-white'></i></button>
             </div>
             
         </div>

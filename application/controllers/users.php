@@ -78,6 +78,7 @@ class Users extends CI_Controller
         {
             $body['info'] = $this->users->getUsers($id);
             $body['permissions'] = $this->users->getPermissionsList($_COOKIE['userid']);
+            $body['statuses'] = $this->functions->getCodes(1);
         }
         catch(Exception $e)
         {
@@ -181,29 +182,56 @@ class Users extends CI_Controller
         {
             try
             {
-                $check = $this->users->checkPassword($_COOKIE['userid'], $_POST['currentPassword']);
+                // checks password
+                if (!empty($_POST['currentPassword']))
+                {
+                    $check = $this->users->checkPassword($_COOKIE['userid'], $_POST['currentPassword']);
+
+                    // password check came back incorrect
+                    if ($check === false)
+                    {
+                        $return['status'] = 'ALERT';
+                        $return['msg'] = "Current password is incorrect!";
+                        die(json_encode($return));
+                    }
+
+                    // updates password
+                    $this->users->updatePassword($_POST['userid'], $_POST['newPassword']);
+                }
+
+                // checks if username has been changed
+                if ($_POST['username'] !== $_POST['currentUsername'])
+                {
+                    // checks if username is available
+                    $usernameCheck = $this->users->checkUsernameInUse($_POST['username']);
+
+                    // username is in use
+                    if ($usernameCheck === true)
+                    {
+                        $return['status'] = 'ALERT';
+                        $return['msg'] = "The username {$_POST['username']} is already in use!";
+                        die(json_encode($return));
+                    }
+                }
+
+                $this->users->saveSettings($_POST);
 
                 $return['status'] = 'SUCCESS';
-
-                $return['msg'] = ($check == true) ? 'VALID' : 'INVALID';
-
-                echo json_encode($return);
-                exit;
+                $return['msg'] = "User settings have been updated!";
+                die(json_encode($return));
             }
-            catch(Exception)
+            catch(Exception $e)
             {
                 $return['status'] = 'ERROR';
                 $return['msg'] = $e->getMessage();
                 $return['errorNumber'] = 1;
-                echo json_encode($return);
-                exit;
+                die(json_encode($return));
             }
         }
 
         $return['status'] = 'ERROR';
         $return['msg'] = 'Get is not supported';
         $return['errorNumber'] = 2;
-        echo json_encode($return);
-        exit;
+        die(json_encode($return));
     }
 }
