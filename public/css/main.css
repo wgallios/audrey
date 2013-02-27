@@ -50,3 +50,10 @@ ul.home-nav li a i
 {
     /* margin-top:4px; */
 }
+
+table.auth-table tr td
+{
+    padding:20px;
+    font-size:22px;
+    /* font-weight:bolder; */
+}

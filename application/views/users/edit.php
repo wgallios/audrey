@@ -120,7 +120,7 @@ EOS;
 
     foreach ($permissions as $r)
     {
-        $checked = ((int) $r->assigned > 0) ? "checked='checked'" : null;
+        $checked = ($r->assigned > 0) ? "checked='checked'" : null;
 
         echo "<tr>\n";
 

@@ -27,6 +27,10 @@ users.createInit = function()
 
 users.editInit = function()
 {
+    $('#saveBtn').click(function(e){
+            users.checkEditForm();
+            });
+
     $('#cancelBtn').click(function(e){
 
             if (confirm("Are you sure you wish to cancel?"))
@@ -163,7 +167,7 @@ users.checkEditForm = function()
         return;
     }
 
-    if ($('#currentPassword').va() != '')
+    if ($('#currentPassword').val() != '')
     {
         if ($('#newPassword').val() != $('#confirmPassword').val())
         {
@@ -173,7 +177,27 @@ users.checkEditForm = function()
         }
     }
 
+    $('#saveBtn').attr('disabled', 'disabled');
+    $('#cancelBtn').attr('disabled', 'disabled');
+    $('#deleteBtn').attr('disabled', 'disabled');
+
     $.post("/users/save", $('#editUserForm').serialize(), function(data){
+            if (data.status == 'SUCCESS')
+            {
+                global.renderAlert(data.msg, 'alert-success');
+            }
+            else if (data.status == 'ALERT')
+            {
+                global.renderAlert(data.msg);
+            }
+            else if (data.status == 'ERROR')
+            {
+                global.renderAlert(data.msg + " (Error #" + data.errorNumber + ")", 'alert-error');
+            }
+
+                $('#saveBtn').removeAttr('disabled');
+                $('#cancelBtn').removeAttr('disabled');
+                $('#deleteBtn').removeAttr('disabled');
 
             }, 'json');
 

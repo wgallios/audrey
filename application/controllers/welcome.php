@@ -20,8 +20,12 @@ class Welcome extends CI_Controller
 
     public function index()
     {
+        $header['headscript'] = "<script type='text/javascript' src='/min/?f=public/js/welcome.js{$this->config->item('min_debug')}&amp;{$this->config->item('min_version')}'></script>\n";
 
-        $this->load->view('templates/header');
+        $header['onload'] = "welcome.indexInit();";
+
+
+        $this->load->view('templates/header', $header);
         $this->load->view('welcome/homepage');
         $this->load->view('templates/footer');
     }

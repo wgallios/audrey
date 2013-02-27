@@ -188,22 +188,22 @@ ORDER BY label";
 
         if (empty($p['id'])) throw new Exception("user id is empty!");
 
-        $perms = 0;
+        (int) $perms = 0;
 
         if (!empty($_POST['permission']))
         {
             foreach ($p['permission'] as $bit)
             {
-                $perms += $bit;
+                $perms = $perms + (int) $bit;
             }
         }
 
         $sql = "UPDATE users SET
             username = '{$p['username']}',
-            fistName = '{$p['firstName']}',
+            firstName = '{$p['firstName']}',
             lastName = '{$p['lastName']}',
             status = '{$p['status']}',
-            email = '{$p['email']}'
+            email = '{$p['email']}',
             permissions = '{$perms}'
             WHERE id = '{$p['id']}'";
 

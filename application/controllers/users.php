@@ -77,7 +77,7 @@ class Users extends CI_Controller
         try
         {
             $body['info'] = $this->users->getUsers($id);
-            $body['permissions'] = $this->users->getPermissionsList($_COOKIE['userid']);
+            $body['permissions'] = $this->users->getPermissionsList($id);
             $body['statuses'] = $this->functions->getCodes(1);
         }
         catch(Exception $e)

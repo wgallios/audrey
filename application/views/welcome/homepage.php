@@ -36,13 +36,17 @@
         <div class='row-fluid action-bar'>
             <button type='button' class='btn btn-success'><i class='icon-plus icon-white'></i> Add Friend</button>
             <button type='button' class='btn btn-info'><i class='icon-tag icon-white'></i> Follow</button>
+
+            <div class='pull-right'>
+            <button type='button' class='btn btn-primary'><i class='icon-envelope icon-white'></i> Message</button>
+            </div>
         </div>
 
 
           <div class="hero-unit">
             <h1>Welcome</h1>
             <p>This is the development site for the Audrey Social Network Platform.</p>
-            <p><a href="#" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+            <p><a href="http://asnp.co" target='_blank' class="btn btn-primary btn-large">Learn more &raquo;</a></p>
           </div>
         </div><!--/span-->
 
