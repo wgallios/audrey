@@ -362,6 +362,9 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 
 
+// URL that is used to authenciate the site
+$config['authUrl'] = "http://asnp.co/auth";
+
 if (!isset($config['min_version'])) $config['min_version'] = 1;
 if (!isset($config['min_debug'])) $config['min_debug'] = null;
 
