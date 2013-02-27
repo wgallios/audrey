@@ -18,9 +18,10 @@ echo <<< EOS
                 <tr>
                     <th>ID</th>
                     <th>First Name</th>
-                    <td>Last Name</td>
-                    <td>Username</td>
-                    <td>Status</td>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                    <th>Status</th>
+                    <th>&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
