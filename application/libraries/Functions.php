@@ -127,6 +127,33 @@ class Functions
     return $s;
     }
 
+
+    /**
+     * TODO: short description.
+     *
+     * @return TODO
+     */
+    public function createUploadFolder()
+    {
+        $path = $_SERVER['DOCUMENT_ROOT'] . 'public' . DIRECTORY_SEPARATOR . 'uploads';
+
+
+        // upload directory already exists - no need to create
+        if (is_dir($path))
+        {
+            return true;
+        }
+
+        // attempts to create upload directory
+        if (!mkdir($path, 0777, true))
+        {
+            throw new Exception("Unable to create uploads directory ({$path})");
+            return false;
+        }
+
+    return true;
+    }
+
     /**
      * Saves stack trace error in error log
      */

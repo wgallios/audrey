@@ -27,7 +27,7 @@
             <td><input type='password' name='password' id='password' placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'></td>
 
             <td>Database Password</td>
-            <td><input type='text' name='dbPassword' id='dbPassword' placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'></td>
+            <td><input type='password' name='dbPassword' id='dbPassword' placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'></td>
         <tr>
         <tr>
             <td>Confirm Admin Password</td>

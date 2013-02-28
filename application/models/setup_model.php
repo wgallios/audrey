@@ -19,4 +19,13 @@ class setup_model extends CI_Model
     }
 
 
+    /**
+     * TODO: short description.
+     *
+     * @return TODO
+     */
+    public function createDatabase($databaseName)
+    {
+        $sql = "CREATE DATABASE IF NOT EXISTS ;";
+    }
 }
