@@ -1,7 +1,7 @@
 DELIMITER $$
 
 CREATE
-    FUNCTION `codeDislay`(iGroup INT UNSIGNED, iCode INT UNSIGNED)
+    FUNCTION `codeDisplay`(iGroup INT UNSIGNED, iCode INT UNSIGNED)
             RETURNS VARCHAR(300)
 BEGIN
 DECLARE returnDisplay VARCHAR(300);
