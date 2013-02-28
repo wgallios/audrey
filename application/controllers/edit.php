@@ -43,7 +43,7 @@ class Edit extends CI_Controller
         }
         catch(Exception $e)
         {
-
+            $this->functions->sendStackTrace($e);
         }
 
         $this->load->view('templates/header', $header);
@@ -72,6 +72,7 @@ class Edit extends CI_Controller
                 $return['msg'] = $e->getMessage();
                 $return['errorNumber'] = 1;
                 echo json_encode($return);
+                $this->functions->sendStackTrace($e, 1);
                 exit;
             }
 

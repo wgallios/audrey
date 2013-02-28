@@ -4,3 +4,4 @@ database.local.php
 *.swp
 *~
 uploads/*
+logs/error_log.txt

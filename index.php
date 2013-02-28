@@ -34,6 +34,27 @@
  * By default development will show errors but testing and live will hide them.
  */
 
+
+/*
+| error logging settings
+*/
+ini_set('log_errors', true);
+ini_set('html_errors', false);
+
+$sub = substr($_SERVER['DOCUMENT_ROOT'], -1);
+
+// if document root path ends in a directory sperator (/ (Linux/Unix) or \ (Windows - sigh))
+if ($sub == "/" || $sub == "\\")
+{
+    ini_set('error_log', $_SERVER['DOCUMENT_ROOT'] . 'logs' . DIRECTORY_SEPARATOR . 'error_log.txt');
+}
+else
+{
+    ini_set('error_log', $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR . 'error_log.txt');
+}
+
+
+
 if (defined('ENVIRONMENT'))
 {
 	switch (ENVIRONMENT)

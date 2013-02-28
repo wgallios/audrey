@@ -23,7 +23,8 @@ CREATE TABLE `errors` (
 
 insert  into `errors`(`id`,`errorMsg`,`description`,`solution`,`url`) values 
 (1,'SQL ERROR','SQL Error',NULL,'*'),
-(2,'Get is not supported','Get is not supported by save info page',NULL,'*');
+(2,'Get is not supported','Get is not supported by save info page',NULL,'*'),
+(3,'Setup Error',NULL ,NULL,'/setup');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

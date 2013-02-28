@@ -11,36 +11,40 @@
 //-->
 <div class='row-fluid' style="margin-top:20px;">
 
+<form name='setupForm' id='setupForm'>
+
 <table class='form-table'>
     <tbody>
         <tr>
             <td>Admin Username</td>
-            <td><input type='text' name='' id='' placeholder='admin'></td>
+            <td><input type='text' name='username' id='username' placeholder='admin'></td>
 
             <td>Database User</td>
-            <td><input type='text' name='' id='' placeholder='root'></td>
+            <td><input type='text' name='dbUser' id='dbUser' placeholder='root'></td>
         <tr>
         <tr>
             <td>Admin Password</td>
-            <td><input type='password' name='' id='' placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'></td>
+            <td><input type='password' name='password' id='password' placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'></td>
 
             <td>Database Password</td>
-            <td><input type='text' name='' id='' placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'></td>
+            <td><input type='text' name='dbPassword' id='dbPassword' placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'></td>
         <tr>
         <tr>
             <td>Confirm Admin Password</td>
-            <td><input type='password' name='' id='' placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'></td>
+            <td><input type='password' name='confirmPassword' id='confirmPassword' placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'></td>
 
             <td>Database Name</td>
-            <td><input type='text' name='' id='' placeholder='asnp'></td>
+            <td><input type='text' name='dbName' id='dbName' placeholder='asnp'></td>
         <tr>
 
     </tbody>
 </table>
 
+</form>
+
 </div>
 
 <div class='form-actions'>
 
-    <button type='button' class='btn btn-primary'>Complete Setup</button>
+    <button type='button' id='setupBtn' class='btn btn-primary'>Complete Setup</button>
 </div>
