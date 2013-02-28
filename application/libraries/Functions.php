@@ -107,21 +107,15 @@ class Functions
      */
     public function removeCode($s)
     {
-        $s = str_replace("<?php" , '', $s);
-        $s = str_replace("<?PHP" , '', $s);
-        $s = str_replace("<?Php" , '', $s);
-        $s = str_replace("<?PHp" , '', $s);
-        $s = str_replace("<?pHp" , '', $s);
-        $s = str_replace("<?pHP" , '', $s);
-        $s = str_replace("<?PhP" , '', $s);
-        $s = str_replace("<?" , '', $s);
-        $s = str_replace("?>" , '', $s);
-        $s = str_replace("<script" , '', $s);
-        $s = str_replace("</script>" , '', $s);
-        $s = str_replace("type='application/javascript'" , '', $s);
-        $s = str_replace("type=\"application/javascript\"" , '', $s);
-        $s = str_replace("type='text/javascript'" , '', $s);
-        $s = str_replace("type=\"text/javascript\"" , '', $s);
+        $s = str_ireplace("<?php" , '', $s);
+        $s = str_ireplace("<?" , '', $s);
+        $s = str_ireplace("?>" , '', $s);
+        $s = str_ireplace("<script" , '', $s);
+        $s = str_ireplace("</script>" , '', $s);
+        $s = str_ireplace("type='application/javascript'" , '', $s);
+        $s = str_ireplace("type=\"application/javascript\"" , '', $s);
+        $s = str_ireplace("type='text/javascript'" , '', $s);
+        $s = str_ireplace("type=\"text/javascript\"" , '', $s);
 
 
     return $s;
@@ -135,20 +129,53 @@ class Functions
      */
     public function createUploadFolder()
     {
-        $path = $_SERVER['DOCUMENT_ROOT'] . 'public' . DIRECTORY_SEPARATOR . 'uploads';
+        $ci =& get_instance();
+
+        $publicPath = $_SERVER['DOCUMENT_ROOT'] . 'public';
+        $path = $publicPath . DIRECTORY_SEPARATOR . 'uploads';
 
 
         // upload directory already exists - no need to create
-        if (is_dir($path))
+        if (!is_dir($path))
         {
+            // attempts to create upload directory
+            if (!mkdir($path, 0777, true))
+            {
+
+                $solution = "<div class='row-fluid'>" .
+                    "<hr>" .
+                    //"<div class='span12 well'>" .
+                    "<h5>Try the following solution</h5>" . 
+                    "<p><code>sudo mkdir $path</code></p>" .
+                    "<p><code>sudo chmod -R 777 $path</code></p>" .
+                    //"</div>" .
+                    "</div>";
+
+                throw new Exception("Unable to create uploads directory ({$path})!" . $solution);
+                return false;
+            }
+
             return true;
         }
 
-        // attempts to create upload directory
-        if (!mkdir($path, 0777, true))
+        // checks permissions just incase
+        if (is_dir($path))
         {
-            throw new Exception("Unable to create uploads directory ({$path})");
-            return false;
+            $perm = $ci->functions->filePermissions($path);
+
+            if ($perm !== 'drwxrwxrwx')
+            {
+                $solution = "<div class='row-fluid'>" .
+                    "<hr>" .
+                    //"<div class='span12 well'>" .
+                    "<h5>Try the following solution</h5>" . 
+                    "<p><code>sudo chmod -R 777 $path</code></p>" .
+                    //"</div>" .
+                    "</div>";
+
+                throw new Exception("Upload directory does not have the proper permissions ({$path})!" . $solution);
+                return false;
+            }
         }
 
     return true;
@@ -171,5 +198,65 @@ class Functions
 
         error_log($body);
 
+    }
+    /**
+     * TODO: short description.
+     *
+     * @param mixed $path 
+     *
+     * @return TODO
+     */
+    public function filePermissions($path)
+    {
+        $perms = fileperms($path);
+
+        if (($perms & 0xC000) == 0xC000) {
+            // Socket
+            $info = 's';
+        } elseif (($perms & 0xA000) == 0xA000) {
+            // Symbolic Link
+            $info = 'l';
+        } elseif (($perms & 0x8000) == 0x8000) {
+            // Regular
+            $info = '-';
+        } elseif (($perms & 0x6000) == 0x6000) {
+            // Block special
+            $info = 'b';
+        } elseif (($perms & 0x4000) == 0x4000) {
+            // Directory
+            $info = 'd';
+        } elseif (($perms & 0x2000) == 0x2000) {
+            // Character special
+            $info = 'c';
+        } elseif (($perms & 0x1000) == 0x1000) {
+            // FIFO pipe
+            $info = 'p';
+        } else {
+            // Unknown
+            $info = 'u';
+        }
+
+        // Owner
+        $info .= (($perms & 0x0100) ? 'r' : '-');
+        $info .= (($perms & 0x0080) ? 'w' : '-');
+        $info .= (($perms & 0x0040) ?
+                    (($perms & 0x0800) ? 's' : 'x' ) :
+                    (($perms & 0x0800) ? 'S' : '-'));
+
+        // Group
+        $info .= (($perms & 0x0020) ? 'r' : '-');
+        $info .= (($perms & 0x0010) ? 'w' : '-');
+        $info .= (($perms & 0x0008) ?
+                    (($perms & 0x0400) ? 's' : 'x' ) :
+                    (($perms & 0x0400) ? 'S' : '-'));
+
+        // World
+        $info .= (($perms & 0x0004) ? 'r' : '-');
+        $info .= (($perms & 0x0002) ? 'w' : '-');
+        $info .= (($perms & 0x0001) ?
+                    (($perms & 0x0200) ? 't' : 'x' ) :
+                    (($perms & 0x0200) ? 'T' : '-'));
+
+    return $info;
     }
 }
