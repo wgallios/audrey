@@ -51,22 +51,20 @@ class Setup extends CI_Controller
                 $create = $this->functions->createUploadFolder();
 
                 // working on testing on connecting w/o db name
-                /*
                 $config = array
                     (
-                        'hostname' => $_POST['hostname'],
+                        'hostname' => $_POST['dbHost'],
                         'username' => $_POST['dbUser'],
                         'password' => $_POST['dbPassword'],
                         'database' => $_POST['dbName']
                     );
-                */
-
-                $config = array
-                    (
-                        'hostname' => $_POST['hostname'],
-                        'username' => $_POST['dbUser'],
-                        'password' => $_POST['dbPassword']
-                    );
+                // 
+                // $config = array
+                //     (
+                //         'hostname' => $_POST['hostname'],
+                //         'username' => $_POST['dbUser'],
+                //         'password' => $_POST['dbPassword']
+                //     );
 
                 // will attempt to connect to database
                 $this->load->model('setup_model', 'setup', $config);

@@ -26,6 +26,12 @@ class setup_model extends CI_Model
      */
     public function createDatabase($databaseName)
     {
-        $sql = "CREATE DATABASE IF NOT EXISTS ;";
+        $databaseName = $this->db->escape_str($databasename);
+
+        $sql = "CREATE DATABASE IF NOT EXISTS {$databaseName};";
+
+        $this->db->query($sql);
+
+    return true;
     }
 }

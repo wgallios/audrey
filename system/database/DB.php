@@ -104,8 +104,10 @@ function &DB($params = '', $active_record_override = NULL)
 
 	// No DB specified yet?  Beat them senseless...
 	if ( ! isset($params['dbdriver']) OR $params['dbdriver'] == '')
-	{
-		show_error('You have not selected a database type to connect to.');
+    {
+        // throws exception instead of showing an error
+        throw new Exception('You have not selected a database type to connect to.');
+		#show_error('You have not selected a database type to connect to.');
 	}
 
 	// Load the DB classes.  Note: Since the active record class is optional

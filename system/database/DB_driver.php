@@ -328,9 +328,11 @@ class CI_DB_driver {
 												$sql
 											)
 										);
-			}
+            }
 
-			return FALSE;
+            // changed db_driver to throw SQL exception rather than returning false
+            throw new exception($error_msg);
+			#return FALSE;
 		}
 
 		// Stop and aggregate the query time results
