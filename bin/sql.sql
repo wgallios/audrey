@@ -1,4 +1,6 @@
 
+SHOW DATABASES;
+
 SHOW TABLES;
 
 EXPLAIN users;

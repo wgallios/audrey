@@ -14,7 +14,7 @@ setup.checkServer = function()
     $.post('/setup/checkserver', $('#setupForm').serialize(), function(data){
         if (data.status == 'SUCCESS')
         {
-            global.renderAlert("Information saved!", 'alert-success');
+            global.renderAlert("Server has been configured! You will now be re-directed to your profile page.", 'alert-success');
         }
         else if (data.status == 'ERROR')
         {

@@ -56,9 +56,14 @@ class Setup extends CI_Controller
                         'hostname' => $_POST['dbHost'],
                         'username' => $_POST['dbUser'],
                         'password' => $_POST['dbPassword'],
-                        'database' => $_POST['dbName']
+                        'database' => $_POST['dbName'],
+                        'dbdriver' => 'mysqli',
+                        'dbprefix' => '',
+                        'pconnect' => false,
+                        'db_debug' => false
                     );
-                // 
+
+                //
                 // $config = array
                 //     (
                 //         'hostname' => $_POST['hostname'],
@@ -66,14 +71,19 @@ class Setup extends CI_Controller
                 //         'password' => $_POST['dbPassword']
                 //     );
 
+                if ($this->load->database($config) == false)
+                {
+                    throw new exception("Unable to connect to database!");
+                }
+
                 // will attempt to connect to database
-                $this->load->model('setup_model', 'setup', $config);
+                //$this->load->model('setup_model', 'setup', $config);
 
                 // attempts to create the database
                 $createDB = $this->setup->createDatabase($_POST['dbName']);
 
                 // all is checked and applied, setup was successful
-                $return['status'] = 'SUCESS';
+                $return['status'] = 'SUCCESS';
                 die(json_encode($return));
             }
             catch(Exception $e)
