@@ -190,7 +190,7 @@ class Functions
         $body .= "URL: {$_SERVER["SERVER_NAME"]}{$_SERVER["REQUEST_URI"]}\n";
         $body .= "Referer: {$_SERVER['HTTP_REFERER']}\n";
 
-        if (empty($errorNum))$body .= "Error Number: {$errorNum}\n\n";
+        if (!empty($errorNum))$body .= "Error Number: {$errorNum}\n\n";
 
         $body .= "User ID: {$_COOKIE['userid']}\n\n";
         $body .= "Message: " . $e->getMessage() . "\n\n";
@@ -258,5 +258,22 @@ class Functions
                     (($perms & 0x0200) ? 'T' : '-'));
 
     return $info;
+    }
+
+    /**
+     * TODO: short description.
+     *
+     * @return TODO
+     */
+    public function createDatabase($databaseName)
+    {
+        $ci =& get_instance();
+        //$databaseName = $this->db->escape_str($databaseName);
+
+        $sql = "CREATE DATABASE IF NOT EXISTS {$databaseName};";
+
+        $ci->db->query($sql);
+
+    return true;
     }
 }

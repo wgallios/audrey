@@ -24,6 +24,9 @@ class Setup extends CI_Controller
      */
     public function index()
     {
+        header("Cache-Control: no-cache, must-revalidate");
+        header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+
         $this->load->model('setup_model', '', false);
 
         $header['headscript'] .= "<script type='text/javascript' src='/min/?f=public/js/setup.js{$this->config->item('min_debug')}&amp;{$this->config->item('min_version')}'></script>\n";
@@ -41,6 +44,10 @@ class Setup extends CI_Controller
      */
     public function checkserver()
     {
+        header("Cache-Control: no-cache, must-revalidate");
+        header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+
+
         if ($_POST)
         {
             try
@@ -65,25 +72,30 @@ class Setup extends CI_Controller
 
                 if ($this->load->database($config) === false)
                 {
-                    throw new exception("Unable to connect to database during setup process!");
+                    throw new exception("Unable to connect to database during setup process! (pre-database creation)!");
                 }
 
+                // attempts to create the database
+                $createDB = $this->functions->createDatabase($_POST['dbName']);
+
                 // connection was successfull - must now create database
+
+                $config['database'] = $_POST['dbName'];
+
+                // reloads connection with database selected
+                if ($this->load->database($config) === false)
+                {
+                    throw new exception("Unable to connect to database during setup process! (post-database creation)");
+                }
 
                 // will attempt to connect to database
                 $this->load->model('setup_model', '', $config);
 
-                // attempts to create the database
-                $createDB = $this->setup_model->createDatabase($_POST['dbName']);
-
-                $config['database'] = $_POST['dbName'];
-
-
                 // reloads config connected to new database
-                $this->load->model('setup_model', '', $config);
+                // $this->load->model('setup_model', '', $config);
 
                 // will now setup database
-                $this->setup_model->setupDatabse();
+                $this->setup_model->setupDatabase();
 
                 // all is checked and applied, setup was successful
                 $return['status'] = 'SUCCESS';
