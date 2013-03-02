@@ -56,31 +56,34 @@ class Setup extends CI_Controller
                         'hostname' => $_POST['dbHost'],
                         'username' => $_POST['dbUser'],
                         'password' => $_POST['dbPassword'],
-                        'database' => $_POST['dbName'],
+                        'database' => '',
                         'dbdriver' => 'mysqli',
                         'dbprefix' => '',
                         'pconnect' => false,
                         'db_debug' => false
                     );
 
-                //
-                // $config = array
-                //     (
-                //         'hostname' => $_POST['hostname'],
-                //         'username' => $_POST['dbUser'],
-                //         'password' => $_POST['dbPassword']
-                //     );
-
-                if ($this->load->database($config) == false)
+                if ($this->load->database($config) === false)
                 {
-                    throw new exception("Unable to connect to database!");
+                    throw new exception("Unable to connect to database during setup process!");
                 }
 
+                // connection was successfull - must now create database
+
                 // will attempt to connect to database
-                //$this->load->model('setup_model', 'setup', $config);
+                $this->load->model('setup_model', '', $config);
 
                 // attempts to create the database
-                $createDB = $this->setup->createDatabase($_POST['dbName']);
+                $createDB = $this->setup_model->createDatabase($_POST['dbName']);
+
+                $config['database'] = $_POST['dbName'];
+
+
+                // reloads config connected to new database
+                $this->load->model('setup_model', '', $config);
+
+                // will now setup database
+                $this->setup_model->setupDatabse();
 
                 // all is checked and applied, setup was successful
                 $return['status'] = 'SUCCESS';

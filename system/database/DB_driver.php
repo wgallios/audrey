@@ -118,7 +118,7 @@ class CI_DB_driver {
 		if ( ! $this->conn_id)
 		{
 			log_message('error', 'Unable to connect to the database');
-
+            throw new Exception('Unable to connect to the database');
 			if ($this->db_debug)
 			{
 				$this->display_error('db_unable_to_connect');
@@ -319,6 +319,8 @@ class CI_DB_driver {
 				// transactions to remain in limbo.
 				$this->trans_complete();
 
+                throw new exception('Query Error: ' . $error_msg . "\n\nSQL: " . $sql);
+
 				// Log and display errors
 				log_message('error', 'Query error: '.$error_msg);
 				return $this->display_error(
@@ -331,7 +333,7 @@ class CI_DB_driver {
             }
 
             // changed db_driver to throw SQL exception rather than returning false
-            throw new exception($error_msg);
+            throw new exception('Query Error: ' . $error_msg);
 			#return FALSE;
 		}
 
