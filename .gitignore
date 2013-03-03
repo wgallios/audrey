@@ -1,6 +1,7 @@
 
 config.local.php
 database.local.php
+database.local.php.back
 *.swp
 *~
 uploads/*

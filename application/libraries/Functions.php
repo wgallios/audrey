@@ -182,6 +182,40 @@ class Functions
     }
 
     /**
+     * Checks permissions for the logs directory
+     *
+     * @return boolean
+     */
+    public function checkLogsDirectoryPermissions()
+    {
+        $ci =& get_instance();
+
+        $path = $_SERVER['DOCUMENT_ROOT'] . 'logs';
+
+        // checks permissions just incase
+        if (is_dir($path))
+        {
+            $perm = $ci->functions->filePermissions($path);
+
+            if ($perm !== 'drwxrwxrwx')
+            {
+                $solution = "<div class='row-fluid'>" .
+                    "<hr>" .
+                    //"<div class='span12 well'>" .
+                    "<h5>Try the following solution</h5>" . 
+                    "<p><code>sudo chmod -R 777 $path</code></p>" .
+                    //"</div>" .
+                    "</div>";
+
+                throw new Exception("logs directory does not have the proper permissions ({$path})!" . $solution);
+                return false;
+            }
+        }
+
+    return true;
+    }
+
+    /**
      * Saves stack trace error in error log
      */
     public function sendStackTrace($e, $errorNum = 0)

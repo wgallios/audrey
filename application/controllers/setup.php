@@ -47,6 +47,7 @@ class Setup extends CI_Controller
         header("Cache-Control: no-cache, must-revalidate");
         header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
+        $this->load->model('setup_model', '', false);
 
         if ($_POST)
         {
@@ -56,6 +57,9 @@ class Setup extends CI_Controller
 
                 // will first create upload diretory
                 $create = $this->functions->createUploadFolder();
+
+                // checks logs directory permissions
+                $this->functions->checkLogsDirectoryPermissions();
 
                 // working on testing on connecting w/o db name
                 $config = array
@@ -70,13 +74,12 @@ class Setup extends CI_Controller
                         'db_debug' => true
                     );
 
-                if ($this->ci->dbConnectTest = $this->load->database($config, true) === false)
+                if ($this->load->database($config, true) === false)
                 {
                     throw new exception("Unable to connect to database during setup process! (pre-database creation)!");
                 }
 
                 // will attempt to connect to database
-                $this->load->model('setup_model', '', false);
 
                 // attempts to create the database
                 $createDB = $this->setup_model->createDatabase($_POST['dbName'], $config);
@@ -87,14 +90,10 @@ class Setup extends CI_Controller
                 // print_r($config);
 
                 // reloads connection with database selected
-                if ($dbConnected = $this->load->database($config, true) === false)
+                if ($this->load->database($config, true) === false)
                 {
                     throw new exception("Unable to connect to database during setup process! (post-database creation)");
                 }
-
-
-                // reloads config connected to new database
-                // $this->load->model('setup_model', '', $config);
 
                 // will now setup database
                 $this->setup_model->setupDatabase($config);
@@ -106,7 +105,7 @@ class Setup extends CI_Controller
             catch(Exception $e)
             {
                 $return['status'] = 'ERROR';
-                $return['msg'] = 'Setup Error: ' . $e->getMessage();
+                $return['msg'] = 'Setup Error: ' . nl2br($e->getMessage());
                 $return['errorNumber'] = 3;
                 $this->functions->sendStackTrace($e, 3);
                 die(json_encode($return));

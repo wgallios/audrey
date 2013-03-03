@@ -1,13 +1,14 @@
 DROP TABLE IF EXISTS `errors`;
 
-CREATE TABLE `errors` (
+CREATE TABLE `errors`
+(
   `id` int(10) unsigned NOT NULL,
   `errorMsg` varchar(300) DEFAULT NULL,
   `description` text,
   `solution` text,
   `url` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=innodb DEFAULT CHARSET=latin1;
 
 
 insert  into `errors`(`id`,`errorMsg`,`description`,`solution`,`url`) values 

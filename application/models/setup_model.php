@@ -25,7 +25,6 @@ class setup_model extends CI_Model
      */
     public function setupDatabase($config)
     {
-
         $db = $this->load->database($config, true);
 
         $path = $_SERVER['DOCUMENT_ROOT'] . 'sql' . DIRECTORY_SEPARATOR;
@@ -57,7 +56,7 @@ class setup_model extends CI_Model
                 $sql .= $buffer;
             }
 
-            if (!feof($handle)) throw new Exception("Unexecpted fgets() fail! ({$path}{$file})");
+            if (!feof($handle)) throw new Exception("Unexpected fgets() fail! ({$path}{$file})");
 
             if (!fclose($handle)) throw new Exception("Unable to close file! ({$path}{$file})");
 
@@ -81,15 +80,15 @@ class setup_model extends CI_Model
     public function createDatabase($databaseName, $config)
     {
 
-        $dbNoSel = $this->load->database($config, true);
+        $db = $this->load->database($config, true);
 
         //$databaseName = $this->db->escape_str($databaseName);
 
         $sql = "CREATE DATABASE IF NOT EXISTS {$databaseName};";
 
-        $dbNoSel->query($sql);
+        $db->query($sql);
 
-        $dbNoSel->close(); // close connection
+        $db->close(); // close connection
 
     return true;
     }
