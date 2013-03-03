@@ -9,7 +9,7 @@ setup.indexInit = function()
 
 setup.checkServer = function()
 {
-    $('#setupBtn').attr('disabled', 'disabled');
+    //$('#setupBtn').attr('disabled', 'disabled');
 
     $.post('/setup/checkserver', $('#setupForm').serialize(), function(data){
         if (data.status == 'SUCCESS')

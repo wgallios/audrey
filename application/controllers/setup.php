@@ -67,10 +67,10 @@ class Setup extends CI_Controller
                         'dbdriver' => 'mysqli',
                         'dbprefix' => '',
                         'pconnect' => false,
-                        'db_debug' => false
+                        'db_debug' => true
                     );
 
-                if ($this->load->database($config) === false)
+                if ($this->ci->dbConnectTest = $this->load->database($config, true) === false)
                 {
                     throw new exception("Unable to connect to database during setup process! (pre-database creation)!");
                 }
@@ -79,11 +79,12 @@ class Setup extends CI_Controller
                 $createDB = $this->functions->createDatabase($_POST['dbName']);
 
                 // connection was successfull - must now create database
-
                 $config['database'] = $_POST['dbName'];
 
+                // print_r($config);
+
                 // reloads connection with database selected
-                if ($this->load->database($config) === false)
+                if ($dbConnected = $this->load->database($config, true) === false)
                 {
                     throw new exception("Unable to connect to database during setup process! (post-database creation)");
                 }
@@ -95,7 +96,7 @@ class Setup extends CI_Controller
                 // $this->load->model('setup_model', '', $config);
 
                 // will now setup database
-                $this->setup_model->setupDatabase();
+                $this->setup_model->setupDatabase($dbConnected);
 
                 // all is checked and applied, setup was successful
                 $return['status'] = 'SUCCESS';

@@ -23,7 +23,7 @@ class setup_model extends CI_Model
      *
      * @return TODO
      */
-    public function setupDatabase()
+    public function setupDatabase($dbConnection)
     {
 
         $path = $_SERVER['DOCUMENT_ROOT'] . 'sql' . DIRECTORY_SEPARATOR;
@@ -60,7 +60,7 @@ class setup_model extends CI_Model
             if (!fclose($handle)) throw new Exception("Unable to close file! ({$path}{$file})");
 
             // $sql variable shoudl now have file contents and will now execute sql file
-            $this->db->query($sql);
+            $dbConnection->query($sql);
 
         }
 
