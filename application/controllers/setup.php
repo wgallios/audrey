@@ -75,8 +75,11 @@ class Setup extends CI_Controller
                     throw new exception("Unable to connect to database during setup process! (pre-database creation)!");
                 }
 
+                // will attempt to connect to database
+                $this->load->model('setup_model', '', false);
+
                 // attempts to create the database
-                $createDB = $this->functions->createDatabase($_POST['dbName']);
+                $createDB = $this->setup_model->createDatabase($_POST['dbName'], $config);
 
                 // connection was successfull - must now create database
                 $config['database'] = $_POST['dbName'];
@@ -89,14 +92,12 @@ class Setup extends CI_Controller
                     throw new exception("Unable to connect to database during setup process! (post-database creation)");
                 }
 
-                // will attempt to connect to database
-                $this->load->model('setup_model', '', $config);
 
                 // reloads config connected to new database
                 // $this->load->model('setup_model', '', $config);
 
                 // will now setup database
-                $this->setup_model->setupDatabase($dbConnected);
+                $this->setup_model->setupDatabase($config);
 
                 // all is checked and applied, setup was successful
                 $return['status'] = 'SUCCESS';

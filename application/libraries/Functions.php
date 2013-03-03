@@ -260,20 +260,4 @@ class Functions
     return $info;
     }
 
-    /**
-     * TODO: short description.
-     *
-     * @return TODO
-     */
-    public function createDatabase($databaseName, $dbConnection)
-    {
-        $ci =& get_instance();
-        //$databaseName = $this->db->escape_str($databaseName);
-
-        $sql = "CREATE DATABASE IF NOT EXISTS {$databaseName};";
-
-        $ci->ci->dbConnectTest->query($sql);
-
-    return true;
-    }
 }

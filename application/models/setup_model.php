@@ -23,8 +23,10 @@ class setup_model extends CI_Model
      *
      * @return TODO
      */
-    public function setupDatabase($dbConnection)
+    public function setupDatabase($config)
     {
+
+        $db = $this->load->database($config, true);
 
         $path = $_SERVER['DOCUMENT_ROOT'] . 'sql' . DIRECTORY_SEPARATOR;
 
@@ -60,11 +62,34 @@ class setup_model extends CI_Model
             if (!fclose($handle)) throw new Exception("Unable to close file! ({$path}{$file})");
 
             // $sql variable shoudl now have file contents and will now execute sql file
-            $dbConnection->query($sql);
+            $db->query($sql);
 
         }
 
         @closedir($dh);
+
+        $db->close();
+
+    return true;
+    }
+
+    /**
+     * TODO: short description.
+     *
+     * @return TODO
+     */
+    public function createDatabase($databaseName, $config)
+    {
+
+        $dbNoSel = $this->load->database($config, true);
+
+        //$databaseName = $this->db->escape_str($databaseName);
+
+        $sql = "CREATE DATABASE IF NOT EXISTS {$databaseName};";
+
+        $dbNoSel->query($sql);
+
+        $dbNoSel->close(); // close connection
 
     return true;
     }
