@@ -12,7 +12,7 @@ $active[$nav] = 'active';
     <li><a href='#'><i class='icon-envelope'></i> Messages <span class='label label-important'>3</span></a></li>
     <li><a href='#'><i class='icon-comment'></i> Notifications <span class='label label-important'>69</span></a></li>
     <li><a href='#'><i class='icon-plus'></i> Requests <span class='label label-important'>2</span></a></li>
-    <li><a href='#'><i class='icon-camera'></i> Photos</a></li>
+    <li class='<?=$active['photos']?>'><a href='/photos'><i class='icon-camera'></i> Photos</a></li>
     <li><a href='/home/logout'><i class='icon-eject'></i> Log out</a></li>
 
     <li class='nav-header'>Profile</li>
