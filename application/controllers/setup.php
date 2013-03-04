@@ -61,6 +61,9 @@ class Setup extends CI_Controller
                 // checks logs directory permissions
                 $this->functions->checkLogsDirectoryPermissions();
 
+                // checks permissions of config directory for creating database.local.php later
+                $this->functions->checkConfigDirectoryPermissions();
+
                 // working on testing on connecting w/o db name
                 $config = array
                     (
@@ -71,7 +74,7 @@ class Setup extends CI_Controller
                         'dbdriver' => 'mysqli',
                         'dbprefix' => '',
                         'pconnect' => false,
-                        'db_debug' => true
+                        'db_debug' => false,
                     );
 
                 if ($this->load->database($config, true) === false)
@@ -97,6 +100,28 @@ class Setup extends CI_Controller
 
                 // will now setup database
                 $this->setup_model->setupDatabase($config);
+
+                // create database.local.php
+                $this->setup_model->createLocalDBconfig($config);
+
+                // inserts admin user
+                $userid = $this->setup_model->insertAdminUser($_POST, $config);
+
+                // inserts initial settings row
+                $this->setup_model->insertInitSettings($_POST, $config);
+
+                // clears all previous cookies and session data
+                foreach($_COOKIE as $key => $value)
+                {
+                    setcookie($key, '', 0, '/');
+                }
+
+                session_start();
+                session_unset();
+                session_destroy();
+
+                // sets login cookie
+                setcookie('userid', $id, 0, '/');
 
                 // all is checked and applied, setup was successful
                 $return['status'] = 'SUCCESS';

@@ -1,5 +1,3 @@
-/*Table structure for table `codes` */
-
 DROP TABLE IF EXISTS `codes`;
 
 CREATE TABLE `codes` (
@@ -10,8 +8,6 @@ CREATE TABLE `codes` (
   `editable` binary(1) DEFAULT NULL,
   PRIMARY KEY (`group`,`code`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
-/*Data for the table `codes` */
 
 insert  into `codes`(`group`,`code`,`display`,`active`,`editable`) values
 (1,0,'User statuses','1','0'),
@@ -30,8 +26,3 @@ insert  into `codes`(`group`,`code`,`display`,`active`,`editable`) values
 (4,0,'Gender Types','1','1'),
 (4,1,'Male','1','1'),
 (4,2,'Female','1','1');
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

@@ -7,7 +7,13 @@ class Functions
      */
     public function checkNeedSetup()
     {
+        // checks if database.local.php exists
+        $dbLocal = $_SERVER['DOCUMENT_ROOT'] . 'application' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'database.local.php';
 
+        if (!file_exists($dbLocal))
+        {
+            return true;
+        }
 
         return false;
     }
@@ -208,6 +214,40 @@ class Functions
                     "</div>";
 
                 throw new Exception("logs directory does not have the proper permissions ({$path})!" . $solution);
+                return false;
+            }
+        }
+
+    return true;
+    }
+
+    /**
+     * Checks permissions for the config/ directory
+     *
+     * @return boolean
+     */
+    public function checkConfigDirectoryPermissions()
+    {
+        $ci =& get_instance();
+
+        $path = $_SERVER['DOCUMENT_ROOT'] . 'application' . DIRECTORY_SEPARATOR . 'config';
+
+        // checks permissions just incase
+        if (is_dir($path))
+        {
+            $perm = $ci->functions->filePermissions($path);
+
+            if ($perm !== 'drwxrwxrwx')
+            {
+                $solution = "<div class='row-fluid'>" .
+                    "<hr>" .
+                    //"<div class='span12 well'>" .
+                    "<h5>Try the following solution</h5>" . 
+                    "<p><code>sudo chmod -R 777 $path</code></p>" .
+                    //"</div>" .
+                    "</div>";
+
+                throw new Exception("config directory does not have the proper permissions ({$path})!" . $solution);
                 return false;
             }
         }
