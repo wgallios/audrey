@@ -11,4 +11,4 @@ CREATE TABLE `users` (
   `status` smallint(5) unsigned DEFAULT NULL,
   `permissions` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;

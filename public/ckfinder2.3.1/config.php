@@ -26,11 +26,20 @@ function CheckAuthentication()
 
 	// return isset($_SESSION['IsAuthorized']) && $_SESSION['IsAuthorized'];
 
+    if(isset($_COOKIE['userid']))
+    {
+        return true;
+    }
 	// ... where $_SESSION['IsAuthorized'] is set to "true" as soon as the
 	// user logs in your system. To be able to use session variables don't
 	// forget to add session_start() at the top of this file.
 
 	return false;
+}
+
+if (substr($_SERVER['DOCUMENT_ROOT'], -1) !== DIRECTORY_SEPARATOR)
+{
+    $_SERVER['DOCUMENT_ROOT'] = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR;
 }
 
 // LicenseKey : Paste your license key here. If left blank, CKFinder will be
@@ -60,8 +69,8 @@ Examples:
 
 ATTENTION: The trailing slash is required.
 */
-$baseUrl = '/ckfinder/userfiles/';
-
+#$baseUrl = $_SERVER['DOCUMENT_ROOT'] . 'public' . DIRECTORY_SEPARATOR 'uploads';
+$baseUrl = DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR;
 /*
 $baseDir : the path to the local directory (in the server) which points to the
 above $baseUrl URL. This is the path used by CKFinder to handle the files in

@@ -23,6 +23,10 @@ class Photos extends CI_Controller
     {
         $header['nav'] = 'photos';
 
+        $header['headscript'] = "<script type='text/javascript' src='/public/ckfinder2.3.1/ckfinder.js'></script>\n";
+
+        $header['onload'] = "photos.indexInit();";
+
         $this->load->view('templates/header', $header);
         $this->load->view('photos/index', $body);
         $this->load->view('templates/footer');

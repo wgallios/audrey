@@ -9,6 +9,7 @@
     <div class='span9'>
         <h1>Photos</h1>
 
+
 <div class='tabbable'>
     <ul class='nav nav-tabs'>
         <li class='active'><a href='#tabAlbums' data-toggle="tab">Albums</a></li>
@@ -17,10 +18,24 @@
 
 <div class="tab-content">
 
-    <div id="tabAlbum" class='tab-pane active'>
+    <div id="tabAlbums" class='tab-pane active'>
+
+        <div class='row-fluid'>
+            <button type='button' class='btn btn-primary'>Create Album</button>
+        </div>
+
     </div> <!-- #tabAlbum //-->
 
+
+
     <div id="tabUpload" class='tab-pane'>
+<script type="text/javascript">
+var finder = new CKFinder();
+finder.basePath = '/public/ckfinder2.3.1/';
+finder.height = 700;
+finder.create();
+</script>
+
     </div> <!-- #tabUpload //-->
 
 </div> <!-- .tab-content //-->

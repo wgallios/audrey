@@ -4,5 +4,5 @@ database.local.php
 database.local.php.back
 *.swp
 *~
-uploads/*
+public/uploads/*
 logs/error_log.txt
