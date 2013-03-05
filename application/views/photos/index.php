@@ -20,9 +20,11 @@
 
     <div id="tabAlbums" class='tab-pane active'>
 
-        <div class='row-fluid'>
-            <button type='button' class='btn btn-primary'>Create Album</button>
+        <div class='row-fluid create-album'>
+            <a href='#createAlbumModal' role='button' class='btn btn-primary btn-large' data-toggle='modal'>Create Album</a>
         </div>
+
+        <div id='album-display'></div>
 
     </div> <!-- #tabAlbum //-->
 
@@ -49,3 +51,30 @@ finder.create();
     </div> <!-- .span9 //-->
 
 </div> <!-- .row-fluid //-->
+
+
+<!-- modal for creating new album //-->
+
+<div id='createAlbumModal' class='modal hide fade' data-backdrop=''>
+
+    <div class='modal-header'>
+        <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
+        <h3>Create a New Album</h3>
+    </div> <!-- .modal-header //-->
+
+    <div class='modal-body'>
+        <div id='modalAlert'></div>
+
+        <p class='lead'>Enter the name of your new photo album</p>
+
+        <form name='createAlbumForm' id='createAlbumForm'>
+        <p><input type='text' class='input-large' name='albumName' id='albumName' placeholder='Album Name'></p>
+        </form>
+    </div> <!-- .modal-body //-->
+
+    <div class='modal-footer'>
+        <button class='btn' data-dismiss='modal' aria-hidden='true'>Close</button>
+        <button class='btn btn-primary' aria-hidden='true' id='createModalBtn'>Create Album</button>
+    </div> <!-- .modal-footer //-->
+
+</div> <!-- #createAlbumModal .modal .hide .fade //-->

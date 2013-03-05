@@ -33,4 +33,25 @@ class photos_model extends CI_Model
 
     return $results;
     }
+
+    /**
+     * TODO: short description.
+     *
+     * @param mixed $albumName 
+     *
+     * @return INT - album ID
+     */
+    public function createAlbum($albumName)
+    {
+        $albumName = $this->db->escape_str($albumName);
+
+        $sql = "INSERT INTO photoAlbums SET
+            datestamp = NOW(),
+            albumName = '{$albumName}',
+            deleted = 0";
+
+        $this->db->query($sql);
+
+    return $this->db->insert_id();
+    }
 }

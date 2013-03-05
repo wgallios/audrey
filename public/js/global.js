@@ -74,3 +74,14 @@ global.checkEmail = function(inputvalue)
         return false;
     }
 }
+
+global.ajaxLoader = function(divId)
+{
+    var html = "<div class='row-fluid' style=\"margin:50px 0;\">" +
+        "<div class='well span2 offset5' align='center'>" +
+        "<img src='/public/images/loader.gif'> Loading..." +
+        "</div>" +
+        "</div>";
+
+    $(divId).html(html);
+}
