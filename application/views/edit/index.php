@@ -23,6 +23,11 @@
 
         <table class='form-table'>
             <tbody>
+
+                <tr>
+                    <td>Site Title</td>
+                    <td colspan='3'><input type='text' name='siteTitle' id='siteTitle' class='input-block-level' value="<?=$info->siteTitle?>" placeholder='Title'></td>
+                </tr>
                 <tr>
                     <td>First Name</td>
                     <td><input type='text' class='input-large' name='firstName' id='firstName' value="<?=$info->firstName?>"></td>

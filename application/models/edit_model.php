@@ -79,7 +79,8 @@ class edit_model extends CI_Model
             , weight = {$weight}
             , weightType = {$weightType}
             , relationshipStatus = {$relationshipStatus}
-            , aboutMe = '{$p['aboutMe']}'";
+            , aboutMe = '{$p['aboutMe']}'
+            , siteTitle = '{$p['siteTitle']}'";
 
         $this->db->query($sql);
 

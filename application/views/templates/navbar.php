@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="/">William Gallios</a>
+          <a class="brand" href="/"><?=$this->functions->getSiteTitle()?></a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
                 <a href="/home" class="navbar-link">Home</a>

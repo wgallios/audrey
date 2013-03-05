@@ -201,6 +201,7 @@ class setup_model extends CI_Model
         // escape strings
         $p['firstName'] = $db->escape_str($p['firstName']);
         $p['lastName'] = $db->escape_str($p['lastName']);
+        $p['siteTitle'] = $db->escape_str($p['siteTitle']);
 
         // first clears any previous settings just in case
         $sql = "DELETE FROM settings";
@@ -209,6 +210,7 @@ class setup_model extends CI_Model
 
         // now inserts settings row
         $sql = "INSERT INTO settings SET
+            siteTitle = '{$p['siteTitle']}',
             firstName = '{$p['firstName']}',
             lastName = '{$p['lastName']}'";
 

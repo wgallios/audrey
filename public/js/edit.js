@@ -7,10 +7,22 @@ edit.indexInit = function()
     $('#saveBtn').click(function(e){
             edit.checkEditForm();
             });
+
+    $('#dob').datepicker({
+        dateFormat: "yy-mm-dd"
+    });
 }
 
 edit.checkEditForm = function()
 {
+
+    if ($('#siteTitle').val() == '')
+    {
+        global.renderAlert("Please enter a site title!");
+        $('#firstName').focus();
+        return false;
+    }
+
     if ($('#firstName').val() == '')
     {
         global.renderAlert("Please enter a first name!");

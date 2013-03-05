@@ -334,4 +334,70 @@ class Functions
     return $info;
     }
 
+    /**
+     * Gets first and last name from settings for the site name
+     *
+     * @return String - site name
+     */
+    public function getSiteName()
+    {
+        $ci =& get_instance();
+
+        $sql = "SELECT CONCAT_WS(' ', firstName, lastName) as name FROM settings";
+
+        $query = $ci->db->query($sql);
+
+        $results = $query->result();
+
+    return $results[0]->name;
+    }
+
+    /**
+     * TODO: short description.
+     *
+     * @return TODO
+     */
+    public function getSiteTitle()
+    {
+        $ci =& get_instance();
+
+        $ci->load->helper('url');
+
+        $pattern = '/^setup/';
+
+        $setup = preg_match($pattern, uri_string());
+
+        // if they are on the setup page
+        if ($setup >  0)
+        {
+            return "Audrey Social Network Platform";
+        }
+
+
+        $sql = "SELECT siteTitle FROM settings";
+
+        $query = $ci->db->query($sql);
+
+        $results = $query->result();
+
+    return $results[0]->siteTitle;
+    }
+
+    /**
+     * Gets sites settings
+     *
+     * @return object
+     */
+    public function getSettings()
+    {
+        $ci =& get_instance();
+
+        $sql = "SELECT * FROM settings";
+
+        $query = $ci->db->query($sql);
+
+        $results = $query->result();
+
+    return $results[0];
+    }
 }

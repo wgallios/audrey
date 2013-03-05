@@ -13,5 +13,6 @@ CREATE TABLE `settings` (
   `aboutMe` text,
   `majorVersion` int(10) unsigned DEFAULT NULL,
   `minorVersion` int(10) unsigned DEFAULT NULL,
-  `authKey` char(16) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `authKey` char(16) DEFAULT NULL,
+  `siteTitle` VARCHAR(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

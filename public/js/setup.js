@@ -9,6 +9,14 @@ setup.indexInit = function()
 
 setup.checkServer = function()
 {
+
+    if ($('#siteTitle').val() == '')
+    {
+        global.renderAlert("Please enter a site title!");
+        $('#siteTitle').focus();
+        return false;
+    }
+
     if ($('#firstName').val() == '')
     {
         global.renderAlert("Please enter your first name!");
