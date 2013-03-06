@@ -368,5 +368,13 @@ $config['authUrl'] = "http://asnp.co/auth";
 if (!isset($config['min_version'])) $config['min_version'] = 1;
 if (!isset($config['min_debug'])) $config['min_debug'] = null;
 
+
+// path to the thumbnails where images are uploaded to
+$config['thumbnail_path'] = $_SERVER['DOCUMENT_ROOT'] . 'public' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . '_thumbs' . DIRECTORY_SEPARATOR . 'Images' . DIRECTORY_SEPARATOR;
+
+
+// url to the where thumbnails images are uploaded to
+$config['thumbnail_url'] = "/public/uploads/_thumbs/Images/";
+
 /* End of file config.php */
 /* Location: ./application/config/config.php */

@@ -26,6 +26,8 @@ photos.checkAlbumName = function()
 
         if (data.status == 'SUCCESS')
         {
+            $('#createAlbumModal').modal('hide');
+            $('#albumName').val('');
             photos.getAlbums();
         }
         else
@@ -43,5 +45,13 @@ photos.getAlbums = function()
 
     $.get('/photos/albums', function(data){
         $('#album-display').html(data);
+    });
+}
+
+photos.editalbumInit = function()
+{
+    $('#cancelBtn').click(function(e){
+        $(this).attr('disabled', 'disabled');
+        window.location = "/photos";
     });
 }

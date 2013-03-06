@@ -32,3 +32,6 @@ ORDER BY label
 
 
 SELECT COUNT(*) cnt FROM users WHERE username = 'wgallios'
+
+
+SELECT * FROM photoAlbums

@@ -2,7 +2,7 @@
 
       <div class="row-fluid">
         <div class="span3">
-            <img src='/public/images/will.jpg' class='img-polaroid'>
+            <img src='/public/images/dude.gif' class='img-polaroid'>
 
 
 <div class='row-fluid' style="margin-top:20px;">

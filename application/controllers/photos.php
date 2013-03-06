@@ -95,4 +95,44 @@ class Photos extends CI_Controller
         $return['errorNumber'] = 2;
         die(json_encode($return));
     }
+
+    /**
+     * TODO: short description.
+     *
+     * @param mixed $id 
+     *
+     * @return TODO
+     */
+    public function editalbum($id)
+    {
+
+        $header['nav'] = 'photos';
+
+        $header['headscript'] = "<script type='text/javascript' src='/min/?f=public/js/photos.js{$this->config->item('min_debug')}&amp;{$this->config->item('min_version')}'></script>\n";
+
+        $header['onload'] = "photos.editalbumInit()";
+
+        if (empty($id))
+        {
+            header("Location: /photos?site-error=" . urlencode("ID was not specified!"));
+            exit;
+        }
+
+        $body['id'] = $id;
+
+        try
+        {
+            $body['images'] = $this->photos->getAlbumThumbs();
+        }
+        catch(Exception $e)
+        {
+            $this->functions->sendStackTrace($e);
+        }
+
+
+        $this->load->view('templates/header', $header);
+        $this->load->view('photos/editalbum', $body);
+        $this->load->view('templates/footer');
+
+    }
 }

@@ -25,7 +25,7 @@ class photos_model extends CI_Model
      */
     public function getAlbums()
     {
-        $sql = "SELECT * FROM photoAlbums ORDER BY albumName";
+        $sql = "SELECT * FROM photoAlbums WHERE `deleted` = 0 ORDER BY albumName";
 
         $query = $this->db->query($sql);
 
@@ -53,5 +53,39 @@ class photos_model extends CI_Model
         $this->db->query($sql);
 
     return $this->db->insert_id();
+    }
+
+    /**
+     * Gets list of all thumbnails
+     *
+     * @return array $images 
+     */
+    public function getAlbumThumbs()
+    {
+        $path = $this->config->item('thumbnail_path');
+
+        $images = array();
+
+        if (!is_dir($path)) throw new Exception("({$path}) is not a valid directory!");
+
+        $handle = @opendir($path);
+
+        if ($handle === false) throw new Exception("Unable to open path! ({$path})");
+
+        while (($entry = readdir($handle)) !== false)
+        {
+            if ($entry == '.' || $entry == '..')
+            {
+                // do nothing
+            }
+            else
+            {
+                $images[] = $entry;
+            }
+        }
+
+        @closedir($handle);
+
+    return $images;
     }
 }

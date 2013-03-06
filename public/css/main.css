@@ -73,3 +73,40 @@ div.key
 {
     margin:5px 0 25px 0;
 }
+
+.editAlbum
+{
+    height:700px;
+}
+
+.img-row
+{
+    margin:5px 0;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border:1px solid white;
+
+
+}
+
+.img-row:hover
+{
+    cursor:move;
+    border:1px solid #e8c0ff;
+    background:#e8f1ff;
+}
+
+table.img-tbl tr td
+{
+    padding:5px;
+    font-weight:bold;
+}
+
+
+table.img-tbl tr td.imgThumb
+{
+    height:100px;
+    width:100px;
+    text-align:center;
+}
