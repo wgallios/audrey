@@ -54,4 +54,37 @@ photos.editalbumInit = function()
         $(this).attr('disabled', 'disabled');
         window.location = "/photos";
     });
+
+
+    // loads draggable pictures
+    $('#all-pictures').find("div").each(function(index, item)
+    {
+        //var eid  = $(item).val();
+       $(item).draggable({
+            revert:true
+       });
+    });
+
+    // loads drop zone
+    $('#photo-drop').droppable({
+    
+        over: function (event, ui)
+        {
+            $(this).addClass('hover');
+        },
+        out: function (event, ui)
+        {
+            $(this).removeClass('hover');
+        },
+        drop: function (event, ui)
+        {
+            $(this).removeClass('hover');
+            photos.albumAddPhoto(event, ui);
+        }
+    });
+}
+
+photos.albumAddPhoto = function(event, ui)
+{
+    //alert("value: " + $(ui.draggable).attr('value'));
 }

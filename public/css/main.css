@@ -110,3 +110,8 @@ table.img-tbl tr td.imgThumb
     width:100px;
     text-align:center;
 }
+
+.hover
+{
+    background:#e7ffca;
+}

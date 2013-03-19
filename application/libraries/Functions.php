@@ -25,9 +25,13 @@ class Functions
      */
     public function checkLoggedIn()
     {
+        // starts session if not already started
+
         $ci =& get_instance();
 
         $ci->load->helper('url');
+
+        $ci->load->library('session');
 
         $pattern = '/^home\/login/';
 
@@ -35,7 +39,12 @@ class Functions
 
         if ($login == 0)
         {
-            if(!isset($_COOKIE['userid']))
+            //if(!isset($_COOKIE['userid']))
+            if($ci->session->userdata('logged_in') === true)
+            {
+                // do nothing
+            }
+            else
             {
                 header("Location: /home/login?site-error=" . urlencode("You are not logged in") . "&ref=" . uri_string());
                 exit;
@@ -260,13 +269,17 @@ class Functions
      */
     public function sendStackTrace($e, $errorNum = 0)
     {
+        $ci =& get_instance();
+
+        $ci->load->library('session');
+
         $body = "Stack Trace Error:\n\n";
         $body .= "URL: {$_SERVER["SERVER_NAME"]}{$_SERVER["REQUEST_URI"]}\n";
         $body .= "Referer: {$_SERVER['HTTP_REFERER']}\n";
 
         if (!empty($errorNum))$body .= "Error Number: {$errorNum}\n\n";
 
-        $body .= "User ID: {$_COOKIE['userid']}\n\n";
+        $body .= "User ID: {$ci->session->userdata('userid')}\n\n";
         $body .= "Message: " . $e->getMessage() . "\n\n";
         $body .= $e;
 

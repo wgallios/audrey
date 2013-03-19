@@ -6,6 +6,8 @@ class Home extends CI_Controller
     {
         parent::__construct();
 
+        $this->load->library('session');
+
         $this->load->library('functions');
 
         $this->functions->checkLoggedIn();
@@ -48,13 +50,28 @@ class Home extends CI_Controller
                 if (!empty($credit))
                 {
                     // clears previous cookies
+                    /*
                     foreach ($_COOKIE as $key => $value)
                     {
                         setcookie($key, '', 0, '/');
                     }
+                    */
+
+                    $array = array('userid' => null, 'logged_in' => false);
+
+                    $this->session->unset_userdata($array);
+
 
                     // login was valid
-                    setcookie('userid', $credit->id, 0, '/');
+                    //setcookie('userid', $credit->id, 0, '/');
+
+                    $array = array
+                        (
+                            'userid' => $credit->id,
+                            'logged_in' => true
+                        );
+
+                    $this->session->set_userdata($array);
 
                     // user tried accessing a page while not logged in - takes them back to that page instead of landing
                     if (!empty($_POST['ref']))
@@ -75,7 +92,7 @@ class Home extends CI_Controller
             }
             catch(Exception $e)
             {
-
+                $this->functions->sendStackTrace($e);
             }
 
         }
@@ -91,7 +108,10 @@ class Home extends CI_Controller
         header("Cache-Control: no-cache, must-revalidate");
         header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
-        foreach($_COOKIE as $key => $value)
+        $array = array('userid' => null, 'logged_in' => false);
+
+        $this->session->unset_userdata($array);
+
         {
             setcookie($key, '', 0, '/');
         }

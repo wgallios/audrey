@@ -1,4 +1,5 @@
 <?php
+
 /*-------------------------------------------------------------
  *  Audrey Social Network Platform
  *  http://asnp.co
@@ -59,6 +60,7 @@ if (defined('ENVIRONMENT'))
 	{
 		case 'development':
 			error_reporting(E_ERROR | E_PARSE | E_STRICT);
+			// error_reporting(E_ALL);
             ini_set('display_errors', '1');
         break;
 	
@@ -82,7 +84,7 @@ if (defined('ENVIRONMENT'))
  * as this file.
  *
  */
-	$system_path = 'system';
+if (!isset($system_path)) $system_path = 'system';
 
 /*
  *---------------------------------------------------------------
@@ -98,7 +100,7 @@ if (defined('ENVIRONMENT'))
  * NO TRAILING SLASH!
  *
  */
-	$application_folder = 'application';
+if (!isset($application_folder)) $application_folder = 'application';
 
 /*
  * --------------------------------------------------------------------

@@ -19,11 +19,11 @@
         </div>
 
         <div class='row-fluid'>
-            <div class='span9 editAlbum'>
+            <div class='span9 editAlbum' id='photo-drop'>
 
             </div>
 
-            <div class='span3 well editAlbum'>
+            <div class='span3 well editAlbum' id='all-pictures'>
 <?php
 if (empty($images))
 {
@@ -31,9 +31,10 @@ if (empty($images))
 }
 else
 {
+    $cnt = 1;
     foreach ($images as $file)
     {
-        echo "<div class='row img-row'>";
+        echo "<div class='row img-row' id='img{$cnt}' value=\"{$file}\">";
 
         echo "<table class='img-tbl'>";
         echo "<tr>";
@@ -46,6 +47,8 @@ else
         echo "</table>";
 
         echo "</div>";
+
+        $cnt++;
     }
 }
 ?>

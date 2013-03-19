@@ -8,6 +8,8 @@ class Auth extends CI_Controller
 
         $this->load->library('functions');
 
+        $this->load->library('session');
+
         $this->functions->checkLoggedIn();
 
         $this->load->model('auth_model', 'auth', true);
@@ -32,7 +34,7 @@ class Auth extends CI_Controller
         try
         {
             $body['key'] = $this->auth->getCurrentKey();
-            $body['userInfo'] = $this->users->getUsers($_COOKIE['userid']);
+            $body['userInfo'] = $this->users->getUsers($this->session->userdata('userid'));
         }
         catch(Exception $e)
         {
@@ -55,7 +57,7 @@ class Auth extends CI_Controller
 
         try
         {
-            $userInfo = $this->users->getUsers($_COOKIE['userid']);
+            $userInfo = $this->users->getUsers($this->session->userdata('userid'));
 
             $auth = $this->auth->authSite($userInfo->username, $userInfo->email, $_SERVER['HTTP_HOST']);
 

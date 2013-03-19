@@ -8,6 +8,8 @@ class Users extends CI_Controller
 
         $this->load->library('functions');
 
+        $this->load->library('session');
+
         $this->functions->checkLoggedIn();
 
         $this->load->model('users_model', 'users', true);
@@ -185,7 +187,7 @@ class Users extends CI_Controller
                 // checks password
                 if (!empty($_POST['currentPassword']))
                 {
-                    $check = $this->users->checkPassword($_COOKIE['userid'], $_POST['currentPassword']);
+                    $check = $this->users->checkPassword($this->session->userdata('userid'), $_POST['currentPassword']);
 
                     // password check came back incorrect
                     if ($check === false)

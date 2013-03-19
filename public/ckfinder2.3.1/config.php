@@ -1,4 +1,16 @@
 <?php
+
+if (substr($_SERVER['DOCUMENT_ROOT'], -1) !== DIRECTORY_SEPARATOR)
+{
+    $_SERVER['DOCUMENT_ROOT'] = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR;
+}
+
+    ob_start();
+    $system_path = $_SERVER['DOCUMENT_ROOT'] . 'system';
+    $application_folder = $_SERVER['DOCUMENT_ROOT'] . 'application';
+
+    include_once $_SERVER['DOCUMENT_ROOT'] . 'index.php';
+    ob_end_clean();
 /*
  * ### CKFinder : Configuration File - Basic Instructions
  *
@@ -26,20 +38,28 @@ function CheckAuthentication()
 
 	// return isset($_SESSION['IsAuthorized']) && $_SESSION['IsAuthorized'];
 
+
+
+    $ci =& get_instance();
+
+    $ci->load->library('session');
+
+    if($ci->session->userdata('logged_in') === true)
+    {
+        return true;
+    }
+
+    /*
     if(isset($_COOKIE['userid']))
     {
         return true;
     }
+     */
 	// ... where $_SESSION['IsAuthorized'] is set to "true" as soon as the
 	// user logs in your system. To be able to use session variables don't
 	// forget to add session_start() at the top of this file.
 
 	return false;
-}
-
-if (substr($_SERVER['DOCUMENT_ROOT'], -1) !== DIRECTORY_SEPARATOR)
-{
-    $_SERVER['DOCUMENT_ROOT'] = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR;
 }
 
 // LicenseKey : Paste your license key here. If left blank, CKFinder will be
@@ -69,7 +89,7 @@ Examples:
 
 ATTENTION: The trailing slash is required.
 */
-#$baseUrl = $_SERVER['DOCUMENT_ROOT'] . 'public' . DIRECTORY_SEPARATOR 'uploads';
+// $baseUrl = $_SERVER['DOCUMENT_ROOT'] . 'public' . DIRECTORY_SEPARATOR 'uploads';
 $baseUrl = DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR;
 /*
 $baseDir : the path to the local directory (in the server) which points to the
@@ -88,6 +108,7 @@ Examples:
 
 ATTENTION: The trailing slash is required.
 */
+// echo $baseUrl;
 $baseDir = resolveUrl($baseUrl);
 
 /*

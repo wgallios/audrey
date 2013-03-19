@@ -12,8 +12,9 @@ class Setup extends CI_Controller
     {
         parent::__construct();
 
-        $this->load->library('functions');
+        $this->load->library('session');
 
+        $this->load->library('functions');
 
     }
 
@@ -111,6 +112,8 @@ class Setup extends CI_Controller
                 $this->setup_model->insertInitSettings($_POST, $config);
 
                 // clears all previous cookies and session data
+
+                /*
                 foreach($_COOKIE as $key => $value)
                 {
                     setcookie($key, '', 0, '/');
@@ -122,6 +125,24 @@ class Setup extends CI_Controller
 
                 // sets login cookie
                 setcookie('userid', $id, 0, '/');
+                */
+
+                $array = array('userid' => null, 'logged_in' => false);
+
+                $this->session->unset_userdata($array);
+
+
+                // login was valid
+                // setcookie('userid', $credit->id, 0, '/');
+
+                $array = array
+                    (
+                        'userid' => $id,
+                        'logged_in' => true
+                    );
+
+                $this->session->set_userdata($array);
+
 
                 // all is checked and applied, setup was successful
                 $return['status'] = 'SUCCESS';
