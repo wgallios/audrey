@@ -82,9 +82,39 @@ photos.editalbumInit = function()
             photos.albumAddPhoto(event, ui);
         }
     });
+
+    photos.getPhotoAlbum();
 }
 
 photos.albumAddPhoto = function(event, ui)
 {
-    //alert("value: " + $(ui.draggable).attr('value'));
+    // alert("value: " + $(ui.draggable).attr('value'));
+
+    $.post("/photos/albumaddphoto", { albumId: $('#id').val(), file: $(ui.draggable).attr('value') }, function(data){
+
+        if (data.status == 'SUCCESS')
+        {
+            photos.getPhotoAlbum();
+        }
+        else if (data.status == 'ALERT')
+        {
+            global.renderAlert(data.msg);
+            return false;
+        }
+        else
+        {
+            global.renderAlert(data.msg, 'alert-error');
+            return false;
+        }
+
+    }, 'json');
+}
+
+photos.getPhotoAlbum = function()
+{
+    global.ajaxLoader('#photo-drop');
+
+    $.get("/photos/photoalbum/" + $('#id').val(), function(data){
+        $('#photo-drop').html(data);
+    });
 }

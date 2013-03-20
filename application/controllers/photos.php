@@ -135,4 +135,65 @@ class Photos extends CI_Controller
         $this->load->view('templates/footer');
 
     }
+
+    public function albumaddphoto ()
+    {
+        if ($_POST)
+        {
+            try
+            {
+                // first check if file is already apart of that album
+                $check = $this->photos->checkPhotoPartOfAlbum($_POST['albumId'], $_POST['file']);
+
+                if ($check === true)
+                {
+                    $return['status'] = 'ALERT';
+                    $return['msg'] = "This photo is already apart of this album";
+                    die(json_encode($return));
+                }
+
+                $id = $this->photos->albumAddPhoto($_POST);
+
+                $return['status'] = 'SUCCESS';
+                $return['id'] = $id;
+                die(json_encode($return));
+            }
+            catch(Exception $e)
+            {
+                $return['status'] = 'ERROR';
+                $return['msg'] = $e->getMessage();
+                $return['errorNumber'] = 1;
+                $this->functions->sendStackTrace($e, 1);
+                die(json_encode($return));
+            }
+        }
+
+
+        $return['status'] = 'ERROR';
+        $return['msg'] = 'Get is not supported';
+        $return['errorNumber'] = 2;
+        die(json_encode($return));
+    }
+
+    /**
+     * TODO: short description.
+     *
+     * @param mixed $id 
+     *
+     * @return TODO
+     */
+    public function photoalbum ($id)
+    {
+        try
+        {
+            $body['photos'] = $this->photos->getAlbumPhotos($id);
+        }
+        catch(Exception $e)
+        {
+            $this->functions->sendStackTrace($e);
+        }
+
+
+        $this->load->view('photos/photoalbum', $body);
+    }
 }

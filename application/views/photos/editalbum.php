@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
+<input type='hidden' id='id' name='id' value='<?=$id?>'>
+
 <div class='row-fluid'>
 
     <div class='span3'>

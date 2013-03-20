@@ -88,4 +88,77 @@ class photos_model extends CI_Model
 
     return $images;
     }
+
+    /**
+     * TODO: short description.
+     *
+     * @param array $p
+     *
+     * @return INT - id of albumPhoto
+     */
+    public function albumAddPhoto ($p)
+    {
+        $p = $this->functions->recursiveClean($p);
+
+        $sql = "INSERT INTO albumPhotos SET
+            datestamp = NOW(),
+            albumId = '{$p['albumId']}',
+            file = '{$p['file']}'";
+
+        $this->db->query($sql);
+
+        return $this->db->insert_id();
+    }
+
+    /**
+     * TODO: short description.
+     *
+     * @param mixed $id 
+     *
+     * @return TODO
+     */
+    public function getAlbumPhotos ($id)
+    {
+        $id = intval($id);
+
+        if (empty($id)) throw new Exception("ID is empty!");
+
+        $sql= "SELECT * FROM albumPhotos WHERE albumId = {$id}";
+
+        $query = $this->db->query($sql);
+
+        $results = $query->result();
+
+        return $results;
+    }
+
+    /**
+     * TODO: short description.
+     *
+     * @param mixed $albumId 
+     * @param mixed $file    
+     *
+     * @return boolean - true if already in that album
+     */
+    public function checkPhotoPartOfAlbum ($albumId, $file)
+    {
+        $albumId = intval($albumId);
+
+        $file = $this->db->escape_str($file);
+
+        if (empty($albumId)) throw new Exception ("albumId is empty!");
+
+        $sql = "SELECT COUNT(*) cnt FROM albumPhotos WHERE albumId = '{$albumId}' AND `file` = '{$file}'";
+
+        $query = $this->db->query($sql);
+
+        $results = $query->result();
+
+        if ($results[0]->cnt > 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }
