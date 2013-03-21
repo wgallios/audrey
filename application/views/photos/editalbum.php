@@ -61,15 +61,24 @@ else
         </div> <!-- .row-fluid //-->
 
 
-
+<!--
     <div class='form-actions'>
         <button class='btn btn-primary' id='saveBtn'>Save</button>
         <button class='btn' id='cancelBtn'>Cancel</button>
     </div>
-
+//-->
     </div> <!-- .span9 //-->
 
 </div> <!-- .row-fluid //-->
 
 
+<!-- modal for image properties //-->
 
+<div id="image-modal" class="modal hide fade image-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close pull-left" data-dismiss="modal" aria-hidden="true">×</button>
+     &nbsp; 
+</div>
+  <div class="modal-body" id='image-modal-body'></div>
+
+</div>

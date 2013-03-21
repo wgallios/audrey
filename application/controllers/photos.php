@@ -7,6 +7,7 @@ class Photos extends CI_Controller
         parent::__construct();
 
         $this->load->library('functions');
+        $this->load->library('images');
 
         $this->functions->checkLoggedIn();
 
@@ -195,5 +196,34 @@ class Photos extends CI_Controller
 
 
         $this->load->view('photos/photoalbum', $body);
+    }
+
+    /**
+     * TODO: short description.
+     *
+     * @return TODO
+     */
+    public function block ($img, $size = 50, $path = null)
+    {
+        try
+        {
+            $this->images->block($img, $size, $path);
+        }
+        catch(Exception $e)
+        {
+            $this->functions->sendStackTrace($e);
+        }
+    }
+
+    /**
+     * TODO: short description.
+     *
+     * @return TODO
+     */
+    public function editphoto ()
+    {
+
+        $this->load->view('photos/editphoto', $body);
+
     }
 }

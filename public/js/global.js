@@ -1,5 +1,14 @@
 var global = {}
 
+/**
+ * Jquery functions
+ */
+
+// jquery function to check if element exists;
+jQuery.fn.exists = function(){ return this.length>0; }
+
+
+
 /*
  * renders a site wide alert
  *

@@ -413,4 +413,21 @@ class Functions
 
     return $results[0];
     }
+
+    /**
+     * gets the extension of a given file, Example: some_image.test.JPG
+     *
+     * @param string $file - filename
+     *
+     * @return string. E.g.: jpg
+     */
+    public function getFileExt($file)
+    {
+        $ld = strrpos($file, '.');
+
+        // gets file extension
+        $ext = strtolower(substr($file, $ld + 1, (strlen($file) - $ld)));
+
+    return $ext;
+    }
 }

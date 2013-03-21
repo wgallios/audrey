@@ -116,5 +116,32 @@ photos.getPhotoAlbum = function()
 
     $.get("/photos/photoalbum/" + $('#id').val(), function(data){
         $('#photo-drop').html(data);
+
+        $('#album-container').find("img").each(function(index, item)
+        {
+
+            var src = $(item).attr('src');
+
+            //console.log("img: " + $(this).attr('src'));
+            $(item).mouseover(function(e){
+                $(this).switchClass('', 'enlarge', 100);
+            });
+
+            $(item).mouseout(function(e){
+                $(this).switchClass('enlarge', '', 100);
+            });
+
+            $(item).click(function(e){
+                photos.loadPhotoModal(src);
+            });
+        });
+    });
+}
+
+photos.loadPhotoModal = function(src)
+{
+    $.get("/photos/editphoto", function(data){
+        $('#image-modal-body').html(data);
+        $('#image-modal').modal('show');
     });
 }

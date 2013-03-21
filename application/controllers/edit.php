@@ -22,8 +22,8 @@ class Edit extends CI_Controller
     public function index()
     {
 
-        //$header['headscript'] .= "<script type='text/javascript' src='/min/?f=public/ckeditor4.0.1.1/ckeditor.js{$this->config->item('min_debug')}&amp;{$this->config->item('min_version')}'></script>\n";
-        $header['headscript'] .= "<script type='text/javascript' src='/public/ckeditor4.0.1.1/ckeditor.js'></script>\n";
+        //$header['headscript'] .= "<script type='text/javascript' src='/min/?f=public/ckeditor4.0.2/ckeditor.js{$this->config->item('min_debug')}&amp;{$this->config->item('min_version')}'></script>\n";
+        $header['headscript'] .= "<script type='text/javascript' src='/public/ckeditor4.0.2/ckeditor.js'></script>\n";
 
         $header['headscript'] .= "<script type='text/javascript' src='/min/?f=public/js/edit.js{$this->config->item('min_debug')}&amp;{$this->config->item('min_version')}'></script>\n";
 

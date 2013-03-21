@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<div class='row-fluid'>
+<div class='row-fluid edit-row'>
 
     <div class='span3'>
         <?php include_once $_SERVER['DOCUMENT_ROOT'] . 'application' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'home' . DIRECTORY_SEPARATOR . 'nav.php' ?>
@@ -106,10 +106,9 @@
 
     </div>
 
-    <div id="tabAboutMe" class='tab-pane'>
+    <div id="tabAboutMe" class='tab-pane about-me'>
 
         <textarea name='aboutMe' id='aboutMe'><?=$info->aboutMe?></textarea>
-
     </div> <!-- #tabAboutMe //-->
 
 </div> <!-- .tab-content //-->
