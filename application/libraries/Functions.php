@@ -444,7 +444,7 @@ class Functions
     {
         $return['status'] = $status;
         $return['msg'] = $msg;
-        $return['errorNumber'] = $errorNum;
+        if (!empty($errorNum)) $return['errorNumber'] = $errorNum;
         echo json_encode($return);
         exit;
     }

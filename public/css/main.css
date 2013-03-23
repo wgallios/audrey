@@ -189,6 +189,7 @@ img.enlarge:hover
     border-bottom-right-radius: 4px;
 
     text-align:center;
+    max-height:100%;
 }
 
 .fill

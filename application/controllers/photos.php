@@ -225,6 +225,8 @@ class Photos extends CI_Controller
     public function editphoto ($id)
     {
 
+        $body['id'] = $id;
+
         try
         {
             $body['info'] = $this->photos->getAlbumPhoto($id);

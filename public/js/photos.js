@@ -165,7 +165,7 @@ photos.loadPhotoModal = function(id)
 
 photos.savePhotoEdit = function()
 {
-    CKEDITOR.instances.caption.getData();
+    CKEDITOR.instances.caption.updateElement();
 
     $.post("/photos/savePhotoEdit", $('#editPhotoForm').serialize(), function(data){
 

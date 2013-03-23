@@ -16,6 +16,9 @@ UPDATE users SET passwd = SHA1('') WHERE id =
 
 SELECT * FROM albumPhotos WHERE albumId = 5;
 
+
+SELECT * FROM albumPhotos;
+
 SELECT * 
 , codeDisplay(1, status) statusDisplay
 FROM
