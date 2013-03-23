@@ -372,9 +372,15 @@ if (!isset($config['min_debug'])) $config['min_debug'] = null;
 // path to the thumbnails where images are uploaded to
 $config['thumbnail_path'] = $_SERVER['DOCUMENT_ROOT'] . 'public' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . '_thumbs' . DIRECTORY_SEPARATOR . 'Images' . DIRECTORY_SEPARATOR;
 
+// path to where the full size images are uploaded to
+$config['image_upload_path'] = $_SERVER['DOCUMENT_ROOT'] . 'public' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR;
+
 
 // url to the where thumbnails images are uploaded to
 $config['thumbnail_url'] = "/public/uploads/_thumbs/Images/";
+
+// url to where the fullsize images are uploaded to
+$config['image_upload_url'] = "/public/uploads/images/";
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

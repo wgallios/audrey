@@ -84,6 +84,10 @@ photos.editalbumInit = function()
     });
 
     photos.getPhotoAlbum();
+
+    $('#image-modal').on('hide', function (){
+        photos.savePhotoEdit();
+    });
 }
 
 photos.albumAddPhoto = function(event, ui)
@@ -121,6 +125,7 @@ photos.getPhotoAlbum = function()
         {
 
             var src = $(item).attr('src');
+            var id = $(item).attr('id');
 
             //console.log("img: " + $(this).attr('src'));
             $(item).mouseover(function(e){
@@ -132,16 +137,42 @@ photos.getPhotoAlbum = function()
             });
 
             $(item).click(function(e){
-                photos.loadPhotoModal(src);
+                photos.loadPhotoModal(id);
             });
         });
     });
 }
 
-photos.loadPhotoModal = function(src)
+photos.loadPhotoModal = function(id)
 {
-    $.get("/photos/editphoto", function(data){
+    $.get("/photos/editphoto/" + id, function(data){
         $('#image-modal-body').html(data);
+
+        CKEDITOR.replace('caption',{
+        toolbar: [
+           { name: 'document', items: [ 'Source', '-', 'Bold', 'Italic', 'Underline', ] }, // Defines toolbar group windowith name (used to create voice label) and items in 3 subgroups.
+            [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight' ],
+            [ 'Font', 'FontSize', 'TextColor' ],
+            [ 'Smiley' ]
+           //[ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],// Defines toolbar group without name.
+       ],
+        height: 50
+        });
+
         $('#image-modal').modal('show');
     });
+}
+
+photos.savePhotoEdit = function()
+{
+    CKEDITOR.instances.caption.getData();
+
+    $.post("/photos/savePhotoEdit", $('#editPhotoForm').serialize(), function(data){
+
+        if (data.status == 'ERROR')
+        {
+            global.renderAlert(data.msg, 'alert-error');
+        }
+
+    }, 'json');
 }

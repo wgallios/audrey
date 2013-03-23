@@ -111,6 +111,8 @@ class Photos extends CI_Controller
 
         $header['headscript'] = "<script type='text/javascript' src='/min/?f=public/js/photos.js{$this->config->item('min_debug')}&amp;{$this->config->item('min_version')}'></script>\n";
 
+        $header['headscript'] .= "<script type='text/javascript' src='/public/ckeditor4.0.2/ckeditor.js'></script>\n";
+
         $header['onload'] = "photos.editalbumInit()";
 
         if (empty($id))
@@ -220,10 +222,47 @@ class Photos extends CI_Controller
      *
      * @return TODO
      */
-    public function editphoto ()
+    public function editphoto ($id)
     {
 
+        try
+        {
+            $body['info'] = $this->photos->getAlbumPhoto($id);
+        }
+        catch(Exception $e)
+        {
+            $this->functions->sendStackTrace($e);
+        }
+
         $this->load->view('photos/editphoto', $body);
+
+    }
+
+    /**
+     * TODO: short description.
+     *
+     * @return TODO
+     */
+    public function savePhotoEdit ()
+    {
+        if ($_POST)
+        {
+            try
+            {
+                // updates image caption
+                $this->photos->updateImageCaption($_POST);
+
+                $this->functions->jsonReturn('SUCCESS', 'Image has been updated!');
+            }
+            catch(Exception $e)
+            {
+                $this->functions->sendStackTrace($e);
+
+                $this->functions->jsonReturn('ERROR', $e->getMessage(), 1);
+            }
+        }
+
+    $this->functions->jsonReturn('ERROR', 'GET is not supported', 2);
 
     }
 }

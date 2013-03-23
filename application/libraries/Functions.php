@@ -430,4 +430,22 @@ class Functions
 
     return $ext;
     }
+
+    /**
+     * Used for ajax JSON post returns
+     *
+     * @param mixed $status   
+     * @param mixed $msg      
+     * @param mixed $errorNum 
+     *
+     * @return TODO
+     */
+    public function jsonReturn ($status, $msg, $errorNum = 0)
+    {
+        $return['status'] = $status;
+        $return['msg'] = $msg;
+        $return['errorNumber'] = $errorNum;
+        echo json_encode($return);
+        exit;
+    }
 }

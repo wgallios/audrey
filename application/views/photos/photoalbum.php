@@ -10,7 +10,7 @@ else
 
     foreach ($photos as $r)
     {
-        echo "\t<img src='/photos/block/" . $r->file . "/80' class='img-polaroid' >";
+        echo "\t<img src='/photos/block/" . urlencode($r->file) . "/80' class='img-polaroid' id='{$r->id}' >";
     }
 
     echo "</div>";

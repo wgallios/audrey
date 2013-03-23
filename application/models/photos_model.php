@@ -161,4 +161,46 @@ class photos_model extends CI_Model
 
         return false;
     }
+
+    /**
+     * TODO: short description.
+     *
+     * @param mixed $id 
+     *
+     * @return TODO
+     */
+    public function getAlbumPhoto ($id)
+    {
+        $id = intval($id);
+
+        if (empty($id)) throw new Exception("ID is empty!");
+
+        $sql= "SELECT * FROM albumPhotos WHERE id = '{$id}'";
+
+        $query = $this->db->query($sql);
+
+        $results = $query->result();
+
+        return $results[0];
+    }
+
+    /**
+     * TODO: short description.
+     *
+     * @param mixed $p 
+     *
+     * @return TODO
+     */
+    public function updateImageCaption ($p)
+    {
+        $p = $this->functions->recursiveClean($p);
+
+        if (empty($p['id'])) throw new Exception("ID is empty!");
+
+        $sql = "UPDATE albumPhotos SET caption = '{$p['caption']}' WHERE id = '{$p['id']}'";
+
+        $this->db->query($sql);
+
+        return true;
+    }
 }
