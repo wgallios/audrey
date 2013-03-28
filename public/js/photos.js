@@ -148,6 +148,10 @@ photos.loadPhotoModal = function(id)
     $.get("/photos/editphoto/" + id, function(data){
         $('#image-modal-body').html(data);
 
+    $('#defaultPicBtn').click(function(e){
+        photos.setProfilePhoto();
+    });
+
         CKEDITOR.replace('caption',{
         toolbar: [
            { name: 'document', items: [ 'Source', '-', 'Bold', 'Italic', 'Underline', ] }, // Defines toolbar group windowith name (used to create voice label) and items in 3 subgroups.
@@ -175,4 +179,28 @@ photos.savePhotoEdit = function()
         }
 
     }, 'json');
+}
+
+
+photos.setProfilePhoto = function()
+{
+
+    $('#defaultPicBtn').attr('disabled', 'disabled');
+
+    $('#img-wrapper').addClass('select');
+
+    var container = $('<div/>').attr('id', 'selectContainer');
+
+    $('#img-wrapper').append(container);
+
+    // $('#img-wrapper').width() / 2;
+
+    $('#selectContainer').resizable({
+        containment: "#img-wrapper img",
+        aspectRatio: 1/1
+    });
+
+    $('#selectContainer').draggable({
+        containment: "#img-wrapper img"
+    });
 }

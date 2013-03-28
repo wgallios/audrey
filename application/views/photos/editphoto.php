@@ -16,13 +16,15 @@
         </div>
         <div class='span8 img-background'>
 
-            <img src='<?= $this->config->item('image_upload_url') . $info->file ?>'>
+            <div id='img-wrapper'>
+                <img src='<?= $this->config->item('image_upload_url') . $info->file ?>'>
+            </div>
 
             <div class='row-fluid img-controls'>
                 <button class='btn btn-link'><i class='icon-repeat icon-white'></i></button>
                 <button class='btn btn-link'><i class='icon-repeat icon-white icon-counter-clock-wise'></i></button>
                 <button class='btn btn-link'><i class='icon-tag icon-white'></i></button>
-                <button class='btn btn-link'><i class='icon-user icon-white'></i></button>
+                <button type='button' class='btn btn-link' id='defaultPicBtn'><i class='icon-user icon-white'></i></button>
             </div>
         </div>
 
