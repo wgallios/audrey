@@ -77,7 +77,7 @@ else
 
             //$class = ($r->active == 1) ? null : ' hidden-doc';
 
-            echo "\t<li class='ui-state-default{$class}' value='{$r->id}' itemType='2' id='doc{$r->id}'><img src='{$img}' class='img-polaroid'><div class='docName'>{$name}</div></li>\n";
+            echo "\t<li class='ui-state-default{$class}' value='{$r->id}' itemType='2' id='doc{$r->id}' file=\"{$r->name}\"><img src='{$img}' class='img-polaroid'><div class='docName'>{$name}</div></li>\n";
         }
 
     }
@@ -164,3 +164,12 @@ finder.create();
     </div> <!-- .modal-footer //-->
 
 </div> <!-- #createAlbumModal .modal .hide .fade //-->
+
+
+
+
+<!-- modal for creating new album //-->
+<div id='imgPreviewModal' class='modal-backdrop hide'>
+
+
+</div>

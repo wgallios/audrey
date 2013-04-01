@@ -100,9 +100,9 @@ photos.indexInit = function()
                 // if they double click on a document
                 $(item).dblclick(function()
                 {
-                    $(item).attr('disabled', 'disabled');
-                    // window.location = "/docs/edit/" + $(item).attr('value') + "?folder=" + $('#folder').val();
-                    window.location = "/photos/edit/" + $(item).attr('value') + "?folder=" + $('#folder').val();
+
+                    photos.loadEdit($(item).attr('file'));
+                    //$('#imgPreviewModal').removeClass('hide');
                 });
 
                 // when the user right clicks on the screen
@@ -371,4 +371,17 @@ photos.addImgToFolder = function (event, ui, folder, itemId)
             return false;
         }
     }, 'json');
+}
+
+photos.loadEdit = function(file)
+{
+
+    $('#imgPreviewModal').removeClass('hide');
+
+    global.ajaxLoader('#imgPreviewModal');
+
+    $.get("/photos/edit/" + escape(file), function(data){
+        $('#imgPreviewModal').html(data);
+    });
+
 }

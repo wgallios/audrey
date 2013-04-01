@@ -105,6 +105,20 @@ class Photos extends CI_Controller
      *
      * @return TODO
      */
+    public function edit ($file)
+    {
+        $body['file'] = urldecode($file);
+
+        $this->load->view('photos/edit', $body);
+    }
+
+    /**
+     * TODO: short description.
+     *
+     * @param mixed $id 
+     *
+     * @return TODO
+     */
     public function editalbum($id)
     {
 

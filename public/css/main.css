@@ -335,3 +335,9 @@ filter:alpha(opacity=80);
     overflow:hidden;
     cursor:default;
 }
+
+#imgPreviewModal #photo-edit-container img
+{
+    opacity:1;
+    filter:alpha(opacity=100);
+}
