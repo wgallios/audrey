@@ -6,7 +6,117 @@ photos.indexInit = function()
         photos.checkAlbumName();
     });
 
-    photos.getAlbums();
+    //photos.getAlbums();
+
+
+    $('#fileList').selectable({
+        filter: "li",
+        selected: function (event, ui)
+        {
+            // clears previous right click if showing
+            if ($('#right-click-menu').exists())
+            {
+                $('#right-click-menu').remove();
+            }
+
+            $(ui.selected).draggable({
+            start: function (e, u)
+            {
+                // $(this).addClass('moving');
+            },
+            stop: function (e, u)
+            {
+                // $(this).removeClass('moving');
+            },
+            helper: function(){
+
+                var selected = $('#fileList').find('.ui-selected');
+
+                if (selected.length === 0)
+                {
+                    selected = $(this);
+                }
+                var container = $('<div/>').attr('id', 'draggingContainer');
+                var clone = selected.clone();
+                clone.addClass('moving');
+                container.append(clone);
+                // container.append(selected.clone());
+                return container;
+                }
+
+            });
+        },
+        unselected: function (event, ui)
+        {
+            $(ui.unselected).draggable('destroy');
+        }
+    });
+
+
+
+    // goes through each li in doc-container and makes draggable/droppable
+    $('#doc-container').find("li").each(function(index, item)
+    {
+
+            // folders
+            if ($(item).attr('itemType') == '1')
+            {
+
+                // folders are a drop zone
+                $(item).droppable({
+                    over: function (event, ui)
+                    {
+                        $(this).addClass('folder-highlight');
+                    },
+                    out: function (event, ui)
+                    {
+                        $(this).removeClass('folder-highlight');
+                    },
+                    drop: function (event, ui)
+                    {
+                        //docs.moveSelected(event, ui, $(this).attr('value'));
+                        
+                        $(this).removeClass('folder-highlight');
+                    },
+                    helper: function()
+                    {
+                        
+                    }
+                });
+
+                // if they double click on a folder
+                $(item).dblclick(function()
+                {
+                    $(item).attr('disabled', 'disabled');
+                    window.location = "/photos/index/" + $(item).attr('value');
+                    // window.open("/docs/index/" + $(item).attr('value'), '_blank');
+                });
+            }
+
+            // documents
+            if ($(item).attr('itemType') == '2')
+            {
+
+                // if they double click on a document
+                $(item).dblclick(function()
+                {
+                    $(item).attr('disabled', 'disabled');
+                    // window.location = "/docs/edit/" + $(item).attr('value') + "?folder=" + $('#folder').val();
+                    window.location = "/photos/edit/" + $(item).attr('value') + "?folder=" + $('#folder').val();
+                });
+
+                // when the user right clicks on the screen
+                $(item).mousedown(function(e){
+                    switch (e.which)
+                    {
+                        case 3:
+                        //docs.indexRightClick(e, $(item));
+                        break;
+                    }
+                });
+            }
+
+    });
 
 }
 
@@ -88,6 +198,8 @@ photos.editalbumInit = function()
     $('#image-modal').on('hide', function (){
         photos.savePhotoEdit();
     });
+
+    $('#selectable').selectable();
 }
 
 photos.albumAddPhoto = function(event, ui)
@@ -203,4 +315,60 @@ photos.setProfilePhoto = function()
     $('#selectContainer').draggable({
         containment: "#img-wrapper img"
     });
+}
+
+
+photos.moveSelected = function (event, ui, folder)
+{
+    $('#draggingContainer').find("li").each(function(index, item){
+
+        // drop function for folders
+        if ($(this).attr('itemType') == 1)
+        {
+            //docs.moveFolder(undefined, undefined, folder, $(this).attr('value'));
+        }
+
+        // drop function for images
+        if ($(this).attr('itemType') == 2)
+        {
+            photos.addImgToFolder(undefined, undefined, folder, $(this).attr('value'));
+        }
+    });
+}
+
+photos.addImgToFolder = function (event, ui, folder, itemId)
+{
+
+    if (ui == undefined)
+    {
+        var id = itemId;
+    }
+    else
+    {
+        var id = $(ui.draggable).attr('value');
+    }
+
+    $.post("/photos/addImgToFolder", { id: id, folder: folder  }, function(data){
+        if (data.status == 'SUCCESS')
+        {
+            if (ui == undefined)
+            {
+                $("#doc" + itemId).hide();
+            }
+            else
+            {
+                $(ui.draggable).hide();
+            }
+        }
+        else if (data.stats == 'ALERT')
+        {
+            global.renderAlert(data.msg);
+            return false;
+        }
+        else
+        {
+            global.renderAlert(data.msg, 'alert-error');
+            return false;
+        }
+    }, 'json');
 }

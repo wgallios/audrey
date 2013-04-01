@@ -34,8 +34,17 @@ if (empty($images))
 else
 {
     $cnt = 1;
+
+    echo "<ol id='selectable'>\n";
+
     foreach ($images as $file)
     {
+
+        #echo "\t<li class='ui-state-default'><img src='{$this->config->item('thumbnail_url')}{$file}' class='img-polaroid'></li>\n";
+        echo "\t<li class='ui-state-default'><img src='/photos/block/{$file}/50' class='img-polaroid'></li>\n";
+
+
+        /*
         echo "<div class='row img-row' id='img{$cnt}' value=\"{$file}\">";
 
         echo "<table class='img-tbl'>";
@@ -49,9 +58,11 @@ else
         echo "</table>";
 
         echo "</div>";
-
+        */
         $cnt++;
     }
+
+    echo "</ol>\n";
 }
 ?>
 

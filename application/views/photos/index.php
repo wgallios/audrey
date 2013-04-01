@@ -10,6 +10,91 @@
         <h1>Photos</h1>
 
 
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+
+      <!-- Everything you want hidden at 940px or less, place within here -->
+      <div class="nav-collapse collapse">
+        <!-- .nav, .navbar-search, .navbar-form, etc -->
+
+<ul class="nav">
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">File <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li><a tabindex="-1" role='button' href="#createAlbumModal" data-toggle='modal'><i class='icon-folder-open'></i> New Album</a></li>
+        </ul>
+  </li>
+    <!-- <li><a href="#">Edit</a></li> -->
+    <!-- <li><a href="#">Help</a></li> -->
+</ul>
+
+    </div> <!-- .nav-collapse //-->
+
+    </div>
+  </div>
+</div>
+
+
+
+<ul class="breadcrumb" id='folderCrumbs'>
+    <li id=''><a href='/photos'>All Photos</a></li>
+</ul>
+
+<div id='doc-container'>
+<?php
+if (empty($content))
+{
+    echo "<div class='alert alert-info alert-block'><h4>Information!</h4> This folder is currently empty!</div>";
+}
+else
+{
+
+    echo "<div class='row-fluid'>\n";
+
+
+    echo "<ol id='fileList'>\n";
+
+    $rcnt = 1;
+    foreach ($content as $r)
+    {
+        $name = (strlen($r->name) > 25) ? substr($r->name, 0, 22) . '...' : $r->name;
+
+        if ($r->type == 1)
+        {
+            echo "\t<li class='ui-state-default' value='{$r->id}' itemType='1' id='folder{$r->id}'><img src='/public/images/windows_folder_icon_trans.png'><div class='folderName'>{$name}</div></li>\n";
+        }
+        elseif ($r->type == 2)
+        {
+            $img = "/photos/block/{$r->name}/50";
+
+            //$class = ($r->active == 1) ? null : ' hidden-doc';
+
+            echo "\t<li class='ui-state-default{$class}' value='{$r->id}' itemType='2' id='doc{$r->id}'><img src='{$img}' class='img-polaroid'><div class='docName'>{$name}</div></li>\n";
+        }
+
+    }
+
+    echo "</ol>\n";
+
+    if ($rcnt <= 12) echo "</div>\n <!-- .row-fluid (outside) //-->"; // closes row if not 12 docs
+}
+?>
+</div>
+
+
+
+
+<?php
+/*
+
 <div class='tabbable'>
     <ul class='nav nav-tabs'>
         <li class='active'><a href='#tabAlbums' data-toggle="tab">Albums</a></li>
@@ -43,7 +128,8 @@ finder.create();
 </div> <!-- .tab-content //-->
 
 </div> <!-- .tabbable //-->
-
+*/
+?>
 
 
 
@@ -59,7 +145,7 @@ finder.create();
 
     <div class='modal-header'>
         <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
-        <h3>Create a New Album</h3>
+        <h3>Create a new Album</h3>
     </div> <!-- .modal-header //-->
 
     <div class='modal-body'>

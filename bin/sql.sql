@@ -42,7 +42,10 @@ ORDER BY label
 
 SELECT COUNT(*) cnt FROM users WHERE username = 'wgallios'
 
-SELECT * FROM photoAlbums
+SELECT id, albumName AS `name`, 1 AS `type`
+FROM photoAlbums
+WHERE `deleted` = 0
+ORDER BY name
 
 
 DROP TABLE IF EXISTS `albumPhotos`;

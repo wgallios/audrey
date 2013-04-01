@@ -203,4 +203,47 @@ class photos_model extends CI_Model
 
         return true;
     }
+
+    /**
+     * TODO: short description.
+     *
+     * @param mixed $folder 
+     *
+     * @return TODO
+     */
+    public function getFolderContent ($folder = null)
+    {
+        $folder = (empty($folder)) ? ' IS NULL' : ' = ' . intval($folder);
+
+        $sql = "SELECT id, albumName AS `name`, 1 AS `type`
+            FROM photoAlbums
+            WHERE `deleted` = 0
+            ORDER BY name";
+
+        $query = $this->db->query($sql);
+
+        $results = $query->result();
+
+        if (!empty($folder))
+        {
+            // only need to get thumbnails if on root
+            // albums will already have thumbnails associated with them in the DB
+            $at = $this->getAlbumThumbs();
+
+            if (!empty($at))
+            {
+                // unions uploaded photo thumbnails
+                foreach ($at as $k => $img)
+                {
+                    $results[] = (object) array(
+                        'id' => ($k + 1),
+                        'name' => $img,
+                        'type' => 2
+                    );
+                }
+            }
+        }
+
+        return $results;
+    }
 }

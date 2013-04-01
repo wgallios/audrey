@@ -32,7 +32,8 @@ class Photos extends CI_Controller
 
         try
         {
-            $body['albums'] = $this->photos->getAlbums();
+            #$body['albums'] = $this->photos->getAlbums();
+            $body['content'] = $this->photos->getFolderContent();
         }
         catch(Exception $e)
         {

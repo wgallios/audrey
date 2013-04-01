@@ -89,6 +89,7 @@ div.key
     height:700px;
 }
 
+/*
 .img-row
 {
     margin:5px 0;
@@ -106,6 +107,17 @@ div.key
     border:1px solid #e8c0ff;
     background:#e8f1ff;
 }
+*/
+
+#feedback { font-size: 1.4em; }
+#selectable .ui-selecting { background: #FECA40; }
+#selectable .ui-selected { background: #F39814; color: white; }
+#selectable { list-style-type: none; margin: 0; padding: 0; width: 450px; }
+#selectable li { 
+    margin: 3px; 
+    padding: 5px 1px 5px 1px;
+    float: left; 
+    width: auto; height: 60px; font-size: 4em; text-align: center; }
 
 table.img-tbl tr td
 {
@@ -274,3 +286,52 @@ filter: FlipH;
     height:100%;
 }
     */
+
+#fileList .ui-selecting { background: #FECA40; }
+#fileList .ui-selected { background: #F39814; color: white;
+opacity:0.8;
+filter:alpha(opacity=80);
+}
+#fileList { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+#fileList li
+{ margin: 3px; padding: 1px; float: left; width: 100px; height: 100px; font-size: 0.9em; text-align: center; 
+
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border-radius:4px;
+    background:white;
+    border:none;
+}
+
+#fileList li.moving
+{
+    opacity:0.4;
+    filter:alpha(opacity=40);
+    background:none;
+    color:black;
+}
+
+#fileList li.hidden-doc
+{
+    opacity:0.4;
+    filter:alpha(opacity=40);
+    color:#444;
+}
+
+#fileList li.folder-highlight, #folderCrumbs li.folder-highlight
+
+{
+    background:#fffdc8;
+}
+.folderName, .docName
+{
+    width:100%;
+    max-width:100px;
+
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border-radius:4px;
+
+    overflow:hidden;
+    cursor:default;
+}
