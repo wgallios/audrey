@@ -381,7 +381,27 @@ photos.loadEdit = function(file)
     global.ajaxLoader('#imgPreviewModal');
 
     $.get("/photos/edit/" + escape(file), function(data){
-        $('#imgPreviewModal').html(data);
+        // $('#imgPreviewModal').html(data);
+
+
+        $('#imgPreviewModal').html('');
+
+        var container = $('<div/>').attr('id', 'edit-modal-container');
+
+        container.html(data);
+
+        $('body').append(data);
+        CKEDITOR.replace('caption',{
+        toolbar: [
+           { name: 'document', items: [ 'Source', '-', 'Bold', 'Italic', 'Underline', ] }, // Defines toolbar 
+            [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight' ],
+            [ 'Font', 'FontSize', 'TextColor' ],
+            [ 'Smiley' ]
+       ],
+        height: 200
+        });
+
+
     });
 
 }

@@ -27,6 +27,7 @@ class Photos extends CI_Controller
         $header['headscript'] = "<script type='text/javascript' src='/public/ckfinder2.3.1/ckfinder.js'></script>\n";
 
         $header['headscript'] .= "<script type='text/javascript' src='/min/?f=public/js/photos.js{$this->config->item('min_debug')}&amp;{$this->config->item('min_version')}'></script>\n";
+        $header['headscript'] .= "<script type='text/javascript' src='/public/ckeditor4.0.2/ckeditor.js'></script>\n";
 
         $header['onload'] = "photos.indexInit();";
 

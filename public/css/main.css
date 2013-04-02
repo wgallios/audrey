@@ -336,8 +336,36 @@ filter:alpha(opacity=80);
     cursor:default;
 }
 
+#imgPreviewModal #photo-edit-container
+{
+    padding-top:30px;
+}
+
 #imgPreviewModal #photo-edit-container img
 {
     opacity:1;
     filter:alpha(opacity=100);
 }
+
+#photo-edit-container, #photo-edit-container .content-row
+{
+    position:absolute;
+    height:auto;
+    top:20px;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:2000;
+    margin-bottom:20px;
+}
+
+/*
+#photo-edit-container h1
+, #photo-edit-container h2
+, #photo-edit-container h3
+, #photo-edit-container h4
+, #photo-edit-container h5
+{
+    color:white;
+}
+    */
