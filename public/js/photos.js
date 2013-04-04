@@ -204,8 +204,6 @@ photos.editalbumInit = function()
 
 photos.albumAddPhoto = function(event, ui)
 {
-    // alert("value: " + $(ui.draggable).attr('value'));
-
     $.post("/photos/albumaddphoto", { albumId: $('#id').val(), file: $(ui.draggable).attr('value') }, function(data){
 
         if (data.status == 'SUCCESS')
@@ -401,7 +399,32 @@ photos.loadEdit = function(file)
         height: 200
         });
 
+        $('#profilePicBtn').click(function(e){
+            photos.setProfilePicture(file);
+        });
+
+
 
     });
+
+}
+
+photos.setProfilePicture = function (file)
+{
+
+    $.post("/photos/setprofilepicture", { file: file }, function(data){
+
+        if (data.status == 'SUCCESS')
+        {
+            $('#profilePicBtn').attr('disabled', 'disabled');
+
+            global.renderAlert(data.msg, 'alert-success', 'photo-edit-alert');
+        }
+        else
+        {
+            global.renderAlert(data.msg, 'alert-error', 'photo-edit-alert');
+        }
+
+    }, 'json');
 
 }

@@ -48,6 +48,8 @@ WHERE `deleted` = 0
 ORDER BY name
 
 
+SELECT * FROM codes;
+
 DROP TABLE IF EXISTS `albumPhotos`;
 
 CREATE TABLE `albumPhotos` (
@@ -59,3 +61,11 @@ CREATE TABLE `albumPhotos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
+
+ALTER TABLE settings ADD profilePicture VARCHAR(300);
+
+ALTER TABLE users DROP COLUMN profilePicture;
+
+
+
+SELECT * FROM settings;

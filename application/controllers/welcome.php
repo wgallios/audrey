@@ -24,9 +24,18 @@ class Welcome extends CI_Controller
 
         $header['onload'] = "welcome.indexInit();";
 
+        try
+        {
+            $body['settings'] = $this->functions->getSettings();
+        }
+        catch(Exception $e)
+        {
+            $this->functions->sendStackTrace($e);
+        }
+
 
         $this->load->view('templates/header', $header);
-        $this->load->view('welcome/homepage');
+        $this->load->view('welcome/homepage', $body);
         $this->load->view('templates/footer');
     }
 

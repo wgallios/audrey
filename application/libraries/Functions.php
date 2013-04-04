@@ -405,7 +405,11 @@ class Functions
     {
         $ci =& get_instance();
 
-        $sql = "SELECT * FROM settings";
+        $sql = "SELECT *
+            , codeDisplay(2, relationshipStatus) rssDisplay
+            , codeDisplay(4, gender) genderDisplay
+            , FLOOR(DATEDIFF(NOW(), dob) / 365.25) as age
+            FROM settings";
 
         $query = $ci->db->query($sql);
 

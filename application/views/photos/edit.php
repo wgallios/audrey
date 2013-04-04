@@ -1,6 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 <div class="container-fluid" id='photo-edit-container'>
 
+        <div id='photo-edit-alert'></div>
+
         <div class='row-fluid clearfix'>
 
             <div class='span4'>
@@ -9,7 +11,7 @@
 
             <div class='span4'>
                 
-                <p><button class='btn btn-success'><i class='icon-user icon-white'></i> Make Profile Picture</button></p>
+            <p><button class='btn btn-success' id='profilePicBtn' <?=($settings->profilePicture == $file) ? 'disabled' : null?> ><i class='icon-user icon-white'></i> Make Profile Picture</button></p>
 
             
                 <div class='alert alert-block alert-info'>

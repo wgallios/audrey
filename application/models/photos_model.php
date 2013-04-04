@@ -23,13 +23,25 @@ class photos_model extends CI_Model
      *
      * @return TODO
      */
-    public function getAlbums()
+    public function getAlbums($id = null)
     {
-        $sql = "SELECT * FROM photoAlbums WHERE `deleted` = 0 ORDER BY albumName";
+        if (!empty($id))
+        {
+            $id = intval($id);
+
+            if (empty($id)) throw new Exception("ID is empty!");
+
+            $sqlAdd = " AND id = '{$id}' ";
+        }
+
+        $sql = "SELECT * FROM photoAlbums WHERE `deleted` = 0 {$sqlAdd} ORDER BY albumName";
 
         $query = $this->db->query($sql);
 
         $results = $query->result();
+
+        // returns first row only if id is passed
+        if (!empty($id)) return $results[0];
 
     return $results;
     }
@@ -213,19 +225,21 @@ class photos_model extends CI_Model
      */
     public function getFolderContent ($folder = null)
     {
-        $folder = (empty($folder)) ? ' IS NULL' : ' = ' . intval($folder);
+        //$folder = (empty($folder)) ? ' IS NULL' : ' = ' . intval($folder);
 
-        $sql = "SELECT id, albumName AS `name`, 1 AS `type`
-            FROM photoAlbums
-            WHERE `deleted` = 0
-            ORDER BY name";
 
-        $query = $this->db->query($sql);
-
-        $results = $query->result();
-
-        if (!empty($folder))
+        if (empty($folder))
         {
+
+            $sql = "SELECT id, albumName AS `name`, 1 AS `type`
+                FROM photoAlbums
+                WHERE `deleted` = 0
+                ORDER BY name";
+
+            $query = $this->db->query($sql);
+
+            $results = $query->result();
+
             // only need to get thumbnails if on root
             // albums will already have thumbnails associated with them in the DB
             $at = $this->getAlbumThumbs();
@@ -243,7 +257,47 @@ class photos_model extends CI_Model
                 }
             }
         }
+        else
+        {
+            $pics = $this->getAlbumPhotos($folder);
+
+            if (!empty($pics))
+            {
+                $results = array();
+
+                foreach ($pics as $r)
+                {
+                    $results[] = (object) array(
+                        'id' => $r->id,
+                        'name' => $r->file,
+                        'type' => 2
+                    );
+
+                }
+            }
+        }
 
         return $results;
+    }
+
+    /**
+     * TODO: short description.
+     *
+     * @param mixed $file 
+     *
+     * @return TODO
+     */
+    public function setPorfilePicture ($file)
+    {
+
+        $file = $this->db->escape_str($file);
+
+        if (empty($file)) throw new Exception("file is empty!");
+
+        $sql = "UPDATE settings SET profilePicture = '{$file}'";
+
+        $this->db->query($sql);
+
+        return true;
     }
 }

@@ -45,7 +45,15 @@
 
 
 <ul class="breadcrumb" id='folderCrumbs'>
-    <li id=''><a href='/photos'>All Photos</a></li>
+    <li id=''><a href='/photos'>All Photos</a>
+    
+    <?php if (!empty($folder)) : ?>
+        <span class='divider'>/</span></li>
+        <li class='active'><?=$folderInfo->albumName?>
+    <?php endif; ?>
+
+    </li>
+    
 </ul>
 
 <div id='doc-container'>

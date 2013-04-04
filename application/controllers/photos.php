@@ -8,6 +8,7 @@ class Photos extends CI_Controller
 
         $this->load->library('functions');
         $this->load->library('images');
+        $this->load->library('session');
 
         $this->functions->checkLoggedIn();
 
@@ -20,7 +21,7 @@ class Photos extends CI_Controller
      *
      * @return TODO
      */
-    public function index()
+    public function index($folder = null)
     {
         $header['nav'] = 'photos';
 
@@ -31,10 +32,13 @@ class Photos extends CI_Controller
 
         $header['onload'] = "photos.indexInit();";
 
+        $body['folder'] = $folder;
+
         try
         {
-            #$body['albums'] = $this->photos->getAlbums();
-            $body['content'] = $this->photos->getFolderContent();
+            if (!empty($folder)) $body['folderInfo'] = $this->photos->getAlbums($folder);
+
+            $body['content'] = $this->photos->getFolderContent($folder);
         }
         catch(Exception $e)
         {
@@ -85,18 +89,12 @@ class Photos extends CI_Controller
             }
             catch(Exception $e)
             {
-                $return['status'] = 'ERROR';
-                $return['msg'] = $e->getMessage();
-                $return['errorNumber'] = 1;
                 $this->functions->sendStackTrace($e, 1);
-                die(json_encode($return));
+                $this->functions->jsonReturn('ERROR', $e->getMessage(), 1);
             }
         }
 
-        $return['status'] = 'ERROR';
-        $return['msg'] = 'Get is not supported';
-        $return['errorNumber'] = 2;
-        die(json_encode($return));
+        $this->functions->jsonReturn('ERROR', 'GET is not supported', 2);
     }
 
     /**
@@ -109,6 +107,15 @@ class Photos extends CI_Controller
     public function edit ($file)
     {
         $body['file'] = urldecode($file);
+
+        try
+        {
+            $body['settings'] = $this->functions->getSettings();
+        }
+        catch(Exception $e)
+        {
+            $this->functions->sendStackTrace($e);
+        }
 
         $this->load->view('photos/edit', $body);
     }
@@ -179,19 +186,13 @@ class Photos extends CI_Controller
             }
             catch(Exception $e)
             {
-                $return['status'] = 'ERROR';
-                $return['msg'] = $e->getMessage();
-                $return['errorNumber'] = 1;
                 $this->functions->sendStackTrace($e, 1);
-                die(json_encode($return));
+                $this->functions->jsonReturn('ERROR', $e->getMessage(), 1);
             }
         }
 
 
-        $return['status'] = 'ERROR';
-        $return['msg'] = 'Get is not supported';
-        $return['errorNumber'] = 2;
-        die(json_encode($return));
+        $this->functions->jsonReturn('ERROR', 'GET is not supported', 2);
     }
 
     /**
@@ -282,5 +283,32 @@ class Photos extends CI_Controller
 
     $this->functions->jsonReturn('ERROR', 'GET is not supported', 2);
 
+    }
+
+    /**
+     * TODO: short description.
+     *
+     * @return TODO
+     */
+    public function setprofilepicture ()
+    {
+
+        if ($_POST)
+        {
+            try
+            {
+                $this->photos->setPorfilePicture($_POST['file']);
+
+                $this->functions->jsonReturn('SUCCESS', 'Profile picture has been set!');
+            }
+            catch(Exception $e)
+            {
+                $this->functions->sendStackTrace($e);
+
+                $this->functions->jsonReturn('ERROR', $e->getMessage(), 1);
+            }
+        }
+
+        $this->functions->jsonReturn('ERROR', 'GET is not supported', 2);
     }
 }

@@ -14,5 +14,6 @@ CREATE TABLE `settings` (
   `majorVersion` int(10) unsigned DEFAULT NULL,
   `minorVersion` int(10) unsigned DEFAULT NULL,
   `authKey` char(16) DEFAULT NULL,
-  `siteTitle` VARCHAR(150) DEFAULT NULL
+  `siteTitle` VARCHAR(150) DEFAULT NULL,
+  `profilePicture` VARCHAR(300) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

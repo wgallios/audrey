@@ -2,31 +2,53 @@
 
       <div class="row-fluid">
         <div class="span3">
-            <img src='/public/images/dude.gif' class='img-polaroid'>
+
+<?php
+if (empty($settings->profilePicture))
+{
+    $img = "/public/images/dude.gif";
+}
+else
+{
+    $img = $this->config->item('image_upload_url') . $settings->profilePicture;
+}
+?>
+
+    <img src='<?=$img?>' class='img-polaroid'>
 
 
 <div class='row-fluid' style="margin-top:20px;">
 
-<table class='table info-table'>
-    <tbody>
-        <tr>
-            <td>Age</td>
-            <td>27</td>
-        </tr>
+<?php
+// print_r($settings);
+?>
 
-        <tr>
-            <td>Employer</td>
-            <td>CGI Solution</td>
-        </tr>
+<?php if (!empty($settings->firstName)) echo "<dl class='dl-horizontal'><dt>Name</dt><dd>{$settings->firstName} {$settings->lastName}</dd></dl>"; ?>
+<?php if (!empty($settings->dob)) echo "<dl class='dl-horizontal'><dt>Age</dt><dd>{$settings->age}</dd></dl>"; ?>
+<?php if (!empty($settings->gender)) echo "<dl class='dl-horizontal'><dt>Gender</dt><dd>{$settings->genderDisplay}</dd></dl>"; ?>
+<?php if (!empty($settings->relationshipStatus)) echo "<dl class='dl-horizontal'><dt>Relationship Status</dt><dd>{$settings->rssDisplay}</dd></dl>"; ?>
 
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
-
-    </tbody>
-</table>
-
+<!--  -->
+<!-- <table class='table info-table'> -->
+<!--     <tbody> -->
+<!--         <tr> -->
+<!--             <td>Age</td> -->
+<!--             <td>27</td> -->
+<!--         </tr> -->
+<!--  -->
+<!--         <tr> -->
+<!--             <td>Employer</td> -->
+<!--             <td>CGI Solution</td> -->
+<!--         </tr> -->
+<!--  -->
+<!--         <tr> -->
+<!--             <td></td> -->
+<!--             <td></td> -->
+<!--         </tr> -->
+<!--  -->
+<!--     </tbody> -->
+<!-- </table> -->
+<!--  -->
 </div>
 
         </div><!--/span-->
