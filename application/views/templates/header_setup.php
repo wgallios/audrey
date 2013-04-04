@@ -4,7 +4,7 @@
 
   <body<?php if (!empty($onload)) echo " onload=\"{$onload}\""; ?>>
 
-    <div class="container-fluid">
+    <div class="container">
 
+    <?php include_once 'alert.php' ?>
 
-    <h1>Audrey Social Network Platform Setup</h1>
