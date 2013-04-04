@@ -1,4 +1,5 @@
 <?php
+
 /*-------------------------------------------------------------
  *  Audrey Social Network Platform
  *  http://asnp.co
@@ -34,13 +35,34 @@
  * By default development will show errors but testing and live will hide them.
  */
 
+/*
+ * sets proper document root to ensure it ends in a direcotry separator
+ */
+
+if (substr($_SERVER['DOCUMENT_ROOT'], -1) !== DIRECTORY_SEPARATOR)
+{
+    $_SERVER['DOCUMENT_ROOT'] = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR;
+}
+
+/*
+| error logging settings
+*/
+ini_set('log_errors', true);
+ini_set('html_errors', false);
+ini_set('error_log', $_SERVER['DOCUMENT_ROOT'] . 'logs' . DIRECTORY_SEPARATOR . 'error_log.txt');
+
+
+
+
 if (defined('ENVIRONMENT'))
 {
 	switch (ENVIRONMENT)
 	{
 		case 'development':
-			error_reporting(E_ERROR | E_PARSE);
-		break;
+			error_reporting(E_ERROR | E_PARSE | E_STRICT);
+			// error_reporting(E_ALL);
+            ini_set('display_errors', '1');
+        break;
 	
 		case 'testing':
 		case 'production':
@@ -62,7 +84,7 @@ if (defined('ENVIRONMENT'))
  * as this file.
  *
  */
-	$system_path = 'system';
+if (!isset($system_path)) $system_path = 'system';
 
 /*
  *---------------------------------------------------------------
@@ -78,7 +100,7 @@ if (defined('ENVIRONMENT'))
  * NO TRAILING SLASH!
  *
  */
-	$application_folder = 'application';
+if (!isset($application_folder)) $application_folder = 'application';
 
 /*
  * --------------------------------------------------------------------

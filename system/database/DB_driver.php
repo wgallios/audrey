@@ -118,7 +118,7 @@ class CI_DB_driver {
 		if ( ! $this->conn_id)
 		{
 			log_message('error', 'Unable to connect to the database');
-
+            throw new Exception('Unable to connect to the database');
 			if ($this->db_debug)
 			{
 				$this->display_error('db_unable_to_connect');
@@ -306,18 +306,22 @@ class CI_DB_driver {
 			// This will trigger a rollback if transactions are being used
 			$this->_trans_status = FALSE;
 
+            // gets error message regardless of debug mode
+            $error_msg = $this->_error_message();
+
 			if ($this->db_debug)
 			{
 				// grab the error number and message now, as we might run some
 				// additional queries before displaying the error
 				$error_no = $this->_error_number();
-				$error_msg = $this->_error_message();
 
 				// We call this function in order to roll-back queries
 				// if transactions are enabled.  If we don't call this here
 				// the error message will trigger an exit, causing the
 				// transactions to remain in limbo.
 				$this->trans_complete();
+
+                throw new exception('(SQL Error) ' . $error_msg . "\n\nSQL: " . $sql);
 
 				// Log and display errors
 				log_message('error', 'Query error: '.$error_msg);
@@ -328,9 +332,11 @@ class CI_DB_driver {
 												$sql
 											)
 										);
-			}
+            }
 
-			return FALSE;
+            // changed db_driver to throw SQL exception rather than returning false
+            throw new exception('(SQL Error) ' . $error_msg);
+			#return FALSE;
 		}
 
 		// Stop and aggregate the query time results

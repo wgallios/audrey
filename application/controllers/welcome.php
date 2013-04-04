@@ -6,8 +6,6 @@ class Welcome extends CI_Controller
     {
         parent::__construct();
 
-        $this->load->model('welcome_model', 'welcome', true);
-
         $this->load->library('functions');
 
         if ($this->functions->checkNeedSetup() == true)
@@ -15,13 +13,29 @@ class Welcome extends CI_Controller
             header("Location: /setup");
             exit;
         }
+
+        $this->load->model('welcome_model', 'welcome', true);
+
     }
 
     public function index()
     {
+        $header['headscript'] = "<script type='text/javascript' src='/min/?f=public/js/welcome.js{$this->config->item('min_debug')}&amp;{$this->config->item('min_version')}'></script>\n";
 
-        $this->load->view('templates/header');
-        $this->load->view('welcome/homepage');
+        $header['onload'] = "welcome.indexInit();";
+
+        try
+        {
+            $body['settings'] = $this->functions->getSettings();
+        }
+        catch(Exception $e)
+        {
+            $this->functions->sendStackTrace($e);
+        }
+
+
+        $this->load->view('templates/header', $header);
+        $this->load->view('welcome/homepage', $body);
         $this->load->view('templates/footer');
     }
 

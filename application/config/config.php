@@ -228,7 +228,7 @@ $config['cache_path'] = '';
 | MUST set an encryption key.  See the user guide for info.
 |
 */
-$config['encryption_key'] = '';
+$config['encryption_key'] = 'TheyGotNothinOnYou';
 
 /*
 |--------------------------------------------------------------------------
@@ -297,9 +297,9 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_cookie_name' = The cookie name
 | 'csrf_expire' = The number in seconds the token should expire.
 */
-$config['csrf_protection'] = FALSE;
-$config['csrf_token_name'] = 'csrf_test_name';
-$config['csrf_cookie_name'] = 'csrf_cookie_name';
+$config['csrf_protection'] = false;
+$config['csrf_token_name'] = 'csrfToken';
+$config['csrf_cookie_name'] = 'csrfC';
 $config['csrf_expire'] = 7200;
 
 /*
@@ -362,8 +362,25 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 
 
+// URL that is used to authenciate the site
+$config['authUrl'] = "http://asnp.co/auth";
+
 if (!isset($config['min_version'])) $config['min_version'] = 1;
 if (!isset($config['min_debug'])) $config['min_debug'] = null;
+
+
+// path to the thumbnails where images are uploaded to
+$config['thumbnail_path'] = $_SERVER['DOCUMENT_ROOT'] . 'public' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . '_thumbs' . DIRECTORY_SEPARATOR . 'Images' . DIRECTORY_SEPARATOR;
+
+// path to where the full size images are uploaded to
+$config['image_upload_path'] = $_SERVER['DOCUMENT_ROOT'] . 'public' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR;
+
+
+// url to the where thumbnails images are uploaded to
+$config['thumbnail_url'] = "/public/uploads/_thumbs/Images/";
+
+// url to where the fullsize images are uploaded to
+$config['image_upload_url'] = "/public/uploads/images/";
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
