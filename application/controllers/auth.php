@@ -38,7 +38,7 @@ class Auth extends CI_Controller
         }
         catch(Exception $e)
         {
-
+            $this->functions->sendStackTrace($e);
         }
 
         $this->load->view('templates/header', $header);
@@ -72,7 +72,7 @@ class Auth extends CI_Controller
         }
         catch(Exception $e)
         {
-
+            $this->functions->sendStackTrace($e);
         }
     }
 
