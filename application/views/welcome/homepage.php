@@ -56,7 +56,15 @@ else
         <div class="span6">
 
         <div class='row-fluid action-bar'>
-            <button type='button' class='btn btn-success'><i class='icon-plus icon-white'></i> Add Friend</button>
+
+<?php
+if (isset($_COOKIE['asnpid']))
+{
+    echo "ASNP: " . $_COOKIE['asnpid'];
+}
+?>
+
+            <button type='button' class='btn btn-success' id='asnp-addFriendBtn'><i class='icon-plus icon-white'></i> Add Friend</button>
             <button type='button' class='btn btn-info'><i class='icon-tag icon-white'></i> Follow</button>
 
             <div class='pull-right'>

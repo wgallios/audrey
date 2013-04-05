@@ -83,7 +83,7 @@ class Home extends CI_Controller
                     else
                     {
                         // sets cookie for asnp
-                        setcookie('asnpid', $verify, 0, '/', 'asnp.co');
+                        setcookie('asnpid', $verify, time() + 3600, null, 'asnp.co');
                     }
 
                     // user tried accessing a page while not logged in - takes them back to that page instead of landing
@@ -128,11 +128,11 @@ class Home extends CI_Controller
 
         foreach ($_COOKIE as $key => $value)
         {
-            setcookie($key, '', 0, '/');
+            setcookie($key, '', time() - 3600, '/');
         }
 
         // clears asnp cookie
-        setcookie('asnpid', '', 0, '/', 'asnp.co');
+        setcookie('asnpid', '', time() - 3600, '/', 'asnp.co');
 
         session_start();
         session_unset();

@@ -25,6 +25,11 @@
     <link href="/public/bootstrap2.3/css/bootstrap-responsive.css" rel="stylesheet">
 
 
+    <script type="text/javascript" src="http://asnp.co/public/js/asnp.js"></script>
+    <script type="text/javascript">
+        asnp.key = "<?=$this->functions->authKey()?>";
+    </script>
+
 
     <style type="text/css">
       body {

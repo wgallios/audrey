@@ -419,6 +419,18 @@ class Functions
     }
 
     /**
+     * TODO: short description.
+     *
+     * @return TODO
+     */
+    public function authKey ()
+    {
+        $settings = $this->getSettings();
+
+    return $settings->authKey;
+    }
+
+    /**
      * gets the extension of a given file, Example: some_image.test.JPG
      *
      * @param string $file - filename
@@ -451,5 +463,38 @@ class Functions
         if (!empty($errorNum)) $return['errorNumber'] = $errorNum;
         echo json_encode($return);
         exit;
+    }
+
+    /**
+     * TODO: short description.
+     *
+     * @return TODO
+     */
+    public function renderJsUserid ()
+    {
+        $ci =& get_instance();
+
+        $ci->load->library('session');
+
+        if ($ci->session->userdata('logged_in') === true)
+        {
+
+        $userid = $ci->session->userdata('userid');
+
+        echo <<< EOS
+        <script type='text/javascript'>
+            asnp.userid = $userid
+        </script>
+EOS;
+        }
+        else
+        {
+        echo <<< EOS
+        <script type='text/javascript'>
+            asnp.userid = undefined;
+        </script>
+EOS;
+        }
+
     }
 }
