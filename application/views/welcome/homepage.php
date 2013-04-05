@@ -19,36 +19,11 @@ else
 
 <div class='row-fluid' style="margin-top:20px;">
 
-<?php
-// print_r($settings);
-?>
-
 <?php if (!empty($settings->firstName)) echo "<dl class='dl-horizontal'><dt>Name</dt><dd>{$settings->firstName} {$settings->lastName}</dd></dl>"; ?>
 <?php if (!empty($settings->dob)) echo "<dl class='dl-horizontal'><dt>Age</dt><dd>{$settings->age}</dd></dl>"; ?>
 <?php if (!empty($settings->gender)) echo "<dl class='dl-horizontal'><dt>Gender</dt><dd>{$settings->genderDisplay}</dd></dl>"; ?>
 <?php if (!empty($settings->relationshipStatus)) echo "<dl class='dl-horizontal'><dt>Relationship Status</dt><dd>{$settings->rssDisplay}</dd></dl>"; ?>
 
-<!--  -->
-<!-- <table class='table info-table'> -->
-<!--     <tbody> -->
-<!--         <tr> -->
-<!--             <td>Age</td> -->
-<!--             <td>27</td> -->
-<!--         </tr> -->
-<!--  -->
-<!--         <tr> -->
-<!--             <td>Employer</td> -->
-<!--             <td>CGI Solution</td> -->
-<!--         </tr> -->
-<!--  -->
-<!--         <tr> -->
-<!--             <td></td> -->
-<!--             <td></td> -->
-<!--         </tr> -->
-<!--  -->
-<!--     </tbody> -->
-<!-- </table> -->
-<!--  -->
 </div>
 
         </div><!--/span-->
@@ -73,11 +48,43 @@ if (isset($_COOKIE['asnpid']))
         </div>
 
 
-          <div class="hero-unit">
-            <h1>Welcome</h1>
-            <p>This is the development site for the Audrey Social Network Platform.</p>
-            <p><a href="http://asnp.co" target='_blank' class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-          </div>
+
+        <!-- <h2>Page Posts</h2> -->
+    
+        <input type='hidden' id='load_comments' value='0'>
+
+        <form name='pagePostForm' id='pagePostForm'>
+<?php
+// if ($res[2] == true) $btnDis = "disabled='disabled'";
+?>
+
+        <div class='row-fluid'>
+        
+        <div id='postAlert'></div>
+
+        <textarea name='post' id='post' class='input-block-level' <?=$btnDis?>></textarea>
+        </div>
+        <div class='row-fluid'>
+            <div class='span8'>
+            <img src='/employee/profileimg/40'> <strong>[name]</strong> &bull; [Domain]
+            </div>
+            
+            <div class='span4' align='right'>
+
+                <button id='pagePostBtn' type='button' class='btn' <?=$btnDis?>>Post</button>
+            </div>
+
+        </div>
+
+        </form>
+
+        <form name='postForm' id='postForm'>
+        <div id='posts-display'></div>
+        </form>
+
+        <div id='posts-loader-display'></div>
+
+
         </div><!--/span-->
 
         <div class='span3'>

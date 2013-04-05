@@ -6,7 +6,7 @@ CREATE TABLE `permissions` (
   `Description` text,
   `active` binary(1) DEFAULT NULL,
   PRIMARY KEY (`bit`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 insert  into `permissions`(`bit`,`label`,`Description`,`active`) values 
 (1,'Admin','Gives users admin permissions to the site.','1'),
