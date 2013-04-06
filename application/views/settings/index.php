@@ -25,6 +25,18 @@
 
 
 <div class="control-group">
+    <label class="control-label" for="domian">Google Analytics ID</label>
+
+    <div class="controls">
+    <input type="text" id='googleAnalyticsID' name='googleAnalyticsID' placeholder='UA-11223344-1' value="<?=$settings->googleAnalyticsID?>">
+    </div>
+</div>
+
+
+
+
+
+<div class="control-group">
     <div class="controls">
     <label class="checkbox">
         <input type='hidden' name='seoCrawable' value='0'>

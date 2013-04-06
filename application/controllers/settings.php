@@ -6,12 +6,12 @@ class Settings extends CI_Controller
     {
         parent::__construct();
 
+        $this->load->model('settings_model', 'settings', true);
+
+        $this->load->library('SiteSettings');
         $this->load->library('functions');
 
         $this->functions->checkLoggedIn();
-
-        $this->load->model('settings_model', 'settings', true);
-
     }
 
     /**

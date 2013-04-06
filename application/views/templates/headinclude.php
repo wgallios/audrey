@@ -29,7 +29,7 @@
 
     <?php if (class_exists('CI_DB')) : ?>
     <script type="text/javascript">
-        asnp.key = "<?=$this->functions->authKey()?>";
+        asnp.key = "<?=$this->SiteSettings->getitem('authKey')?>";
     </script>
     <?php endif; ?>
 

@@ -32,9 +32,12 @@ class settings_model extends CI_Model
 
         if (empty($p['domain'])) throw new Exception('domain is empty!');
 
+        $gaid = (empty($p['googleAnalyticsID'])) ? 'NULL' : "'{$p['googleAnalyticsID']}'";
+
         $sql = "UPDATE settings SET
             domain = '{$p['domain']}',
-            seoCrawable = '{$p['seoCrawable']}'";
+            seoCrawable = '{$p['seoCrawable']}',
+            googleAnalyticsID = {$gaid}";
 
         $this->db->query($sql);
 

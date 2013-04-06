@@ -2,21 +2,12 @@
 
 class Functions
 {
-
-    /**
-     * TODO: description.
-     *
-     * @var mixed
-     */
-    public $settings;
-
     public function __construct()
     {
-        $this->settings = null;
-
+        // if connect to DB
         if (class_exists('CI_DB'))
         {
-            if ($this->settings !== null) $this->settings = $this->getSettings();
+        
         }
     }
 
@@ -417,10 +408,18 @@ class Functions
     /**
      * Gets sites settings
      *
+     * deprecated, use settings library
+     *
      * @return object
      */
     public function getSettings()
     {
+
+        $ci =& get_instance();
+        $ci->load->library('SiteSettings');
+
+        return $ci->SiteSettings->getSettings();
+/*
         $ci =& get_instance();
 
         $sql = "SELECT *
@@ -433,7 +432,8 @@ class Functions
 
         $results = $query->result();
 
-    return $results[0];
+        return $results[0];
+         */
     }
 
     /**
@@ -443,9 +443,7 @@ class Functions
      */
     public function authKey ()
     {
-        #$settings = $this->getSettings();
-
-    return $this->settings->authKey;
+        return $this->settings->authKey;
     }
 
     /**

@@ -66,7 +66,11 @@ CREATE TABLE `albumPhotos` (
 
 ALTER TABLE settings ADD profilePicture VARCHAR(300);
 
+ALTER TABLE settings ADD `googleAnalyticsID` VARCHAR(50) DEFAULT NULL;
+
 ALTER TABLE users DROP COLUMN profilePicture;
+
+
 
 
 
@@ -103,28 +107,6 @@ CREATE TABLE `friends` (
     `domain` VARCHAR(300) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
-
-DROP TABLE IF EXISTS `settings`;
-
-CREATE TABLE `settings` (
-  `firstName` varchar(250) DEFAULT NULL,
-  `lastName` varchar(250) DEFAULT NULL,
-  `dob` date DEFAULT NULL,
-  `gender` smallint(5) DEFAULT NULL,
-  `heightFeet` smallint(5) unsigned DEFAULT NULL,
-  `heightInches` smallint(5) unsigned DEFAULT NULL,
-  `weight` smallint(6) DEFAULT NULL,
-  `weightType` smallint(6) DEFAULT NULL,
-  `relationshipStatus` smallint(6) DEFAULT NULL,
-  `aboutMe` text,
-  `majorVersion` int(10) unsigned DEFAULT NULL,
-  `minorVersion` int(10) unsigned DEFAULT NULL,
-  `authKey` char(16) DEFAULT NULL,
-  `siteTitle` VARCHAR(150) DEFAULT NULL,
-  `profilePicture` VARCHAR(300) DEFAULT NULL,
-  `domain` VARCHAR(300) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 INSERT INTO settings SET firstName = 'William'
 
 
