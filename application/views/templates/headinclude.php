@@ -27,9 +27,33 @@
 
     <script type="text/javascript" src="http://asnp.co/public/js/asnp.js"></script>
 
-    <?php if (class_exists('CI_DB')) : ?>
+    <?php if (class_exists('CI_DB')) :
+
+    $gaid = $this->settings->item('googleAnalyticsID');
+
+    if (!empty($gaid))
+    {
+        echo <<< EOS
+
+<script type="text/javascript">
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', '{$gaid}']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+</script>
+EOS;
+    }
+?>
+
     <script type="text/javascript">
-        asnp.key = "<?=$this->SiteSettings->getitem('authKey')?>";
+        asnp.key = "<?=$this->settings->item('authKey')?>";
     </script>
     <?php endif; ?>
 
@@ -62,17 +86,4 @@
 
 
 
-<script type="text/javascript">
-
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-38992311-1']);
-_gaq.push(['_trackPageview']);
-
-(function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-
-</script>
 

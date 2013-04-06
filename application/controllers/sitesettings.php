@@ -1,15 +1,16 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Settings extends CI_Controller
+class Sitesettings extends CI_Controller
 {
-    function Settings()
+    function Sitesettings()
     {
         parent::__construct();
 
-        $this->load->model('settings_model', 'settings', true);
+        $this->load->model('sitesettings_model', 'sitesettings', true);
 
-        $this->load->library('SiteSettings');
         $this->load->library('functions');
+        $this->load->library('settings');
+        $this->load->library('session');
 
         $this->functions->checkLoggedIn();
     }
@@ -22,15 +23,15 @@ class Settings extends CI_Controller
     public function index ()
     {
 
-        $header['headscript'] = "<script type='text/javascript' src='/min/?f=public/js/settings.js{$this->config->item('min_debug')}&amp;{$this->config->item('min_version')}'></script>\n";
+        $header['headscript'] = "<script type='text/javascript' src='/min/?f=public/js/sitesettings.js{$this->config->item('min_debug')}&amp;{$this->config->item('min_version')}'></script>\n";
 
         $header['nav'] = 'settings';
 
-        $header['onload'] = "settings.indexInit();";
+        $header['onload'] = "sitesettings.indexInit();";
 
         try
         {
-            $body['settings'] = $this->functions->getSettings();
+            $body['settings'] = $this->settings->getSettings();
 
             if (empty($body['settings']->domian)) $body['settings']->domain = $_SERVER["HTTP_HOST"];
         }
@@ -55,7 +56,7 @@ class Settings extends CI_Controller
         {
             try
             {
-                $this->settings->updateSettings($_POST);
+                $this->sitesettings->updateSettings($_POST);
                 $this->functions->jsonReturn('SUCCESS', 'Settings have been updated!', 1);
             }
             catch(Exception $e)

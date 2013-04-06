@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class SiteSettings
+class Settings
 {
 
     /**
@@ -12,8 +12,7 @@ class SiteSettings
 
     public function __construct()
     {
-        die('here');
-        // if connect to DB
+        // if connected to DB
         if (class_exists('CI_DB'))
         {
             // if settings have not been defined - will get settings
@@ -36,7 +35,7 @@ class SiteSettings
             , codeDisplay(4, gender) genderDisplay
             , FLOOR(DATEDIFF(NOW(), dob) / 365.25) as age
             FROM settings";
-echo $sql. PHP_EOL;
+
         $query = $ci->db->query($sql);
 
         $results = $query->result();
@@ -51,8 +50,8 @@ echo $sql. PHP_EOL;
      *
      * @return TODO
      */
-    public function getitem ($col)
+    public function item ($col)
     {
-        return 'a';
+        return $this->settings->$col;
     }
 }

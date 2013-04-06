@@ -1,14 +1,14 @@
-var settings = {}
+var sitesettings = {}
 
 
-settings.indexInit = function()
+sitesettings.indexInit = function()
 {
     $('#saveBtn').click(function(e){
-        settings.checkSettingsForm();
+        sitesettings.checkSettingsForm();
     });
 }
 
-settings.checkSettingsForm = function()
+sitesettings.checkSettingsForm = function()
 {
     if ($('#domain').val() == '')
     {
@@ -16,7 +16,7 @@ settings.checkSettingsForm = function()
         return false;
     }
 
-    $.post("/settings/update", $('#settingsForm').serialize(), function(data){
+    $.post("/sitesettings/update", $('#settingsForm').serialize(), function(data){
 
         if (data.status == 'SUCCESS')
         {

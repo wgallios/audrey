@@ -416,9 +416,9 @@ class Functions
     {
 
         $ci =& get_instance();
-        $ci->load->library('SiteSettings');
+        $ci->load->library('Settings');
 
-        return $ci->SiteSettings->getSettings();
+        return $ci->settings->getSettings();
 /*
         $ci =& get_instance();
 
@@ -434,16 +434,6 @@ class Functions
 
         return $results[0];
          */
-    }
-
-    /**
-     * TODO: short description.
-     *
-     * @return TODO
-     */
-    public function authKey ()
-    {
-        return $this->settings->authKey;
     }
 
     /**

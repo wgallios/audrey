@@ -6,13 +6,15 @@ class Home extends CI_Controller
     {
         parent::__construct();
 
+        $this->load->model('home_model', 'home', true);
+
         $this->load->library('session');
 
+        $this->load->library('settings');
         $this->load->library('functions');
 
         $this->functions->checkLoggedIn();
 
-        $this->load->model('home_model', 'home', true);
 
     }
 

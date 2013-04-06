@@ -6,11 +6,12 @@ class Edit extends CI_Controller
     {
         parent::__construct();
 
+        $this->load->model('edit_model', 'edit', true);
         $this->load->library('functions');
+        $this->load->library('settings');
 
         $this->functions->checkLoggedIn();
 
-        $this->load->model('edit_model', 'edit', true);
 
     }
 

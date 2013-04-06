@@ -6,7 +6,7 @@
  * TODO: long description.
  *
  */
-class settings_model extends CI_Model
+class sitesettings_model extends CI_Model
 {
 
     /**

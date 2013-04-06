@@ -6,13 +6,15 @@ class Auth extends CI_Controller
     {
         parent::__construct();
 
+        $this->load->model('auth_model', 'auth', true);
+
         $this->load->library('functions');
+        $this->load->library('settings');
 
         $this->load->library('session');
 
         $this->functions->checkLoggedIn();
 
-        $this->load->model('auth_model', 'auth', true);
 
     }
 
