@@ -40,7 +40,7 @@ else
 
         echo "<div class='span11'>";
 
-        echo "<div class='row-fluid'><div class='span10'><strong>{$r->empName}</strong></div><div class='span2 pull-right' align='right'>{$del}</div></div>";
+        echo "<div class='row-fluid'><div class='span10'><strong>[username]</strong></div><div class='span2 pull-right' align='right'>{$del}</div></div>";
 
         echo "<div class='row-fluid'><blockquote>" . nl2br($r->post) . "</blockquote></div>";
 
@@ -51,7 +51,7 @@ else
         else echo "<button type='button' class='btn btn-link' id='likeBtn-{$r->id}' onclick=\"post.like(this, {$r->id});\"><i class='icon-thumbs-up'></i></button> ";
 
         #echo "<a href='#' class='btn btn-link'><i class='icon-comment'></i></a> ";
-        echo "<span class='gray'><span id='time_{$r->id}'>{$r->timeTxt}</span> &bull; {$r->storeName}</span></div>";
+        echo "<span class='gray'><span id='time_{$r->id}'>{$r->timeTxt}</span> &bull; [example.com]</span></div>";
 
 
         echo "<div id='likeContainer-{$r->id}'>";
@@ -79,14 +79,14 @@ else
 
         echo "<div id='comment-display-{$r->id}'></div>\n"; // container for updating comments
 
-if ($res[4] == true) $taDis = "disabled='disabled'";
+// if ($res[4] == true) $taDis = "disabled='disabled'";
 
 // comment box
 echo <<< EOS
         
     <div class='row-fluid post-actions comment-box'>
 
-            <textarea rows='1' onkeypress="wall.enterComment(this, event, '{$r->id}');" placeholder="Write a comment" {$taDis}></textarea>
+            <textarea rows='1' onkeypress="posts.enterComment(this, event, '{$r->id}');" placeholder="Write a comment" {$taDis}></textarea>
     </div>
 EOS;
 

@@ -63,7 +63,7 @@ class posts_model extends CI_Model
 
         if (!empty($id)) $sqlAdd .= " AND id = '" . intval($id) . "' ";
 
-        $sql = "SELECT  wp.*
+        $sql = "SELECT pp.*
             FROM pagePosts pp
             WHERE `deleted` = 0
                 {$sqlAdd}
@@ -72,6 +72,8 @@ class posts_model extends CI_Model
         $query = $this->db->query($sql);
 
         $results = $query->result();
+
+        
 
         if (!empty($id)) return $results[0]; // returns only first row if getting by ID
 

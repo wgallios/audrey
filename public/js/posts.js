@@ -53,7 +53,7 @@ posts.post = function()
             $('#post').val('');
             $('#pagePostBtn').removeAttr('disabled');
 
-            //wall.getstream(false);
+            posts.getstream(false);
             //alert(data);
 
             // posts.newPosts();
@@ -69,7 +69,7 @@ posts.post = function()
 }
 
 
-post.newPosts = function()
+posts.newPosts = function()
 {
 
     $.get("/posts/stream?top=" + $('#top').val(), function(data){
@@ -114,8 +114,6 @@ posts.textAutosize = function()
 
 posts.getstream = function(loading)
 {
-    alert('get stream');
-    /*
     if (loading == undefined) loading = false;
 
     if (loading == true)
@@ -129,8 +127,9 @@ posts.getstream = function(loading)
 
         $('#posts-display').html(data);
         posts.textAutosize();
+
+       posts.clearLoader();
     });
-    */
 }
 
 
