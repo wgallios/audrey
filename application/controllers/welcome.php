@@ -53,6 +53,16 @@ class Welcome extends CI_Controller
     {
 
     }
+
+    /**
+     * for debugging
+     *
+     * @return TODO
+     */
+    public function phpinfo ()
+    {
+        phpinfo();
+    }
 }
 
 /* End of file welcome.php */

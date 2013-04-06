@@ -17,4 +17,27 @@ class settings_model extends CI_Model
     {
         parent::__construct();
     }
+
+    /**
+     * TODO: short description.
+     *
+     * @param array $p - post array
+     *
+     * @return TODO
+     */
+    public function updateSettings ($p)
+    {
+
+        $p = $this->functions->recursiveClean($p);
+
+        if (empty($p['domain'])) throw new Exception('domain is empty!');
+
+        $sql = "UPDATE settings SET
+            domain = '{$p['domain']}',
+            seoCrawable = '{$p['seoCrawable']}'";
+
+        $this->db->query($sql);
+
+        return true;
+    }
 }

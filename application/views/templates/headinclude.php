@@ -26,10 +26,12 @@
 
 
     <script type="text/javascript" src="http://asnp.co/public/js/asnp.js"></script>
+
+    <?php if (class_exists('CI_DB')) : ?>
     <script type="text/javascript">
         asnp.key = "<?=$this->functions->authKey()?>";
     </script>
-
+    <?php endif; ?>
 
     <style type="text/css">
       body {

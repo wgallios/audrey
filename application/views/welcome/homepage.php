@@ -54,9 +54,8 @@ if (isset($_COOKIE['asnpid']))
         <input type='hidden' id='load_comments' value='0'>
 
         <form name='pagePostForm' id='pagePostForm'>
-<?php
-// if ($res[2] == true) $btnDis = "disabled='disabled'";
-?>
+
+        <input type='hidden' name='domain' id='domain' value=''>
 
         <div class='row-fluid'>
         

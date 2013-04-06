@@ -11,23 +11,34 @@
 
 <p class='lead'>Here you can adjust your sites settings.</p>
 
-<form>
+<form name='settingsForm' id='settingsForm'>
 
 <div class='row-fluid form-horizontal'>
-  <div class="control-group">
-    <label class="control-label" for="inputEmail">Email</label>
-    <div class="controls">
-      <input type="text" id="inputEmail" placeholder="Email">
-    </div>
-  </div>
 
-  <div class="control-group">
-    <label class="control-label" for="inputPassword">Password</label>
-    <div class="controls">
-      <input type="password" id="inputPassword" placeholder="Password">
-    </div>
-  </div>
+<div class="control-group">
+    <label class="control-label" for="domian">Domain</label>
 
+    <div class="controls">
+    <input type="text" id='domain' name='domain' placeholder="example.com" value="<?=$settings->domain?>">
+    </div>
+</div>
+
+
+<div class="control-group">
+    <div class="controls">
+    <label class="checkbox">
+        <input type='hidden' name='seoCrawable' value='0'>
+        <input type="checkbox" name='seoCrawable' id='seoCrawable' value='1'> SEO Crawable
+    </label>
+    </div>
+</div>
+
+
+
+</div> <!-- .row-fluid .form-horizontal //-->
+
+<div class='form-actions'>
+    <button type='button' class='btn btn-primary' id='saveBtn'>Save</button>
 </div>
 
 

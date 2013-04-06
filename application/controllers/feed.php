@@ -8,8 +8,36 @@ class Feed extends CI_Controller
 
         $this->load->library('functions');
 
-        #$this->load->model('welcome_model', 'welcome', true);
+        $this->load->model('feed_model', 'feed', true);
 
     }
 
+
+    /**
+     * TODO: short description.
+     *
+     * @return TODO
+     */
+    public function posts ()
+    {
+
+        try
+        {
+            $settings = $this->functions->getSettings();
+
+            $body['posts'] = $this->feed->getPosts($settings->domain);
+
+            print_r($body['posts']);
+
+            // print_r(json_encode($body['posts']));
+
+        }
+        catch(Exception $e)
+        {
+            $this->functions->sendStackTrace($e);
+        }
+
+
+        // $this->load->view('feed/posts', $body);
+    }
 }

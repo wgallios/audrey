@@ -13,6 +13,8 @@ EXPLAIN albumPhotos;
 
 UPDATE users SET passwd = SHA1('') WHERE id =
 
+SELECT * FROM settings;
+
 
 SELECT * FROM albumPhotos WHERE albumId = 5;
 
@@ -102,4 +104,36 @@ CREATE TABLE `friends` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS `settings`;
 
+CREATE TABLE `settings` (
+  `firstName` varchar(250) DEFAULT NULL,
+  `lastName` varchar(250) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `gender` smallint(5) DEFAULT NULL,
+  `heightFeet` smallint(5) unsigned DEFAULT NULL,
+  `heightInches` smallint(5) unsigned DEFAULT NULL,
+  `weight` smallint(6) DEFAULT NULL,
+  `weightType` smallint(6) DEFAULT NULL,
+  `relationshipStatus` smallint(6) DEFAULT NULL,
+  `aboutMe` text,
+  `majorVersion` int(10) unsigned DEFAULT NULL,
+  `minorVersion` int(10) unsigned DEFAULT NULL,
+  `authKey` char(16) DEFAULT NULL,
+  `siteTitle` VARCHAR(150) DEFAULT NULL,
+  `profilePicture` VARCHAR(300) DEFAULT NULL,
+  `domain` VARCHAR(300) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO settings SET firstName = 'William'
+
+
+
+UPDATE pagePosts set domain = 'williamgallios.com'
+
+SELECT * 
+FROM pagePosts
+WHERE domain = 'williamgallios.com'
+
+
+ALTER TABLE settings ADD seoCrawable BINARY DEFAULT 1;

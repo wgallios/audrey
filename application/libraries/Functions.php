@@ -2,6 +2,24 @@
 
 class Functions
 {
+
+    /**
+     * TODO: description.
+     *
+     * @var mixed
+     */
+    public $settings;
+
+    public function __construct()
+    {
+        $this->settings = null;
+
+        if (class_exists('CI_DB'))
+        {
+            if ($this->settings !== null) $this->settings = $this->getSettings();
+        }
+    }
+
     /**
      * Main function to check if DB setup is necessary
      */
@@ -425,9 +443,9 @@ class Functions
      */
     public function authKey ()
     {
-        $settings = $this->getSettings();
+        #$settings = $this->getSettings();
 
-    return $settings->authKey;
+    return $this->settings->authKey;
     }
 
     /**
