@@ -6,13 +6,15 @@ class Auth extends CI_Controller
     {
         parent::__construct();
 
+        $this->load->model('auth_model', 'auth', true);
+
         $this->load->library('functions');
+        $this->load->library('settings');
 
         $this->load->library('session');
 
         $this->functions->checkLoggedIn();
 
-        $this->load->model('auth_model', 'auth', true);
 
     }
 
@@ -38,7 +40,7 @@ class Auth extends CI_Controller
         }
         catch(Exception $e)
         {
-
+            $this->functions->sendStackTrace($e);
         }
 
         $this->load->view('templates/header', $header);
@@ -72,7 +74,7 @@ class Auth extends CI_Controller
         }
         catch(Exception $e)
         {
-
+            $this->functions->sendStackTrace($e);
         }
     }
 

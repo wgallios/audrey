@@ -6,13 +6,14 @@ class Photos extends CI_Controller
     {
         parent::__construct();
 
+        $this->load->model('photos_model', 'photos', true);
         $this->load->library('functions');
         $this->load->library('images');
         $this->load->library('session');
+        $this->load->library('settings');
 
         $this->functions->checkLoggedIn();
 
-        $this->load->model('photos_model', 'photos', true);
 
     }
 

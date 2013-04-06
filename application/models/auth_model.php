@@ -53,6 +53,34 @@ class auth_model extends CI_Model
     /**
      * TODO: short description.
      *
+     * @param mixed $domain 
+     *
+     * @return TODO
+     */
+    public function verifySite ($domain)
+    {
+        $p = array
+            (
+                'domain' => $domain
+            );
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $this->config->item('verifyUrl'));
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $p);
+
+        $results = curl_exec($ch);
+
+        curl_close($ch);
+
+    return $results;
+    }
+
+    /**
+     * TODO: short description.
+     *
      * @param mixed $key 
      *
      * @return TODO

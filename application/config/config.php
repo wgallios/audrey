@@ -365,6 +365,9 @@ $config['proxy_ips'] = '';
 // URL that is used to authenciate the site
 $config['authUrl'] = "http://asnp.co/auth";
 
+// URL to verify the user is on the network
+$config['verifyUrl'] = "http://asnp.co/auth/verify";
+
 if (!isset($config['min_version'])) $config['min_version'] = 1;
 if (!isset($config['min_debug'])) $config['min_debug'] = null;
 

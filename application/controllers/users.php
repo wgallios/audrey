@@ -6,13 +6,13 @@ class Users extends CI_Controller
     {
         parent::__construct();
 
+        $this->load->model('users_model', 'users', true);
         $this->load->library('functions');
-
+        $this->load->library('settings');
         $this->load->library('session');
 
         $this->functions->checkLoggedIn();
 
-        $this->load->model('users_model', 'users', true);
 
     }
 

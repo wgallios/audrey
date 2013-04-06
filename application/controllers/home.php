@@ -6,13 +6,15 @@ class Home extends CI_Controller
     {
         parent::__construct();
 
+        $this->load->model('home_model', 'home', true);
+
         $this->load->library('session');
 
+        $this->load->library('settings');
         $this->load->library('functions');
 
         $this->functions->checkLoggedIn();
 
-        $this->load->model('home_model', 'home', true);
 
     }
 
@@ -39,6 +41,8 @@ class Home extends CI_Controller
     {
         $header['headscript'] = "<script type='text/javascript' src='/min/?f=public/js/home.js{$this->config->item('min_debug')}&amp;{$this->config->item('min_version')}'></script>\n";
 
+        $this->load->model('auth_model', 'auth', true);
+
         $header['onload'] = "home.loginInit();";
 
         if ($_POST)
@@ -50,12 +54,10 @@ class Home extends CI_Controller
                 if (!empty($credit))
                 {
                     // clears previous cookies
-                    /*
                     foreach ($_COOKIE as $key => $value)
                     {
                         setcookie($key, '', 0, '/');
                     }
-                    */
 
                     $array = array('userid' => null, 'logged_in' => false);
 
@@ -73,12 +75,26 @@ class Home extends CI_Controller
 
                     $this->session->set_userdata($array);
 
+                    // verifies site with asnp.co network
+                    $verify = $this->auth->verifySite($_SERVER['HTTP_HOST']);
+
+                    if ($verify === false)
+                    {
+                        // do nothing
+                    }
+                    else
+                    {
+                        // sets cookie for asnp
+                        setcookie('asnpid', $verify, time() + 3600, null, 'asnp.co');
+                    }
+
                     // user tried accessing a page while not logged in - takes them back to that page instead of landing
                     if (!empty($_POST['ref']))
                     {
                         header("Location: /" . $_POST['ref']);
                         exit;
                     }
+
 
                     header("Location: /home");
                     exit;
@@ -112,9 +128,13 @@ class Home extends CI_Controller
 
         $this->session->unset_userdata($array);
 
+        foreach ($_COOKIE as $key => $value)
         {
-            setcookie($key, '', 0, '/');
+            setcookie($key, '', time() - 3600, '/');
         }
+
+        // clears asnp cookie
+        setcookie('asnpid', '', time() - 3600, '/', 'asnp.co');
 
         session_start();
         session_unset();
