@@ -7,7 +7,7 @@ CREATE TABLE `codes` (
   `active` binary(1) DEFAULT NULL,
   `editable` binary(1) DEFAULT NULL,
   PRIMARY KEY (`group`,`code`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 insert  into `codes`(`group`,`code`,`display`,`active`,`editable`) values
 (1,0,'User statuses','1','0'),

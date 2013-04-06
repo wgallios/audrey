@@ -2,6 +2,15 @@
 
 class Functions
 {
+    public function __construct()
+    {
+        // if connect to DB
+        if (class_exists('CI_DB'))
+        {
+        
+        }
+    }
+
     /**
      * Main function to check if DB setup is necessary
      */
@@ -399,10 +408,18 @@ class Functions
     /**
      * Gets sites settings
      *
+     * deprecated, use settings library
+     *
      * @return object
      */
     public function getSettings()
     {
+
+        $ci =& get_instance();
+        $ci->load->library('Settings');
+
+        return $ci->settings->getSettings();
+/*
         $ci =& get_instance();
 
         $sql = "SELECT *
@@ -415,7 +432,8 @@ class Functions
 
         $results = $query->result();
 
-    return $results[0];
+        return $results[0];
+         */
     }
 
     /**
@@ -451,5 +469,38 @@ class Functions
         if (!empty($errorNum)) $return['errorNumber'] = $errorNum;
         echo json_encode($return);
         exit;
+    }
+
+    /**
+     * TODO: short description.
+     *
+     * @return TODO
+     */
+    public function renderJsUserid ()
+    {
+        $ci =& get_instance();
+
+        $ci->load->library('session');
+
+        if ($ci->session->userdata('logged_in') === true)
+        {
+
+        $userid = $ci->session->userdata('userid');
+
+        echo <<< EOS
+        <script type='text/javascript'>
+            asnp.userid = $userid
+        </script>
+EOS;
+        }
+        else
+        {
+        echo <<< EOS
+        <script type='text/javascript'>
+            asnp.userid = undefined;
+        </script>
+EOS;
+        }
+
     }
 }

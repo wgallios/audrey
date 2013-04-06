@@ -25,7 +25,7 @@ $active[$nav] = 'active';
     <li class='nav-header'>Settings</li>
     <li class='<?=$active['users']?>'><a href='/users'><i class='icon-user'></i> Users</a></li>
     <li class='<?=$active['plugins']?>'><a href='#'><i class='icon-wrench'></i> Plugins</a></li>
-    <li><a href='#'><i class='icon-cog'></i> Site Settings</a></li>
+    <li class='<?=$active['settings']?>'><a href='/sitesettings'><i class='icon-cog'></i> Site Settings</a></li>
     <li class='<?=$active['auth']?>'><a href='/auth'><i class='icon-certificate'></i> Authentication</a></li>
 </ul>
 </div> <!-- .span12 .well //-->

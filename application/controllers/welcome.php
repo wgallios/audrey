@@ -21,6 +21,11 @@ class Welcome extends CI_Controller
     public function index()
     {
         $header['headscript'] = "<script type='text/javascript' src='/min/?f=public/js/welcome.js{$this->config->item('min_debug')}&amp;{$this->config->item('min_version')}'></script>\n";
+        
+        $header['headscript'] .= "<script type='text/javascript' src='/public/js/jquery.autosize-min.js'></script>\n";
+
+        $header['headscript'] .= "<script type='text/javascript' src='/min/?f=public/js/posts.js{$this->config->item('min_debug')}&amp;{$this->config->item('min_version')}'></script>\n";
+    
 
         $header['onload'] = "welcome.indexInit();";
 
@@ -47,6 +52,16 @@ class Welcome extends CI_Controller
     public function profile()
     {
 
+    }
+
+    /**
+     * for debugging
+     *
+     * @return TODO
+     */
+    public function phpinfo ()
+    {
+        phpinfo();
     }
 }
 

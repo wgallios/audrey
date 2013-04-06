@@ -49,7 +49,7 @@ if (substr($_SERVER['DOCUMENT_ROOT'], -1) !== DIRECTORY_SEPARATOR)
 */
 ini_set('log_errors', true);
 ini_set('html_errors', false);
-ini_set('error_log', $_SERVER['DOCUMENT_ROOT'] . 'logs' . DIRECTORY_SEPARATOR . 'error_log.txt');
+ini_set('error_log', $_SERVER['DOCUMENT_ROOT'] . '..' . DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR . 'error_log.txt');
 
 
 

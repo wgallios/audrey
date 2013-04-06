@@ -15,5 +15,8 @@ CREATE TABLE `settings` (
   `minorVersion` int(10) unsigned DEFAULT NULL,
   `authKey` char(16) DEFAULT NULL,
   `siteTitle` VARCHAR(150) DEFAULT NULL,
-  `profilePicture` VARCHAR(300) DEFAULT NULL
+  `profilePicture` VARCHAR(300) DEFAULT NULL,
+  `domain` VARCHAR(300) DEFAULT NULL,
+  `seoCrawable` BINARY DEFAULT 1,
+  `googleAnalyticsID` VARCHAR(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

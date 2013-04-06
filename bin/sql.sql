@@ -13,6 +13,8 @@ EXPLAIN albumPhotos;
 
 UPDATE users SET passwd = SHA1('') WHERE id =
 
+SELECT * FROM settings;
+
 
 SELECT * FROM albumPhotos WHERE albumId = 5;
 
@@ -64,8 +66,56 @@ CREATE TABLE `albumPhotos` (
 
 ALTER TABLE settings ADD profilePicture VARCHAR(300);
 
+ALTER TABLE settings ADD `googleAnalyticsID` VARCHAR(50) DEFAULT NULL;
+
 ALTER TABLE users DROP COLUMN profilePicture;
 
 
 
+
+
 SELECT * FROM settings;
+
+
+--- table for page posts
+
+EXPLAIN pagePosts;
+
+DROP TABLE IF EXISTS `pagePosts`;
+
+CREATE TABLE `pagePosts` (
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `datestamp` datetime DEFAULT NULL,
+    `userid` int(10) UNSIGNED DEFAULT NULL,
+    `domain` VARCHAR(300) DEFAULT NULL,
+    `post` TEXT DEFAULT NULL,
+    `deleted` BINARY DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+SELECT * FROM pagePosts;
+
+
+-- table for friends
+DROP TABLE IF EXISTS `friends`;
+
+CREATE TABLE `friends` (
+    `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `datestamp` datetime DEFAULT NULL,
+    `userid` int(10) UNSIGNED DEFAULT NULL,
+    `domain` VARCHAR(300) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+INSERT INTO settings SET firstName = 'William'
+
+
+
+UPDATE pagePosts set domain = 'williamgallios.com'
+
+SELECT * 
+FROM pagePosts
+WHERE domain = 'williamgallios.com'
+
+
+ALTER TABLE settings ADD seoCrawable BINARY DEFAULT 1;
