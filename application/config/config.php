@@ -385,5 +385,13 @@ $config['thumbnail_url'] = "/public/uploads/_thumbs/Images/";
 // url to where the fullsize images are uploaded to
 $config['image_upload_url'] = "/public/uploads/images/";
 
+
+// version list here, latest version is laast array entry!
+$config['versions'] = array
+    (
+        array(0,1),
+        array(0,2)
+    );
+
 /* End of file config.php */
 /* Location: ./application/config/config.php */

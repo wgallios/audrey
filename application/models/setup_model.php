@@ -198,6 +198,11 @@ class setup_model extends CI_Model
     {
         $db = $this->load->database($config, true);
 
+        $versions = $this->config->item('versions');
+
+        $majorVersion = $versions[count($versions) - 1][0];
+        $minorVersion = $versions[count($versions) - 1][1];
+
         // escape strings
         $p['firstName'] = $db->escape_str($p['firstName']);
         $p['lastName'] = $db->escape_str($p['lastName']);
@@ -212,7 +217,9 @@ class setup_model extends CI_Model
         $sql = "INSERT INTO settings SET
             siteTitle = '{$p['siteTitle']}',
             firstName = '{$p['firstName']}',
-            lastName = '{$p['lastName']}'";
+            lastName = '{$p['lastName']}',
+            majorVersion = '{$majorVersion}',
+            minorVersion = '{$minorVersion}'";
 
         $db->query($sql);
 
