@@ -30,13 +30,36 @@ class feed_model extends CI_Model
 
         if (empty($domain)) throw new Exception('Domain is empty!');
 
-        $sql= "SELECT * FROM pagePosts WHERE domain = '{$domain}'";
+        $sql= "SELECT * FROM pagePosts WHERE domain = '{$domain}' ORDER BY datestamp DESC";
 
         $query = $this->db->query($sql);
 
         $results = $query->result();
 
-        return $results;
+        $return = array();
+
+        if (!empty($results))
+        {
+            foreach ($results as $r)
+            {
+                if ($r->deleted == 1)
+                {
+                    $return[] = array( 'id' => $r->id, 'deleted' => 1 );
+                }
+                else
+                {
+                    $return[] = array
+                        (
+                            'id' => $r->id,
+                            'datestamp' => $r->datestamp,
+                            'post' => $r->post,
+                            'deleted' => 0
+                        );
+                }
+            }
+        }
+
+        return $return;
     }
 
 }
