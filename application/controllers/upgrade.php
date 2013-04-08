@@ -46,13 +46,17 @@ class Upgrade extends CI_Controller
      */
     public function process ()
     {
+        sleep(2); // sleeps for 2 seconds - make it feel like its doing something important
+
         try
         {
             $this->upgrade->performDBUpgrade();
+            $this->functions->jsonReturn('SUCCESS', 'Database upgraded! Page will automatically reload in 10 seconds...');
         }
         catch(Exception $e)
         {
             $this->functions->sendStackTrace($e);
+            $this->functions->jsonReturn('ERROR', $e->getMessage(), 1);
         }
     }
 }

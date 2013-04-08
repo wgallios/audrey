@@ -9,10 +9,13 @@ class Edit extends CI_Controller
         $this->load->model('edit_model', 'edit', true);
 
         $this->load->library('functions');
+        $this->load->library('session');
         $this->load->library('settings');
 
         // checks if user is logged in
         $this->functions->checkLoggedIn();
+
+        $this->functions->checkDBUpgrades();
 
 
     }

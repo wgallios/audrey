@@ -27,7 +27,7 @@ class setup_model extends CI_Model
     {
         $db = $this->load->database($config, true);
 
-        $path = $_SERVER['DOCUMENT_ROOT'] . 'sql' . DIRECTORY_SEPARATOR;
+        $path = $_SERVER['DOCUMENT_ROOT'] . 'sql' . DS;
 
         // if sql/ folder does not exist
         if (!is_dir($path)) throw new Exception("SQL folder ({$path}) does not exist! Therefore no database files! oh geez. This is bad =/");

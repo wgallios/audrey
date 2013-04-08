@@ -31,62 +31,87 @@ class upgrade_model extends CI_Model
         // if sql/updates folder does not exist - no updates to apply
         if (!is_dir($path)) return true;
 
-        $dh = opendir($path);
+        $versions = $this->config->item('versions');
 
-        if ($dh === false) throw new Exception("Unable to open {$path} directory!");
+        // gets database files that were already loaded
+        $loadedFiles = $this->getLoadedUpgradeFiles();
 
-        // goes through each SQL file to execute
-        while (($file = readdir($dh)) !== false)
+        if (!empty($versions))
         {
-            // skips files that are not .sql
-            if (strtolower(substr($file, -3)) !== 'sql') continue;
-
-            // gets database files that were already loaded
-            $loadedFiles = $this->getLoadedUpgradeFiles();
-
-            if (!empty($loadedFiles))
+            foreach ($versions as $v)
             {
-                
-            }
+                $majV = $v[0];
+                $minV = $v[1];
 
+                $file = "{$majV}.{$minV}.sql";
 
-            $handle = fopen($path . $file, "r");
-
-            if ($handle === false) throw new Exception("Unable to open file! ({$path}{$file})");
-
-            $sql = null;
-
-            while (($buffer = fgets($handle)) !== false)
-            {
-                $sql .= $buffer;
-            }
-
-            if (!feof($handle)) throw new Exception("Unexpected fgets() fail! ({$path}{$file})");
-
-            if (!fclose($handle)) throw new Exception("Unable to close file! ({$path}{$file})");
-
-            $functionPos = strpos(strtoupper($sql), 'CREATE FUNCTION');
-
-            if ($functionPos === false) // is not a create function sql file
-            {
-                // explodes each file's to execute each statement 1 at a time
-                $sqlArray = explode(";", $sql);
-
-                if (!empty($sqlArray))
+                if (file_exists($path . $file))
                 {
-                    foreach($sqlArray as $s)
+                    if (!empty($loadedFiles))
                     {
-                        $s = trim($s);
+                        $loaded = false;
 
-                        if (!empty($s)) $db->query($s);
+                        foreach ($loadedFiles as $r)
+                        {
+
+                            if ($r->filename == $file)
+                            {
+                                $loaded = true;
+                            }
+                        }
+
+                        // if file has already been loaded - will skip it
+                        if ($loaded == true) continue;
                     }
+
+                    // file has not been loaded - will go ahead and lead it
+                    $handle = fopen($path . $file, "r");
+
+                    if ($handle === false) throw new Exception("Unable to open file! ({$path}{$file})");
+
+                    $sql = null;
+
+                    while (($buffer = fgets($handle)) !== false)
+                    {
+                        $sql .= $buffer;
+                    }
+
+                    if (!feof($handle)) throw new Exception("Unexpected fgets() fail! ({$path}{$file})");
+
+                    if (!fclose($handle)) throw new Exception("Unable to close file! ({$path}{$file})");
+
+                    $functionPos = strpos(strtoupper($sql), 'CREATE FUNCTION');
+
+                    if ($functionPos === false) // is not a create function sql file
+                    {
+                        // explodes each file's to execute each statement 1 at a time
+                        $sqlArray = explode(";", $sql);
+
+                        if (!empty($sqlArray))
+                        {
+                            foreach($sqlArray as $s)
+                            {
+                                $s = trim($s);
+
+                                if (!empty($s)) $db->query($s);
+                            }
+                        }
+                    }
+                    else // is a create function sql file, will execute entire string
+                    {
+                        $db->conn_id->multi_query($sql);
+                    }
+
+                    // saves in db that upgrade file was processed
+                    $this->insertLoadedDBFile($file);
+
+                }
+                else
+                {
+                    // no DB upgrade for this file
+                    continue;
                 }
             }
-            else // is a create function sql file, will execute entire string
-            {
-                $db->conn_id->multi_query($sql);
-            }
-
         }
 
     return true;
@@ -111,10 +136,26 @@ class upgrade_model extends CI_Model
     /**
      * TODO: short description.
      *
-     * @return TODO
+     * @return int - row id
      */
-    private function insertLoadedDBFile()
+    private function insertLoadedDBFile($filename)
     {
+        $filename = $this->db->escape_str($filename);
 
+        $userid = $this->session->userdata('userid');
+
+        $userid = intval($userid);
+
+        if (empty($filename)) throw new Exception('filename is empty!');
+        if (empty($userid)) throw new Exception('userid is empty!');
+
+        $sql = "INSERT INTO dbUpgradeFiles
+            datestamp = NOW(),
+            userid = '{$userid}',
+            filename = '{$filename}'";
+
+        $this->db->query($sql);
+
+        return $this->db->insert_id();
     }
 }

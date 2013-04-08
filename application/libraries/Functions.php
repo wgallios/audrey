@@ -34,6 +34,7 @@ class Functions
      */
     public function checkDBUpgrades($redirect = true)
     {
+        return true;
         $path = $_SERVER['DOCUMENT_ROOT'] . DS . 'sql' . DS . 'updates';
 
         // if updates directory does not exist, does not require upgrades
