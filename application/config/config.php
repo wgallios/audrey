@@ -368,7 +368,7 @@ $config['authUrl'] = "http://asnp.co/auth";
 // URL to verify the user is on the network
 $config['verifyUrl'] = "http://asnp.co/auth/verify";
 
-if (!isset($config['min_version'])) $config['min_version'] = 1;
+if (!isset($config['min_version'])) $config['min_version'] = 1; // <!---- this one - this is the min version
 if (!isset($config['min_debug'])) $config['min_debug'] = null;
 
 
@@ -387,6 +387,7 @@ $config['image_upload_url'] = "/public/uploads/images/";
 
 
 // version list here, latest version is laast array entry!
+// dont forget to bumb the min version ^^^^^ a few lines up!
 $config['versions'] = array
     (
         array(0,1),
