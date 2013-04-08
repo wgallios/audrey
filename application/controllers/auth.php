@@ -15,6 +15,8 @@ class Auth extends CI_Controller
 
         $this->functions->checkLoggedIn();
 
+        $this->functions->checkDBUpgrades();
+
 
     }
 

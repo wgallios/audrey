@@ -4,7 +4,7 @@ class Functions
 {
     public function __construct()
     {
-        // if connect to DB
+        // if connected to DB
         if (class_exists('CI_DB'))
         {
         
@@ -17,7 +17,7 @@ class Functions
     public function checkNeedSetup()
     {
         // checks if database.local.php exists
-        $dbLocal = $_SERVER['DOCUMENT_ROOT'] . 'application' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'database.local.php';
+        $dbLocal = $_SERVER['DOCUMENT_ROOT'] . 'application' . DS . 'config' . DS . 'database.local.php';
 
         if (!file_exists($dbLocal))
         {
@@ -26,6 +26,41 @@ class Functions
 
         return false;
     }
+
+    /**
+     * TODO: short description.
+     *
+     * @return TODO
+     */
+    public function checkDBUpgrades($redirect = true)
+    {
+        return true;
+        $path = $_SERVER['DOCUMENT_ROOT'] . DS . 'sql' . DS . 'updates';
+
+        // if updates directory does not exist, does not require upgrades
+        if (!is_dir($path))
+        {
+            return false;
+        }
+
+        $cnt = $this->checkDirFileCount($path, false, 'sql');
+
+        if ($cnt > 0)
+        {
+            if ($redirect === true)
+            {
+                header("Location: /upgrade");
+                exit;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
     /**
      * Checks if user is logged into backend
@@ -502,5 +537,84 @@ EOS;
 EOS;
         }
 
+    }
+
+
+    /**
+     * Checks to ensure path ends with a directory separator
+     * if not adds it
+     *
+     * @param String $path
+     *
+     * @return string - path that ends with a directory sepeartor
+     */
+    public function checkPathSeparator ($path)
+    {
+        if (substr($path, -1) !== DS)
+        {
+            $path = $path . DS;
+        }
+
+        return $path;
+    }
+
+    /**
+     * Countes number of files/directores in a path
+     *
+     * @param String path = path that is going to be checked
+     * @param boolean $includeDir Optional, defaults to false - if true, will include directories in the count
+     * @param mixed $ext Optional, defaults to null. - if a certain file extension is being looked for
+     *
+     * @return int - file count
+     */
+    public function checkDirFileCount ($path = null, $includeDir = false, $ext = null)
+    {
+        if (empty($path)) throw new Exception('path is empty!');
+
+        $path = $this->checkPathSeparator($path);
+
+        // if folder does not exist
+        if (!is_dir($path)) throw new Exception("Folder ({$path}) does not exist!");
+
+        $dh = opendir($path);
+
+        if ($dh === false) throw new Exception("Unable to open {$path} directory!");
+
+        $cnt = 0;
+
+        // goes through and counts how many files in each direcotry
+        while (($file = readdir($dh)) !== false)
+        {
+
+            // does not include . or .. directories
+            if ($file == '.' OR $file == '..')
+            {
+                // do nothing
+            }
+            else
+            {
+                if (!empty($ext))
+                {
+                    $extLength = strlen($this->getFileExt($file)) * -1;
+                    // skips files that are not the extenstion defined
+                    if (strtolower(substr($file, $extLength)) !== $ext) continue;
+                }
+
+
+                // does not include sub directories
+                if ($includeDir == false)
+                {
+                    if (!is_dir($path . $file)) $cnt++;
+                }
+                else
+                {
+                    $cnt++;
+                }
+            }
+        }
+
+        @closedir($dh);
+
+        return $cnt;
     }
 }

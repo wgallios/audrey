@@ -63,6 +63,19 @@ class Welcome extends CI_Controller
     {
         phpinfo();
     }
+
+    /**
+     * TODO: short description.
+     *
+     * @return TODO
+     */
+    public function version()
+    {
+        $versions = $this->config->item('versions');
+
+        echo $versions[count($versions) - 1][0] . '.' . $versions[count($versions) - 1][1];
+
+    }
 }
 
 /* End of file welcome.php */
