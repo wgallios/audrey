@@ -391,7 +391,8 @@ $config['image_upload_url'] = "/public/uploads/images/";
 $config['versions'] = array
     (
         array(0,1),
-        array(0,2)
+        array(0,2),
+        array(0,3)
     );
 
 /* End of file config.php */
