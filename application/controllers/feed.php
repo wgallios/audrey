@@ -25,11 +25,9 @@ class Feed extends CI_Controller
         {
             $settings = $this->functions->getSettings();
 
-            $body['posts'] = $this->feed->getPosts($settings->domain);
+            $posts = $this->feed->getPosts($settings->domain);
 
-            print_r($body['posts']);
-
-            // print_r(json_encode($body['posts']));
+            print_r(json_encode($posts));
 
         }
         catch(Exception $e)

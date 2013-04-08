@@ -13,8 +13,7 @@ class Photos extends CI_Controller
         $this->load->library('settings');
 
         $this->functions->checkLoggedIn();
-
-
+        $this->functions->checkDBUpgrades();
     }
 
     /**

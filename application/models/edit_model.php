@@ -21,6 +21,7 @@ class edit_model extends CI_Model
     /**
      * TODO: short description.
      *
+     * deprecated - use settings library
      * @return object
      */
     public function getSettings()
