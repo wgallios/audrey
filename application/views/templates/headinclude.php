@@ -53,7 +53,7 @@ EOS;
 ?>
 
     <script type="text/javascript">
-        asnp.key = "<?=$this->settings->item('authKey')?>";
+        asnp.domain = "<?=$this->settings->item('domain')?>";
     </script>
     <?php endif; ?>
 
