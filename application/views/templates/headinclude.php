@@ -52,9 +52,6 @@ EOS;
     }
 ?>
 
-    <script type="text/javascript">
-        asnp.domain = "<?=$this->settings->item('domain')?>";
-    </script>
     <?php endif; ?>
 
     <style type="text/css">
