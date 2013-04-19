@@ -38,4 +38,9 @@ asnp.readCookie = function(name)
     $.get(asnp.domain + '/hub/readcookie/' + escape(name), function(data){
         alert(data);
     }); 
-} 
+}
+
+asnp.readframe = function ()
+{
+    alert($('#asnp-cookies').contents().html());
+}
