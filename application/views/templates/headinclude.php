@@ -25,7 +25,7 @@
     <link href="/public/bootstrap2.3/css/bootstrap-responsive.css" rel="stylesheet">
 
 
-    <script type="text/javascript" src="http://asnp.co/public/js/asnp.js"></script>
+    <!-- <script type='text/javascript' src="/min/?f=public/js/asnp.js<?=$this->config->item('min_debug')?>&amp;<?=$this->config->item('min_version')?>"></script> -->
 
     <?php if (class_exists('CI_DB')) :
 
@@ -52,11 +52,13 @@ EOS;
     }
 ?>
 
-    <script type="text/javascript">
-        asnp.key = "<?=$this->settings->item('authKey')?>";
-    </script>
     <?php endif; ?>
 
+<?php
+    if ($this->session->userdata('logged_in') == true) $userid = "&amp;userid=" . $this->session->userdata('userid');
+?>
+
+    <script type="text/javascript" id='asnp-script' src="http://asnp.co/public/js/asnp.js?domain=<?=$_SERVER['HTTP_HOST']?><?=$userid?>"></script>
     <style type="text/css">
       body {
         padding-top: 60px;

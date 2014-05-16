@@ -283,7 +283,7 @@ class Functions
     {
         $ci =& get_instance();
 
-        $path = $_SERVER['DOCUMENT_ROOT'] . 'application' . DIRECTORY_SEPARATOR . 'config';
+        $path = $_SERVER['DOCUMENT_ROOT'] . 'application' . DS . 'config';
 
         // checks permissions just incase
         if (is_dir($path))
@@ -296,7 +296,7 @@ class Functions
                     "<hr>" .
                     //"<div class='span12 well'>" .
                     "<h5>Try the following solution</h5>" . 
-                    "<p><code>sudo chmod -R 777 $path</code></p>" .
+                    "<p><code>sudo chmod 777 $path</code></p>" .
                     //"</div>" .
                     "</div>";
 

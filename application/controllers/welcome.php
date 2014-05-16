@@ -7,6 +7,7 @@ class Welcome extends CI_Controller
         parent::__construct();
 
         $this->load->library('functions');
+        $this->load->library('session');
 
         if ($this->functions->checkNeedSetup() == true)
         {

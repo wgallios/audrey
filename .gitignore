@@ -6,3 +6,4 @@ database.local.php.back
 *~
 public/uploads/*
 logs/error_log.txt
+logs/*
