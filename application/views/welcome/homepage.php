@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-      <div class="row-fluid">
-        <div class="span3">
+      <div class="row">
+        <div class="col-md-3">
 
 <?php
 if (empty($settings->profilePicture))
@@ -14,7 +14,7 @@ else
 }
 ?>
 
-    <img src='<?=$img?>' class='img-polaroid'>
+    <img src='<?=$img?>' class='img-thumbnail'>
 
 
 <div class='row-fluid' style="margin-top:20px;">
@@ -28,9 +28,9 @@ else
 
         </div><!--/span-->
 
-        <div class="span6">
+        <div class="col-md-6">
 
-        <div class='row-fluid action-bar'>
+        <div class='row action-bar'>
 
 <?php
 if (isset($_COOKIE['asnpid']))
@@ -57,18 +57,18 @@ if (isset($_COOKIE['asnpid']))
 
         <input type='hidden' name='domain' id='domain' value=''>
 
-        <div class='row-fluid'>
+        <div class='row'>
         
         <div id='postAlert'></div>
 
-        <textarea name='post' id='post' class='input-block-level' <?=$btnDis?>></textarea>
+        <textarea name='post' id='post' class='form-control input-block-level' <?=$btnDis?>></textarea>
         </div>
-        <div class='row-fluid'>
-            <div class='span8'>
+        <div class='row'>
+            <div class='col-md-8'>
             <img src='/employee/profileimg/40'> <strong>[name]</strong> &bull; [Domain]
             </div>
             
-            <div class='span4' align='right'>
+            <div class='col-md-4' align='right'>
 
                 <button id='pagePostBtn' type='button' class='btn' <?=$btnDis?>>Post</button>
             </div>
@@ -86,7 +86,7 @@ if (isset($_COOKIE['asnpid']))
 
         </div><!--/span-->
 
-        <div class='span3'>
+        <div class='col-md-3'>
             <h3>Friends</h3>
         </div> <!-- .span3 //-->
 

@@ -1,12 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<div class='row-fluid'>
+<div class='row'>
 
-    <div class='span3'>
+    <div class='col-md-3'>
         <?php include_once $_SERVER['DOCUMENT_ROOT'] . 'application' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'home' . DIRECTORY_SEPARATOR . 'nav.php' ?>
     </div> <!-- .span3 //-->
 
-    <div class='span6'>
+    <div class='col-md-6'>
         <h1>Authentication</h1>
 
 <p class='lead'>Here you can authenticate your site with ASNP.co</p>
@@ -20,12 +20,7 @@
 
 if (empty($key))
 {
-echo <<< EOS
-    <div class='alert alert-block'>
-        <h4>Alert!</h4>
-        This site is not authenicated!
-    </div>
-EOS;
+	echo $this->alerts->alert("This site is not authenticated!");
 }
 else
 {
@@ -65,7 +60,7 @@ else
 
     </div> <!-- .span6 //-->
 
-    <div class='span3'>
+    <div class='col-md-3'>
 
 
     </div> <!-- .span3 //-->

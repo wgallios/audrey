@@ -10,9 +10,9 @@
     <!-- ONLY FOR DEV - REMOVE FOR LIVE //-->
     <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
-    <script type='text/javascript' src='/public/js/jquery-1.9.1.min.js'></script>
-    <script type='text/javascript' src='/public/bootstrap2.3/js/bootstrap.min.js'></script>
-    <link href="/public/bootstrap2.3/css/bootstrap.min.css" rel="stylesheet">
+    <script type='text/javascript' src='/public/js/jquery-1.11.1.min.js'></script>
+    <script type="text/javascript" src="/public/bootstrap3.1.1/js/bootstrap.min.js"></script>
+    <link type="text/css" href="/public/bootstrap3.1.1/css/bootstrap.min.css" rel="Stylesheet" />
 
     <script type='text/javascript' src="/min/?f=public/js/global.js<?=$this->config->item('min_debug')?>&amp;<?=$this->config->item('min_version')?>"></script>
 
@@ -21,8 +21,9 @@
     <script type="text/javascript" src="/public/jqueryui1.10.1/js/jquery-ui-1.10.1.custom.min.js"></script>
 
 
+    <link rel="stylesheet" href="/public/font-awesome-4.1.0/css/font-awesome.min.css">
+
     <link rel="stylesheet" type="text/css" href="/min/?f=public/css/main.css<?=$this->config->item('min_debug')?>&amp;<?=$this->config->item('min_version')?>" />
-    <link href="/public/bootstrap2.3/css/bootstrap-responsive.css" rel="stylesheet">
 
 
     <!-- <script type='text/javascript' src="/min/?f=public/js/asnp.js<?=$this->config->item('min_debug')?>&amp;<?=$this->config->item('min_version')?>"></script> -->
@@ -77,13 +78,6 @@ EOS;
         }
       }
     </style>
-
-
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="/public/bootstrap2.3/js/html5shiv.js"></script>
-    <![endif]-->
-
 
 
 

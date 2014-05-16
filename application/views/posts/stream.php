@@ -2,7 +2,7 @@
 
 if (empty($posts))
 {
-    if (empty($top) && empty($tail)) echo "<div class='alert'><h4>Alert!</h4> There are no page posts!</div>";
+    if (empty($top) && empty($tail)) echo $this->alerts->alert("There are no page posts!");
 }
 else
 {
@@ -34,18 +34,18 @@ else
             $del = "  <a href=\"javascript:void(0);\" class='btn btn-link btn-mini' onclick=\"wall.deletePost(this, '{$r->id}')\"><i class='icon-trash'></i></a>";
         }
         */
-        echo "<div class='row-fluid'>";
+        echo "<div class='row'>";
 
-        echo "<div class='span1'><img src='/public/images/dude.gif'></div>";
+        echo "<div class='col-md-1'><img src='/public/images/dude.gif'></div>";
 
-        echo "<div class='span11'>";
+        echo "<div class='col-md-11'>";
 
-        echo "<div class='row-fluid'><div class='span10'><strong>[username]</strong></div><div class='span2 pull-right' align='right'>{$del}</div></div>";
+        echo "<div class='row'><div class='span10'><strong>[username]</strong></div><div class='span2 pull-right' align='right'>{$del}</div></div>";
 
-        echo "<div class='row-fluid'><blockquote>" . nl2br($r->post) . "</blockquote></div>";
+        echo "<div class='row'><blockquote>" . nl2br($r->post) . "</blockquote></div>";
 
 
-        echo "<div class='row-fluid post-notes'>"; 
+        echo "<div class='row post-notes'>"; 
 
         if ($r->empLikes > 0) echo "<button type='button' class='btn btn-link' id='likeBtn-{$r->id}' onclick=\"wall.unlike(this, {$r->id});\"><i class='icon-thumbs-down'></i></button> ";
         else echo "<button type='button' class='btn btn-link' id='likeBtn-{$r->id}' onclick=\"post.like(this, {$r->id});\"><i class='icon-thumbs-up'></i></button> ";
@@ -59,7 +59,7 @@ else
         // displays likes
         if ($r->likes > 0)
         {
-            echo "<div class='row-fluid post-actions likes'>";
+            echo "<div class='row post-actions likes'>";
 
             if ($r->likes == 1)
             {
@@ -84,9 +84,9 @@ else
 // comment box
 echo <<< EOS
         
-    <div class='row-fluid post-actions comment-box'>
+    <div class='row post-actions comment-box'>
 
-            <textarea rows='1' onkeypress="posts.enterComment(this, event, '{$r->id}');" placeholder="Write a comment" {$taDis}></textarea>
+            <textarea rows='1' onkeypress="posts.enterComment(this, event, '{$r->id}');" class='form-control' placeholder="Write a comment" {$taDis}></textarea>
     </div>
 EOS;
 
